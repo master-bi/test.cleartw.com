@@ -522,6 +522,22 @@
   animation: installSpin 0.8s linear infinite;
 }
 @keyframes installSpin { to { transform: rotate(360deg); } }
+
+    /* ===== 簡介展開/收合 ===== */
+    #introBox.intro-collapsed #introText {
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .intro-toggle {
+      margin-top: 6px;
+      font-size: 13px;
+      color: #0a84ff;
+      cursor: pointer;
+      user-select: none;
+    }
+
 </style>
 </head>
 <body>
@@ -1091,5 +1107,16 @@
 
     })();
   </script>
+
+  <script>
+    const introBox = document.getElementById('introBox');
+    const introToggle = document.getElementById('introToggle');
+
+    introToggle.addEventListener('click', () => {
+      const collapsed = introBox.classList.toggle('intro-collapsed') === true;
+      introToggle.textContent = collapsed ? "...查看更多" : "收合";
+    });
+  </script>
+
 </body>
 </html>
