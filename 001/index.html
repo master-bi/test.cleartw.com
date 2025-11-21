@@ -95,32 +95,28 @@
 
     
 
-    
-
-    /* 安裝按鈕 Loading 狀態（顯示「安裝中…」+ 轉圈） */
+    /* 安裝按鈕 Loading 狀態 */
     .btn.loading {
       position: relative;
+      color: transparent !important; /* 隱藏文字 */
       pointer-events: none;
-      background: #0a84ff;
-      color: #ffffff !important;
       opacity: 0.9;
     }
-    /* 轉圈 spinner */
     .btn.loading::after {
       content: "";
       position: absolute;
-      left: 16px;
+      left: 50%;
       top: 50%;
-      width: 16px;
-      height: 16px;
-      margin-top: -8px;
+      width: 18px;
+      height: 18px;
+      margin-left: -9px;
+      margin-top: -9px;
       border-radius: 50%;
       border: 2px solid rgba(255,255,255,0.35);
       border-top-color: #ffffff;
       animation: installSpin 0.8s linear infinite;
     }
     @keyframes installSpin { to { transform: rotate(360deg); } }
-
 .stats-row {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -467,7 +463,7 @@
           <div class="app-title">大老爺</div>
           <div class="app-subtitle">高品質遊戲體驗，立即安裝</div>
           <div class="btn-row">
-            <button class="btn btn-primary" id="install-btn"><span class="btn-text">免費安裝</span></button>
+            <button class="btn btn-primary" id="install-btn">免費安裝</button>
           </div>
         </div>
       </div>
@@ -625,18 +621,12 @@
 
   <script>
     const INSTALL_URL = 'https://your-install-url.com';
-const installBtn = document.getElementById('install-btn');
+    const installBtn = document.getElementById('install-btn');
 
-installBtn.addEventListener('click', () => {
-  if (installBtn.classList.contains('loading')) return;
-  installBtn.classList.add('loading');
-  const t = installBtn.querySelector('.btn-text');
-  if (t) t.textContent = '安裝中…';
-
-  setTimeout(() => {
-    window.location.href = "/pwa/";
-  }, 2000);
-});installBtn.disabled = true;
+    installBtn.addEventListener('click', () => {
+      // 轉圈圈 2 秒再跳轉
+      installBtn.classList.add('loading');
+      installBtn.disabled = true;
       setTimeout(() => {
         window.location.href = "/pwa/";
       }, 2000);
