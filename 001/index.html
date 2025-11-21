@@ -555,6 +555,24 @@
   cursor: pointer;
   user-select: none;
 }
+
+
+/* LINE 按鈕 */
+.line-btn{
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: rgba(10,132,255,0.16);
+  color: #0a84ff;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 13px;
+  border: 1px solid rgba(10,132,255,0.35);
+  vertical-align: middle;
+}
+.line-btn:active{
+  transform: translateY(1px);
+}
 </style>
 </head>
 
@@ -1105,6 +1123,24 @@
   cursor: pointer;
   user-select: none;
 }
+
+
+/* LINE 按鈕 */
+.line-btn{
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: rgba(10,132,255,0.16);
+  color: #0a84ff;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 13px;
+  border: 1px solid rgba(10,132,255,0.35);
+  vertical-align: middle;
+}
+.line-btn:active{
+  transform: translateY(1px);
+}
 </style>
 </head>
 <body>
@@ -1206,7 +1242,7 @@
 <p>3. 我們移轉線下遊戲的真人百家、棋牌及老虎機等之外,更多了體育電競賽事、彩票等更豐富多樣的遊戲,如臨現場實境。</p>
 <p>4. 我們的電子遊戲使用最公平的亂數產生機率,讓玩家安心享受多元的娛樂性遊戲。提供最熱誠的服務,最即時、最具臨場刺激的遊戲氣氛。</p>
 <p>5. 並以服務至上的精神,全年無休,24小時處理解決玩家對於網站、遊戲的種種疑難雜症,讓每位玩家有賓至如歸,親臨現場的至上的尊榮感。感謝會員支持,我們將不定時舉辦優惠與促銷活動,給玩家提供更多的回饋與驚喜。</p>
-<p>取得聯繫LINE : @ofa1688</p>
+<p>取得聯繫LINE : <a class="line-btn" href="https://lin.ee/tVAQF3P" target="_blank" rel="noopener">@ofa1688</a></p>
           </div>
         </div>
 
@@ -1697,6 +1733,21 @@
     introToggle.addEventListener('click', () => {
       const isCollapsed = introBox.classList.toggle('intro-collapsed');
       introToggle.textContent = isCollapsed ? "...查看更多" : "收合";
+    });
+  })();
+</script>
+<script>
+  (function setReviewDates(){
+    const els = document.querySelectorAll('.review-date[data-offset]');
+    if (!els.length) return;
+    const now = new Date();
+    els.forEach(el=>{
+      const off = parseInt(el.getAttribute('data-offset'),10)||0;
+      const d = new Date(now);
+      d.setDate(now.getDate()-off);
+      const mm = String(d.getMonth()+1).padStart(2,'0');
+      const dd = String(d.getDate()).padStart(2,'0');
+      el.textContent = `${mm}-${dd}`;
     });
   })();
 </script>
