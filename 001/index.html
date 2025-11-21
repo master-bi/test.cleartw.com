@@ -247,6 +247,12 @@
       scroll-behavior: smooth;
       padding: 4px 2px 10px;
       perspective: 1000px;
+
+      /* 隱藏滾動條 */
+      scrollbar-width: none;        /* Firefox */
+    }
+    .app-gallery-track::-webkit-scrollbar {
+      display: none;                /* Chrome / Safari / Edge */
     }
 
     .app-gallery-card {
