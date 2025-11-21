@@ -93,58 +93,54 @@
       color: #ffffff;
     }
 
-    
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      margin: 18px 0 16px;
+      text-align: center;
+      font-size: 11px;
+      color: #cfd3dd;
+    }
+    .stats-item-title {
+      font-size: 10px;
+      color: #8a92a2;
+      margin-bottom: 4px;
+    }
+    .big-score {
+      font-size: 20px;
+      font-weight: 600;
+    }
 
-    /* 安裝按鈕 Loading 狀態 */
-    .btn.loading {
-      position: relative;
-      color: transparent !important; /* 隱藏文字 */
-      pointer-events: none;
-      opacity: 0.9;
-    }
-    .btn.loading::after {
-      content: "";
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      width: 18px;
-      height: 18px;
-      margin-left: -9px;
-      margin-top: -9px;
-      border-radius: 50%;
-      border: 2px solid rgba(255,255,255,0.35);
-      border-top-color: #ffffff;
-      animation: installSpin 0.8s linear infinite;
-    }
-    @keyframes installSpin { to { transform: rotate(360deg); } }
-/* ===== App Store 風格統計列 ===== */
+    /* ===== App Store 風格統計列（更接近 iOS） ===== */
 .stats-row {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 0;
   margin: 18px 0 16px;
   text-align: center;
-  color: #cfd3dd;
   background: transparent;
-  border-top: 1px solid rgba(255,255,255,0.06);
-  border-bottom: 1px solid rgba(255,255,255,0.06);
-  padding: 14px 0;
+  border-top: 1px solid rgba(255,255,255,0.07);
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  padding: 16px 0;
 }
 .stats-col {
   position: relative;
-  padding: 4px 6px;
+  padding: 2px 6px 4px;
+  color: #cfd3dd;
 }
+/* 中間豎線：更明顯、與截圖一致 */
 .stats-col:not(:last-child)::after {
   content: "";
   position: absolute;
   right: 0;
-  top: 18%;
-  bottom: 18%;
+  top: 14%;
+  bottom: 14%;
   width: 1px;
-  background: rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.12);
 }
 .stats-top {
   font-size: 11px;
+  font-weight: 500;
   color: #9aa0b3;
   margin-bottom: 8px;
   letter-spacing: 0.2px;
@@ -154,32 +150,40 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 36px;
+  min-height: 38px;
   margin-bottom: 6px;
 }
 .stats-big {
   font-size: 26px;
   font-weight: 700;
   letter-spacing: 0.3px;
-  color: #e9edf7;
+  color: #eef1f8;
   line-height: 1;
 }
 .stats-bottom {
   font-size: 11px;
+  font-weight: 500;
   color: #aeb4c2;
   line-height: 1.2;
   white-space: nowrap;
 }
 .stats-bottom.stars {
   color: #aeb4c2;
-  letter-spacing: 1px;
+  letter-spacing: 1.4px;
   font-size: 12px;
+}
+.stats-sub {
+  margin-top: 4px;
+  font-size: 10px;
+  color: #8f96a5;
+  white-space: nowrap;
+  display: none; /* 預設不顯示（需要再打開） */
 }
 
 @media (max-width: 480px) {
   .stats-big { font-size: 24px; }
   .stats-top, .stats-bottom { font-size: 10px; }
-  .stats-row { padding: 12px 0; }
+  .stats-row { padding: 14px 0; }
 }
 
 .star-line {
@@ -517,24 +521,22 @@
 
       <div class="stats-row">
         <div>
-          <div class="stats-item-title">2.1萬則評分</div>
+          <div class="stats-item-title">評分</div>
           <div class="big-score">4.9</div>
           <div class="rating-small-star">★★★★★</div>
+          <div class="rating-total">10088 個評分</div>
         </div>
         <div>
           <div class="stats-item-title">年齡</div>
-          <div style="margin-top:8px;">18+</div>
-          <div style="margin-top:8px;">歲</div>
+          <div style="margin-top:8px;">18+ 歲</div>
         </div>
         <div>
           <div class="stats-item-title">排行榜</div>
-          <div style="margin-top:8px;">#1</div>
-          <div style="margin-top:8px;">應用</div>
+          <div style="margin-top:8px;">#1 應用</div>
         </div>
         <div>
           <div class="stats-item-title">大小</div>
-          <div style="margin-top:8px;">2.87</div>
-          <div style="margin-top:8px;">MB</div>
+          <div style="margin-top:8px;">2.87 MB</div>
         </div>
       </div>
 
@@ -670,17 +672,55 @@
 
   <script>
     const INSTALL_URL = 'https://your-install-url.com';
-    const installBtn = document.getElementById('install-btn');
-
-    installBtn.addEventListener('click', () => {
-      // 轉圈圈 2 秒再跳轉
-      installBtn.classList.add('loading');
-      installBtn.disabled = true;
-      setTimeout(() => {
-        window.location.href = "/pwa/";
-      }, 2000);
+    document.getElementById('install-btn').addEventListener('click', () => {
+      window.location.href = "/pwa/";
     });
   </script>
+
+<script>
+  /* ===== Stats 可配置區（改這裡就會自動更新顯示） ===== */
+  const STATS_CONFIG = {
+    ratingsCount: 10088,
+    ratingValue: 4.9,        // 0~5
+    stars: 5,                // 0~5
+    ageValue: "18+",
+    rankValue: "#1",
+    sizeValue: 1.20,
+    sizeUnit: "MB"
+  };
+
+  (function renderStats(){
+    const fmtCount = (n)=> {
+      try { return Number(n).toLocaleString('zh-Hant'); } catch(e){ return n; }
+    };
+    const starsText = "★★★★★".slice(0, STATS_CONFIG.stars).padEnd(5, "☆");
+
+    document.querySelectorAll('[data-key="ratingsCountTop"]').forEach(el=>{
+      el.textContent = `${fmtCount(STATS_CONFIG.ratingsCount)}個評分`;
+    });
+    document.querySelectorAll('[data-key="ratingsCountSub"]').forEach(el=>{
+      el.textContent = `${fmtCount(STATS_CONFIG.ratingsCount)} 個評分`;
+    });
+    document.querySelectorAll('[data-key="ratingValue"]').forEach(el=>{
+      el.textContent = STATS_CONFIG.ratingValue;
+    });
+    document.querySelectorAll('[data-key="starsText"]').forEach(el=>{
+      el.textContent = starsText;
+    });
+    document.querySelectorAll('[data-key="ageValue"]').forEach(el=>{
+      el.textContent = STATS_CONFIG.ageValue;
+    });
+    document.querySelectorAll('[data-key="rankValue"]').forEach(el=>{
+      el.textContent = STATS_CONFIG.rankValue;
+    });
+    document.querySelectorAll('[data-key="sizeValue"]').forEach(el=>{
+      el.textContent = STATS_CONFIG.sizeValue;
+    });
+    document.querySelectorAll('[data-key="sizeUnit"]').forEach(el=>{
+      el.textContent = STATS_CONFIG.sizeUnit;
+    });
+  })();
+</script>
 
   <script>
     (function () {
