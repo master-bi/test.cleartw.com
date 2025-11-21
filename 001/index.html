@@ -1,121 +1,366 @@
-<!-- App Store + Google Play 完整展示輪播 -->
-<div class="carousel-container">
-  <div class="carousel" id="carousel">
-    <img src="/001/001.png" onclick="openPreview(this.src)">
-    <img src="/001/002.png" onclick="openPreview(this.src)">
-    <img src="/001/003.png" onclick="openPreview(this.src)">
-    <img src="/001/004.png" onclick="openPreview(this.src)">
+<!-- ===== APP 商店風格 極致輪播區塊 ===== -->
+<div class="app-gallery">
+  <div class="app-gallery-viewport">
+    <button class="app-gallery-arrow app-gallery-arrow--left" type="button" aria-label="上一張">
+      ‹
+    </button>
+
+    <div class="app-gallery-track" id="appGalleryTrack">
+      <div class="app-gallery-card active">
+        <div class="app-gallery-loader"></div>
+        <img data-src="/001/001.png" alt="Screenshot 1" loading="lazy">
+      </div>
+      <div class="app-gallery-card">
+        <div class="app-gallery-loader"></div>
+        <img data-src="/001/002.png" alt="Screenshot 2" loading="lazy">
+      </div>
+      <div class="app-gallery-card">
+        <div class="app-gallery-loader"></div>
+        <img data-src="/001/003.png" alt="Screenshot 3" loading="lazy">
+      </div>
+      <div class="app-gallery-card">
+        <div class="app-gallery-loader"></div>
+        <img data-src="/001/004.png" alt="Screenshot 4" loading="lazy">
+      </div>
+    </div>
+
+    <button class="app-gallery-arrow app-gallery-arrow--right" type="button" aria-label="下一張">
+      ›
+    </button>
   </div>
 
-  <div class="dots" id="dots"></div>
+  <div class="app-gallery-dots" id="appGalleryDots"></div>
 </div>
 
 <!-- 全螢幕預覽 -->
-<div class="preview" id="preview" onclick="closePreview()">
-  <img id="preview-img">
+<div class="app-gallery-preview" id="appGalleryPreview">
+  <div class="app-gallery-preview-inner">
+    <img id="appGalleryPreviewImg">
+  </div>
 </div>
 
 <style>
-/* --- 輪播區塊 --- */
-.carousel-container {
+/* 容器 */
+.app-gallery {
+  width: 100%;
+  margin: 12px 0 4px;
+  padding: 6px 0;
+}
+
+/* 視窗 + 箭頭 */
+.app-gallery-viewport {
   position: relative;
   width: 100%;
   overflow: hidden;
-  padding: 10px 0;
+  padding: 4px 32px; /* 給箭頭留空間 */
 }
 
-.carousel {
+.app-gallery-track {
   display: flex;
-  gap: 12px;
+  gap: 14px;
   overflow-x: auto;
   scroll-behavior: smooth;
+  padding: 4px 2px 10px;
+  perspective: 1000px;
 }
 
-.carousel img {
+/* 卡片 */
+.app-gallery-card {
+  position: relative;
   width: 200px;
-  border-radius: 18px;
+  max-width: 42vw;
+  border-radius: 20px;
+  overflow: hidden;
   flex-shrink: 0;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.35);
+  background: rgba(255,255,255,0.03);
+  transform: translateY(0) scale(0.97) rotateY(-3deg);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+  transition:
+    transform 0.4s ease,
+    box-shadow 0.4s ease,
+    background 0.3s ease,
+    opacity 0.3s ease;
+  opacity: 0.85;
 }
 
-/* --- 小圓點 --- */
-.dots {
-  text-align: center;
-  margin-top: 8px;
-}
-
-.dots span {
-  display: inline-block;
-  width: 10px;
-  height: 10px;
-  background: #555;
-  border-radius: 50%;
-  margin: 0 3px;
-  opacity: 0.4;
-}
-
-.dots .active {
-  background: #fff;
+.app-gallery-card.active {
+  transform: translateY(-4px) scale(1.02) rotateY(0deg);
+  box-shadow: 0 10px 26px rgba(0,0,0,0.65);
+  background: rgba(255,255,255,0.05);
   opacity: 1;
 }
 
-/* --- 全螢幕預覽 --- */
-.preview {
+.app-gallery-card img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 20px;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+/* 載入動畫（spinner） */
+.app-gallery-loader {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: radial-gradient(circle at 20% 20%, rgba(255,255,255,0.12), transparent 55%);
+}
+
+.app-gallery-loader::after {
+  content: "";
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 3px solid rgba(255,255,255,0.25);
+  border-top-color: rgba(255,255,255,0.85);
+  animation: appGallerySpin 0.8s linear infinite;
+}
+
+@keyframes appGallerySpin {
+  to { transform: rotate(360deg); }
+}
+
+/* 圖片載入完成後狀態 */
+.app-gallery-card.loaded img {
+  opacity: 1;
+}
+
+.app-gallery-card.loaded .app-gallery-loader {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+/* 箭頭 */
+.app-gallery-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  background: rgba(0,0,0,0.55);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.6);
+  z-index: 5;
+  padding-bottom: 2px;
+}
+
+.app-gallery-arrow--left {
+  left: 4px;
+}
+
+.app-gallery-arrow--right {
+  right: 4px;
+}
+
+.app-gallery-arrow:active {
+  transform: translateY(-50%) scale(0.9);
+}
+
+/* 小圓點 */
+.app-gallery-dots {
+  text-align: center;
+  margin-top: 4px;
+}
+
+.app-gallery-dots span {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.25);
+  margin: 0 3px;
+  transition: all 0.25s ease;
+}
+
+.app-gallery-dots span.active {
+  width: 18px;
+  background: #fff;
+}
+
+/* 全螢幕預覽 */
+.app-gallery-preview {
   position: fixed;
   inset: 0;
   display: none;
   justify-content: center;
   align-items: center;
-  background: rgba(0,0,0,0.9);
+  background: rgba(0,0,0,0.94);
   z-index: 999;
 }
 
-.preview img {
-  width: 80%;
-  max-height: 90%;
+.app-gallery-preview-inner {
+  max-width: 96vw;
+  max-height: 92vh;
+}
+
+.app-gallery-preview img {
+  display: block;
+  width: 100%;
+  max-height: 92vh;
   border-radius: 20px;
+}
+
+/* 手機優化 */
+@media (max-width: 480px) {
+  .app-gallery-viewport {
+    padding: 4px 24px;
+  }
+  .app-gallery-card {
+    width: 170px;
+    max-width: 70vw;
+  }
 }
 </style>
 
 <script>
-// 自動輪播
-let carousel = document.getElementById("carousel");
-let dots = document.getElementById("dots");
-let imgs = carousel.getElementsByTagName("img");
-let index = 0;
+(function () {
+  const track = document.getElementById('appGalleryTrack');
+  if (!track) return;
 
-// 建立小圓點
-for (let i = 0; i < imgs.length; i++) {
-  let d = document.createElement("span");
-  dots.appendChild(d);
-}
-let dotList = dots.getElementsByTagName("span");
+  const cards = Array.from(track.querySelectorAll('.app-gallery-card'));
+  const dotsBox = document.getElementById('appGalleryDots');
+  const leftArrow = document.querySelector('.app-gallery-arrow--left');
+  const rightArrow = document.querySelector('.app-gallery-arrow--right');
+  const preview = document.getElementById('appGalleryPreview');
+  const previewImg = document.getElementById('appGalleryPreviewImg');
 
-function updateDots(i) {
-  for (let j = 0; j < dotList.length; j++) {
-    dotList[j].classList.remove("active");
-  }
-  dotList[i].classList.add("active");
-}
-updateDots(0);
+  let current = 0;
+  let autoTimer = null;
 
-// 自動輪播每 3 秒
-setInterval(() => {
-  index = (index + 1) % imgs.length;
-  carousel.scrollTo({
-    left: imgs[index].offsetLeft - 10,
-    behavior: "smooth"
+  /* 建立小圓點 */
+  cards.forEach((_, i) => {
+    const dot = document.createElement('span');
+    if (i === 0) dot.classList.add('active');
+    dot.addEventListener('click', () => goTo(i, true));
+    dotsBox.appendChild(dot);
   });
-  updateDots(index);
-}, 3000);
+  const dots = Array.from(dotsBox.querySelectorAll('span'));
 
-// 全螢幕預覽
-function openPreview(src) {
-  document.getElementById("preview-img").src = src;
-  document.getElementById("preview").style.display = "flex";
-}
+  /* Lazy Load + 載入動畫 */
+  const io = 'IntersectionObserver' in window
+    ? new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          const card = entry.target;
+          const img = card.querySelector('img');
+          const dataSrc = img.getAttribute('data-src');
+          if (dataSrc && !img.src) {
+            img.src = dataSrc;
+          }
+          io.unobserve(card);
+        });
+      }, { root: track, threshold: 0.2 })
+    : null;
 
-function closePreview() {
-  document.getElementById("preview").style.display = "none";
-}
+  cards.forEach(card => {
+    const img = card.querySelector('img');
+
+    if (io) {
+      io.observe(card);
+    } else {
+      // 後備：直接載入
+      const dataSrc = img.getAttribute('data-src');
+      if (dataSrc && !img.src) img.src = dataSrc;
+    }
+
+    if (img.complete && img.naturalWidth !== 0) {
+      card.classList.add('loaded');
+    } else {
+      img.addEventListener('load', () => {
+        card.classList.add('loaded');
+      });
+      img.addEventListener('error', () => {
+        card.classList.add('loaded');
+      });
+    }
+
+    // 點擊開啟預覽
+    img.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (!img.src) return;
+      previewImg.src = img.src;
+      preview.style.display = 'flex';
+    });
+  });
+
+  /* 預覽關閉 */
+  preview.addEventListener('click', () => {
+    preview.style.display = 'none';
+    previewImg.src = '';
+  });
+
+  /* 更新狀態 */
+  function updateActive(index) {
+    cards.forEach((c, i) => c.classList.toggle('active', i === index));
+    dots.forEach((d, i) => d.classList.toggle('active', i === index));
+  }
+
+  function scrollToCard(index) {
+    const card = cards[index];
+    if (!card) return;
+    const left = card.offsetLeft - track.offsetLeft - 10;
+    track.scrollTo({ left, behavior: 'smooth' });
+  }
+
+  function goTo(index, fromUser) {
+    if (index < 0) index = cards.length - 1;
+    if (index >= cards.length) index = 0;
+    current = index;
+    updateActive(current);
+    scrollToCard(current);
+    if (fromUser) restartAuto();
+  }
+
+  /* 自動輪播 */
+  function startAuto() {
+    if (autoTimer) clearInterval(autoTimer);
+    autoTimer = setInterval(() => {
+      goTo(current + 1, false);
+    }, 3000);
+  }
+
+  function restartAuto() {
+    clearInterval(autoTimer);
+    startAuto();
+  }
+
+  startAuto();
+
+  /* 箭頭控制 */
+  leftArrow.addEventListener('click', () => goTo(current - 1, true));
+  rightArrow.addEventListener('click', () => goTo(current + 1, true));
+
+  /* 手動滑動時，根據捲動位置更新 active / dots */
+  let scrollTimeout = null;
+  track.addEventListener('scroll', () => {
+    if (scrollTimeout) clearTimeout(scrollTimeout);
+    scrollTimeout = setTimeout(() => {
+      let closestIndex = 0;
+      let closestDist = Infinity;
+      const trackLeft = track.scrollLeft;
+      cards.forEach((card, i) => {
+        const dist = Math.abs(card.offsetLeft - trackLeft);
+        if (dist < closestDist) {
+          closestDist = dist;
+          closestIndex = i;
+        }
+      });
+      current = closestIndex;
+      updateActive(current);
+    }, 80);
+  });
+
+})();
 </script>
