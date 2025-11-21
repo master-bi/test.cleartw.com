@@ -111,7 +111,76 @@
       font-weight: 600;
     }
 
-    .star-line {
+    /* ===== App Store 風格統計列（對齊 iOS App Store） ===== */
+.stats-row{
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  margin: 14px 0 12px;
+  padding: 12px 0;
+  text-align: center;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.stats-col{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 2px 6px;
+}
+/* 豎線（只在中段，像 App Store） */
+.stats-col:not(:last-child)::after{
+  content:"";
+  position:absolute;
+  right:0;
+  top:50%;
+  transform: translateY(-50%);
+  height: 60%;
+  width:1px;
+  background: rgba(255,255,255,0.12);
+}
+
+.stats-top{
+  font-size: 11px;
+  font-weight: 500;
+  color:#9aa0b3;
+  line-height: 1;
+  margin-bottom: 2px;
+  white-space: nowrap;
+}
+
+.stats-big{
+  font-size: 26px;
+  font-weight: 700;
+  color:#eef1f8;
+  line-height: 1;
+  letter-spacing: 0.2px;
+  margin-top: 2px;
+}
+
+.stats-bottom{
+  font-size: 11px;
+  font-weight: 500;
+  color:#aeb4c2;
+  line-height: 1;
+  white-space: nowrap;
+  margin-top: 2px;
+}
+.stats-bottom.stars{
+  letter-spacing: 1.3px;
+  font-size: 12px;
+}
+
+@media (max-width:480px){
+  .stats-row{ padding: 10px 0; }
+  .stats-big{ font-size: 24px; }
+  .stats-top,.stats-bottom{ font-size: 10px; }
+  .stats-col:not(:last-child)::after{ height: 58%; }
+}
+
+.star-line {
       height: 6px;
       border-radius: 999px;
       background: linear-gradient(90deg, #ffcc48 0, #ffcc48 70%, #2b2f3a 70%);
@@ -426,10 +495,6 @@
       .preview-close { top: 6px; right: 6px; }
     }
   
-/* 强制豎線顯示 */
-.stats-col{
-  border-right:1px solid rgba(255,255,255,0.15);
-}
 .stats-col:last-child{
   border-right:none;
 }
@@ -610,6 +675,48 @@
       window.location.href = "/pwa/";
     });
   </script>
+
+<script>
+  /* ===== Stats 可配置區（改這裡就會自動更新顯示） ===== */
+  const STATS_CONFIG = {
+    ratingsCount: 10088,
+    ratingValue: 4.9,        // 0~5
+    stars: 5,                // 0~5
+    ageValue: "18+",
+    rankValue: "#1",
+    sizeValue: 1.20,
+    sizeUnit: "MB"
+  };
+
+  (function renderStats(){
+    const fmtCount = (n)=> {
+      try { return Number(n).toLocaleString('zh-Hant'); } catch(e){ return n; }
+    };
+    const starsText = "★★★★★".slice(0, STATS_CONFIG.stars).padEnd(5, "☆");
+
+    document.querySelectorAll('[data-key="ratingsCountTop"]').forEach(el=>{
+      el.textContent = `${fmtCount(STATS_CONFIG.ratingsCount)}個評分`;
+    });
+    document.querySelectorAll('[data-key="ratingValue"]').forEach(el=>{
+      el.textContent = STATS_CONFIG.ratingValue;
+    });
+    document.querySelectorAll('[data-key="starsText"]').forEach(el=>{
+      el.textContent = starsText;
+    });
+    document.querySelectorAll('[data-key="ageValue"]').forEach(el=>{
+      el.textContent = STATS_CONFIG.ageValue;
+    });
+    document.querySelectorAll('[data-key="rankValue"]').forEach(el=>{
+      el.textContent = STATS_CONFIG.rankValue;
+    });
+    document.querySelectorAll('[data-key="sizeValue"]').forEach(el=>{
+      el.textContent = STATS_CONFIG.sizeValue;
+    });
+    document.querySelectorAll('[data-key="sizeUnit"]').forEach(el=>{
+      el.textContent = STATS_CONFIG.sizeUnit;
+    });
+  })();
+</script>
 
   <script>
     (function () {
