@@ -224,7 +224,7 @@
       gap: 14px;
       overflow-x: auto;
       scroll-behavior: smooth;
-      padding: 12px 2px 12px;  /* 多一點上緣，避免 active 放大被切 */
+      padding: 12px 2px 12px;
       perspective: 1000px;
       scrollbar-width: none;
     }
@@ -233,9 +233,9 @@
     /* ✅ A 大型 1:1 卡片 */
     .app-gallery-card {
       position: relative;
-      width: 270px;          /* A 尺寸 */
-      max-width: 68vw;       /* 手機自適應 */
-      aspect-ratio: 1 / 1;   /* ✅ 強制正方形 */
+      width: 270px;
+      max-width: 68vw;
+      aspect-ratio: 1 / 1;
       border-radius: 20px;
       overflow: hidden;
       flex-shrink: 0;
@@ -257,8 +257,8 @@
       display: block;
       width: 100%;
       height: 100%;
-      object-fit: cover;         /* ✅ 滿版裁切 */
-      object-position: center;   /* ✅ 正中間 */
+      object-fit: cover;
+      object-position: center;
       border-radius: 20px;
       opacity: 0;
       transition: opacity 0.35s ease;
@@ -415,7 +415,7 @@
 
     @media (max-width: 480px) {
       .app-gallery-card {
-        width: 252px;   /* 手機略縮但仍是 A 大感 */
+        width: 252px;
         max-width: 82vw;
       }
       .preview-thumbs {
@@ -678,6 +678,7 @@
           }
         }
 
+        // click open preview
         media.addEventListener('click', (e) => {
           e.stopPropagation();
           if (!media.src) return;
@@ -693,13 +694,14 @@
       function scrollToCard(index) {
         const card = cards[index];
         if (!card) return;
+
         const left = card.offsetLeft - track.offsetLeft - 10;
         isProgrammaticScroll = true;
         track.scrollTo({ left, behavior: 'smooth' });
         setTimeout(() => { isProgrammaticScroll = false; }, 450);
       }
 
-      // 主輪播只播當前影片（muted loop）
+      // 暫停所有影片
       function pauseAllVideos(reset = false) {
         medias.forEach(m => {
           if (m && m.tagName === 'VIDEO') {
@@ -721,6 +723,22 @@
         }
       }
 
+      // ✅ B：只預載「上一張 + 下一張」
+      function preloadNeighbors(index) {
+        const prev = (index - 1 + medias.length) % medias.length;
+        const next = (index + 1) % medias.length;
+
+        [prev, next].forEach(i => {
+          const m = medias[i];
+          if (m && m.tagName === 'VIDEO') {
+            ensureVideoSrc(m);
+            try { m.preload = "auto"; } catch(e){}
+            try { m.load(); } catch(e){}
+          }
+        });
+      }
+
+      // 主輪播只播當前影片（muted loop）
       function playActiveMedia(index) {
         if (isPreviewOpen) return;
 
@@ -746,6 +764,8 @@
           } else {
             media.addEventListener('canplay', tryPlay, { once: true });
           }
+
+          preloadNeighbors(index);
         }
       }
 
@@ -801,7 +821,7 @@
         }, 120);
       });
 
-      // Preview + Thumbs
+      // ===== Preview + Thumbs =====
       function buildThumbs() {
         previewThumbs.innerHTML = '';
         medias.forEach((media, i) => {
