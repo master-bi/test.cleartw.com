@@ -499,6 +499,29 @@
   border-right:none;
 }
 
+
+
+/* ===== 免費安裝按鈕 loading（轉圈 + 2 秒後跳轉） ===== */
+.btn-primary.loading {
+  position: relative;
+  color: transparent !important; /* 隱藏原文字 */
+  pointer-events: none;
+  opacity: 0.95;
+}
+.btn-primary.loading::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 18px;
+  height: 18px;
+  margin: -9px 0 0 -9px;
+  border: 2px solid rgba(255,255,255,0.35);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: installSpin 0.8s linear infinite;
+}
+@keyframes installSpin { to { transform: rotate(360deg); } }
 </style>
 </head>
 <body>
@@ -670,11 +693,21 @@
   </div>
 
   <script>
-    const INSTALL_URL = 'https://your-install-url.com';
-    document.getElementById('install-btn').addEventListener('click', () => {
-      window.location.href = "/pwa/";
-    });
-  </script>
+  const INSTALL_URL = "/pwa/";  // ← 你要跳轉的網址
+
+  const btn = document.getElementById('install-btn');
+
+  btn.addEventListener('click', () => {
+    if (btn.classList.contains('loading')) return;
+
+    btn.classList.add('loading');
+    btn.textContent = "安裝中…";
+
+    setTimeout(() => {
+      window.location.href = INSTALL_URL;
+    }, 2000);
+  });
+</script>
 
 <script>
   /* ===== Stats 可配置區（改這裡就會自動更新顯示） ===== */
