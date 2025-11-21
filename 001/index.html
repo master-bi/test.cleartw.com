@@ -216,8 +216,8 @@
       position: relative;
       width: 100%;
       overflow-x: hidden;
-      overflow-y: visible;     /* ✅ 上下不裁切 */
-      padding: 12px 0 4px;     /* ✅ 左右清掉，跟評論區切齊 */
+      overflow-y: visible;
+      padding: 12px 0 4px;
     }
 
     .app-gallery-track {
@@ -225,7 +225,7 @@
       gap: 14px;
       overflow-x: auto;
       scroll-behavior: smooth;
-      padding: 10px 2px 10px;  /* ✅ 上面留空間給 active 放大 */
+      padding: 10px 2px 10px;
       perspective: 1000px;
       scrollbar-width: none;
     }
@@ -251,7 +251,6 @@
       opacity: 1;
     }
 
-    /* 主輪播媒體（影片/圖片通用樣式） */
     .gallery-media {
       display: block;
       width: 100%;
@@ -260,7 +259,7 @@
       opacity: 0;
       transition: opacity 0.35s ease;
       cursor: zoom-in;
-      background: #000; /* 避免載入前閃白 */
+      background: #000;
     }
 
     .app-gallery-loader {
@@ -286,7 +285,6 @@
       opacity: 0; pointer-events: none; transition: opacity 0.25s ease;
     }
 
-    /* 主輪播左右 <> 隱藏（保留手滑） */
     .app-gallery-arrow { display: none !important; }
 
     .app-gallery-dots {
@@ -303,7 +301,7 @@
     }
     .app-gallery-dots span.active { width: 18px; background: #ffffff; }
 
-    /* ===== 全螢幕預覽（可左右滑 + 縮圖列） ===== */
+    /* ===== 全螢幕預覽 ===== */
     .app-gallery-preview {
       position: fixed;
       inset: 0;
@@ -327,7 +325,6 @@
       gap: 10px;
     }
 
-    /* 預覽主媒體（img/video 都會塞進來） */
     #appGalleryPreviewMedia {
       width: 92vw;
       max-width: 520px;
@@ -345,10 +342,8 @@
       display: block;
     }
 
-    /* 預覽左右 <> 隱藏（保留手滑/鍵盤） */
     .preview-arrow { display: none !important; }
 
-    /* X 往上移 */
     .preview-close {
       position: fixed;
       top: 8px;
@@ -366,7 +361,6 @@
       z-index: 1002;
     }
 
-    /* 縮圖列（加高 + 不切 active 放大） */
     .preview-thumbs {
       position: fixed;
       left: 0; right: 0; bottom: 0;
@@ -429,7 +423,6 @@
 <body>
   <div class="page">
     <div class="card">
-      <!-- 上半部：icon + 名稱 + 按鈕 -->
       <div class="top-row">
         <div class="icon">
           <img src="icons/icon.png" alt="App Icon">
@@ -443,7 +436,6 @@
         </div>
       </div>
 
-      <!-- 中間統計數據 -->
       <div class="stats-row">
         <div>
           <div class="stats-item-title">評分</div>
@@ -465,14 +457,12 @@
         </div>
       </div>
 
-      <!-- 活動輪播（8 段影片） -->
       <div class="section">
         <div class="section-title">活動</div>
 
         <div class="app-gallery">
           <div class="app-gallery-viewport">
             <div class="app-gallery-track" id="appGalleryTrack">
-              <!-- 8 段影片：101.mp4 ~ 108.mp4 -->
               <div class="app-gallery-card active">
                 <div class="app-gallery-loader"></div>
                 <video class="gallery-media" data-src="/video/101.mp4" preload="metadata" muted playsinline></video>
@@ -511,7 +501,6 @@
           </div>
         </div>
 
-        <!-- 全螢幕預覽（有聲 autoplay + controls） -->
         <div class="app-gallery-preview" id="appGalleryPreview">
           <div class="app-gallery-preview-inner">
             <button class="preview-close" id="previewClose" aria-label="關閉">✕</button>
@@ -519,11 +508,9 @@
           </div>
         </div>
 
-        <!-- 縮圖列（JS 自動塞影片縮圖） -->
         <div class="preview-thumbs" id="previewThumbs" style="display:none;"></div>
       </div>
 
-      <!-- 簡介 -->
       <div class="section">
         <div class="section-title">簡介</div>
         <p class="intro-text">
@@ -531,7 +518,6 @@
         </p>
       </div>
 
-      <!-- 評分及評論 -->
       <div class="section">
         <div class="section-title">評分及評論</div>
         <div class="rating-block">
@@ -561,7 +547,6 @@
         </div>
       </div>
 
-      <!-- 資訊 -->
       <div class="section">
         <div class="section-title">信息</div>
         <div class="info-list">
@@ -626,6 +611,7 @@
       let current = 0;
       let autoTimer = null;
       let isProgrammaticScroll = false;
+      let isPreviewOpen = false;
 
       let previewIndex = 0;
       let touchStartX = 0;
@@ -662,7 +648,7 @@
           }, { root: track, threshold: 0.2 })
         : null;
 
-      cards.forEach((card, i) => {
+      cards.forEach((card) => {
         const media = card.querySelector('img, video');
 
         if (io) io.observe(card);
@@ -688,7 +674,7 @@
         media.addEventListener('click', (e) => {
           e.stopPropagation();
           if (!media.src) return;
-          openPreview(i);
+          openPreview(cards.indexOf(card));
         });
       });
 
@@ -707,28 +693,91 @@
         setTimeout(() => { isProgrammaticScroll = false; }, 450);
       }
 
+      // ====== ✅ 主輪播：只播放當前卡片影片（muted loop） ======
+      function pauseAllVideos(reset = false) {
+        medias.forEach(m => {
+          if (m && m.tagName === 'VIDEO') {
+            try { m.pause(); } catch(e){}
+            if (reset) {
+              try { m.currentTime = 0; } catch(e){}
+            }
+          }
+        });
+      }
+
+      function ensureVideoSrc(video) {
+        if (!video.src) {
+          const dataSrc = video.getAttribute('data-src');
+          if (dataSrc) {
+            video.src = dataSrc;
+            video.load();
+          }
+        }
+      }
+
+      function playActiveMedia(index) {
+        if (isPreviewOpen) return;
+
+        // 先停全部（並回到開頭，切換更乾淨）
+        pauseAllVideos(true);
+
+        const media = medias[index];
+        if (!media) return;
+
+        if (media.tagName === 'VIDEO') {
+          ensureVideoSrc(media);
+
+          media.muted = true;
+          media.playsInline = true;
+          media.loop = true;
+
+          const tryPlay = () => {
+            const p = media.play();
+            if (p && typeof p.catch === 'function') p.catch(()=>{});
+          };
+
+          if (media.readyState >= 2) {
+            tryPlay();
+          } else {
+            media.addEventListener('canplay', tryPlay, { once: true });
+          }
+        }
+      }
+      // ============================================================
+
       function goTo(index, fromUser) {
         if (index < 0) index = cards.length - 1;
         if (index >= cards.length) index = 0;
         current = index;
+
         updateActive(current);
         scrollToCard(current);
+        playActiveMedia(current);   // ✅ 切到就播放
+
         if (fromUser) restartAuto();
       }
 
       function startAuto() {
         if (autoTimer) clearInterval(autoTimer);
-        autoTimer = setInterval(() => goTo(current + 1, false), 3000);
+        autoTimer = setInterval(() => {
+          if (!isPreviewOpen) goTo(current + 1, false);
+        }, 3000);
+      }
+      function stopAuto() {
+        if (autoTimer) clearInterval(autoTimer);
+        autoTimer = null;
       }
       function restartAuto() {
-        clearInterval(autoTimer);
+        stopAuto();
         startAuto();
       }
+
       startAuto();
+      playActiveMedia(0); // ✅ 頁面進來先播第一張（無聲）
 
       let scrollTimeout = null;
       track.addEventListener('scroll', () => {
-        if (isProgrammaticScroll) return;
+        if (isProgrammaticScroll || isPreviewOpen) return;
         if (scrollTimeout) clearTimeout(scrollTimeout);
         scrollTimeout = setTimeout(() => {
           let closestIndex = 0;
@@ -743,7 +792,9 @@
           });
           current = closestIndex;
           updateActive(current);
-        }, 80);
+          playActiveMedia(current); // ✅ 手滑停下來後播對應影片
+          restartAuto();
+        }, 120);
       });
 
       // ===== Preview + Thumbs =====
@@ -788,6 +839,10 @@
       }
 
       function openPreview(i) {
+        isPreviewOpen = true;
+        stopAuto();
+        pauseAllVideos(false);
+
         previewIndex = i;
         if (!previewThumbs.children.length) buildThumbs();
         previewThumbs.style.display = 'flex';
@@ -803,6 +858,10 @@
         previewThumbs.style.display = 'none';
         previewMediaBox.innerHTML = '';
         document.body.style.overflow = '';
+
+        isPreviewOpen = false;
+        restartAuto();
+        playActiveMedia(current); // ✅ 回來後繼續播目前那張
       }
 
       function setPreviewMedia(i, dir = 0) {
@@ -813,7 +872,6 @@
         const media = medias[previewIndex];
         const src = media.src || media.getAttribute('data-src');
 
-        // 清空舊的 media
         previewMediaBox.innerHTML = '';
 
         if (media.tagName === 'VIDEO') {
@@ -821,7 +879,7 @@
           v.src = src;
           v.controls = true;
           v.autoplay = true;
-          v.playsInline = true;   // iOS inline
+          v.playsInline = true;
           v.preload = "auto";
           v.style.opacity = '0';
           v.style.transform = `translateX(${dir * 18}px) scale(0.98)`;
@@ -858,7 +916,6 @@
         if (e.target === preview) closePreview();
       });
 
-      // 手指左右滑（預覽）
       preview.addEventListener('touchstart', (e) => {
         touchStartX = e.changedTouches[0].screenX;
       }, { passive: true });
@@ -872,7 +929,6 @@
         }
       });
 
-      // 鍵盤左右鍵/ESC（預覽）
       document.addEventListener('keydown', (e) => {
         if (preview.style.display !== 'flex') return;
         if (e.key === 'ArrowRight') setPreviewMedia(previewIndex + 1, 1);
