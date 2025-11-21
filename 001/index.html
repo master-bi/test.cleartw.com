@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>大老爺 - 安裝頁面</title>
-  
+
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="favicon.png">
 
@@ -80,9 +80,7 @@
       color: #a8afbd;
     }
 
-    .btn-row {
-      margin-top: 10px;
-    }
+    .btn-row { margin-top: 10px; }
     .btn {
       width: 100%;
       border-radius: 999px;
@@ -105,13 +103,11 @@
       font-size: 11px;
       color: #cfd3dd;
     }
-
     .stats-item-title {
       font-size: 10px;
       color: #8a92a2;
       margin-bottom: 4px;
     }
-
     .big-score {
       font-size: 20px;
       font-weight: 600;
@@ -124,9 +120,7 @@
       margin: 6px 0;
     }
 
-    .section {
-      margin-bottom: 18px;
-    }
+    .section { margin-bottom: 18px; }
     .section-title {
       font-size: 15px;
       font-weight: 600;
@@ -182,11 +176,7 @@
       font-size: 12px;
     }
 
-    .review-name {
-      font-size: 11px;
-      color: #c2c9d6;
-    }
-
+    .review-name { font-size: 11px; color: #c2c9d6; }
     .review-text {
       font-size: 11px;
       color: #d5dae6;
@@ -200,24 +190,15 @@
       padding: 10px 12px;
       font-size: 12px;
     }
-
     .info-row {
       display: flex;
       justify-content: space-between;
       padding: 6px 0;
       border-bottom: 1px solid rgba(255,255,255,0.04);
     }
-    .info-row:last-child {
-      border-bottom: none;
-    }
-
-    .info-label {
-      color: #9aa0b3;
-    }
-
-    .info-value {
-      color: #e1e5f2;
-    }
+    .info-row:last-child { border-bottom: none; }
+    .info-label { color: #9aa0b3; }
+    .info-value { color: #e1e5f2; }
 
     .disclaimer {
       font-size: 11px;
@@ -226,7 +207,7 @@
       line-height: 1.5;
     }
 
-    /* ===== APP 商店風格 螢幕截圖輪播（全暗黑主題） ===== */
+    /* ===== APP 商店風格 活動輪播（全暗黑主題） ===== */
     .app-gallery {
       width: 100%;
       margin: 6px 0 6px;
@@ -237,7 +218,7 @@
       position: relative;
       width: 100%;
       overflow: hidden;
-      padding: 4px 30px; /* 給箭頭空間 */
+      padding: 4px 30px;
     }
 
     .app-gallery-track {
@@ -247,40 +228,30 @@
       scroll-behavior: smooth;
       padding: 4px 2px 10px;
       perspective: 1000px;
-
-      /* 隱藏滾動條 */
-      scrollbar-width: none;        /* Firefox */
+      scrollbar-width: none;
     }
-    .app-gallery-track::-webkit-scrollbar {
-      display: none;                /* Chrome / Safari / Edge */
-    }
+    .app-gallery-track::-webkit-scrollbar { display: none; }
 
-    /* ✅ 放大輪播卡片比例 */
+    /* ✅ 輪播比例再放大 */
     .app-gallery-card {
       position: relative;
-      width: 230px;           /* 原 200px → 放大 */
-      max-width: 55vw;        /* 原 42vw → 放大 */
+      width: 255px;     /* 再放大 */
+      max-width: 62vw;  /* 再放大 */
       border-radius: 20px;
       overflow: hidden;
       flex-shrink: 0;
       background: #050508;
       transform: translateY(0) scale(0.97) rotateY(-3deg);
       box-shadow: 0 6px 18px rgba(0,0,0,0.8);
-      transition:
-        transform 0.4s ease,
-        box-shadow 0.4s ease,
-        background 0.3s ease,
-        opacity 0.3s ease;
+      transition: transform 0.4s ease, box-shadow 0.4s ease, background 0.3s ease, opacity 0.3s ease;
       opacity: 0.85;
     }
-
     .app-gallery-card.active {
-      transform: translateY(-4px) scale(1.03) rotateY(0deg);
+      transform: translateY(-4px) scale(1.04) rotateY(0deg);
       box-shadow: 0 14px 30px rgba(0,0,0,0.95);
       background: #0b0b10;
       opacity: 1;
     }
-
     .app-gallery-card img {
       display: block;
       width: 100%;
@@ -290,7 +261,6 @@
       transition: opacity 0.35s ease;
     }
 
-    /* 載入動畫（深色低調） */
     .app-gallery-loader {
       position: absolute;
       inset: 0;
@@ -299,45 +269,32 @@
       align-items: center;
       background: radial-gradient(circle at 20% 20%, rgba(255,255,255,0.06), transparent 55%);
     }
-
     .app-gallery-loader::after {
       content: "";
-      width: 22px;
-      height: 22px;
+      width: 22px; height: 22px;
       border-radius: 50%;
       border: 2px solid rgba(255,255,255,0.1);
       border-top-color: rgba(255,255,255,0.7);
       animation: appGallerySpin 0.8s linear infinite;
     }
+    @keyframes appGallerySpin { to { transform: rotate(360deg); } }
 
-    @keyframes appGallerySpin {
-      to { transform: rotate(360deg); }
-    }
-
-    .app-gallery-card.loaded img {
-      opacity: 1;
-    }
-
+    .app-gallery-card.loaded img { opacity: 1; }
     .app-gallery-card.loaded .app-gallery-loader {
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.25s ease;
+      opacity: 0; pointer-events: none; transition: opacity 0.25s ease;
     }
 
-    /* 箭頭：半透明白 */
     .app-gallery-arrow {
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      width: 26px;
-      height: 26px;
+      width: 26px; height: 26px;
       border-radius: 50%;
       border: none;
       display: flex;
       justify-content: center;
       align-items: center;
       font-size: 18px;
-      line-height: 1;
       cursor: pointer;
       background: rgba(255,255,255,0.12);
       color: #ffffff;
@@ -346,73 +303,100 @@
       padding-bottom: 2px;
       backdrop-filter: blur(6px);
     }
+    .app-gallery-arrow--left { left: 6px; }
+    .app-gallery-arrow--right { right: 6px; }
+    .app-gallery-arrow:active { transform: translateY(-50%) scale(0.9); }
 
-    .app-gallery-arrow--left {
-      left: 6px;
-    }
-
-    .app-gallery-arrow--right {
-      right: 6px;
-    }
-
-    .app-gallery-arrow:active {
-      transform: translateY(-50%) scale(0.9);
-    }
-
-    /* 小圓點：暗色 + 白色高亮 */
     .app-gallery-dots {
       text-align: center;
       margin-top: 4px;
     }
-
     .app-gallery-dots span {
       display: inline-block;
-      width: 8px;
-      height: 8px;
+      width: 8px; height: 8px;
       border-radius: 999px;
       background: rgba(255,255,255,0.18);
       margin: 0 3px;
       transition: all 0.25s ease;
     }
+    .app-gallery-dots span.active { width: 18px; background: #ffffff; }
 
-    .app-gallery-dots span.active {
-      width: 18px;
-      background: #ffffff;
-    }
-
-    /* 全螢幕預覽（深黑背景） */
+    /* ===== 全螢幕預覽（可左右滑） ===== */
     .app-gallery-preview {
       position: fixed;
       inset: 0;
       display: none;
       justify-content: center;
       align-items: center;
-      background: rgba(0,0,0,0.95);
+      background: rgba(0,0,0,0.96);
       z-index: 999;
+      touch-action: pan-y; /* 允許左右滑，不干擾上下 */
     }
-
     .app-gallery-preview-inner {
-      max-width: 96vw;
-      max-height: 92vh;
-    }
-
-    .app-gallery-preview img {
-      display: block;
+      position: relative;
       width: 100%;
-      max-height: 92vh;
-      border-radius: 20px;
+      max-width: 100vw;
+      max-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .app-gallery-preview img {
+      width: 92vw;
+      max-width: 520px;
+      max-height: 90vh;
+      border-radius: 18px;
       box-shadow: 0 18px 40px rgba(0,0,0,1);
+      transition: transform 0.25s ease, opacity 0.25s ease;
+      user-select: none;
+      -webkit-user-drag: none;
     }
 
-    /* 手機優化 */
+    /* 預覽左右箭頭 */
+    .preview-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      border: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 26px;
+      cursor: pointer;
+      background: rgba(255,255,255,0.12);
+      color: #fff;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.9);
+      backdrop-filter: blur(8px);
+    }
+    .preview-arrow.left { left: 10px; }
+    .preview-arrow.right { right: 10px; }
+    .preview-arrow:active { transform: translateY(-50%) scale(0.92); }
+
+    /* 關閉按鈕 */
+    .preview-close {
+      position: absolute;
+      top: 12px; right: 12px;
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      border: none;
+      font-size: 22px;
+      cursor: pointer;
+      background: rgba(255,255,255,0.12);
+      color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.9);
+    }
+
     @media (max-width: 480px) {
-      .app-gallery-viewport {
-        padding: 4px 24px;
-      }
+      .app-gallery-viewport { padding: 4px 24px; }
       .app-gallery-card {
-        width: 200px;  /* 手機也放大一點 */
-        max-width: 78vw;
+        width: 220px;
+        max-width: 82vw;
       }
+      .preview-arrow { width: 34px; height: 34px; font-size: 22px; }
     }
   </style>
 </head>
@@ -427,7 +411,6 @@
         <div class="app-main-info">
           <div class="app-title">大老爺</div>
           <div class="app-subtitle">高品質遊戲體驗，立即安裝</div>
-
           <div class="btn-row">
             <button class="btn btn-primary" id="install-btn">免費安裝</button>
           </div>
@@ -442,270 +425,3 @@
           <div class="rating-small-star">★★★★★</div>
           <div class="rating-total">10088 個評分</div>
         </div>
-        <div>
-          <div class="stats-item-title">年齡</div>
-          <div style="margin-top:8px;">18+ 歲</div>
-        </div>
-        <div>
-          <div class="stats-item-title">排行榜</div>
-          <div style="margin-top:8px;">#1 應用</div>
-        </div>
-        <div>
-          <div class="stats-item-title">大小</div>
-          <div style="margin-top:8px;">2.87 MB</div>
-        </div>
-      </div>
-
-      <!-- ✅ 螢幕截圖輪播（移到簡介上面） -->
-      <div class="section">
-        <div class="section-title">螢幕截圖</div>
-
-        <div class="app-gallery">
-          <div class="app-gallery-viewport">
-            <button class="app-gallery-arrow app-gallery-arrow--left" type="button" aria-label="上一張">‹</button>
-
-            <div class="app-gallery-track" id="appGalleryTrack">
-              <div class="app-gallery-card active"><div class="app-gallery-loader"></div><img data-src="/001/001.png" alt="Screenshot 1" loading="lazy"></div>
-              <div class="app-gallery-card"><div class="app-gallery-loader"></div><img data-src="/001/002.png" alt="Screenshot 2" loading="lazy"></div>
-              <div class="app-gallery-card"><div class="app-gallery-loader"></div><img data-src="/001/003.png" alt="Screenshot 3" loading="lazy"></div>
-              <div class="app-gallery-card"><div class="app-gallery-loader"></div><img data-src="/001/004.png" alt="Screenshot 4" loading="lazy"></div>
-              <div class="app-gallery-card"><div class="app-gallery-loader"></div><img data-src="/001/005.png" alt="Screenshot 5" loading="lazy"></div>
-              <div class="app-gallery-card"><div class="app-gallery-loader"></div><img data-src="/001/006.png" alt="Screenshot 6" loading="lazy"></div>
-              <div class="app-gallery-card"><div class="app-gallery-loader"></div><img data-src="/001/007.png" alt="Screenshot 7" loading="lazy"></div>
-              <div class="app-gallery-card"><div class="app-gallery-loader"></div><img data-src="/001/008.png" alt="Screenshot 8" loading="lazy"></div>
-            </div>
-
-            <button class="app-gallery-arrow app-gallery-arrow--right" type="button" aria-label="下一張">›</button>
-          </div>
-
-          <div class="app-gallery-dots" id="appGalleryDots"></div>
-        </div>
-
-        <!-- 全螢幕預覽 -->
-        <div class="app-gallery-preview" id="appGalleryPreview">
-          <div class="app-gallery-preview-inner">
-            <img id="appGalleryPreviewImg">
-          </div>
-        </div>
-      </div>
-
-      <!-- 簡介 -->
-      <div class="section">
-        <div class="section-title">簡介</div>
-        <p class="intro-text">
-          大老爺 是一款免費版的 App，由專業團隊打造，為您提供流暢、清晰的視覺體驗與最佳操作感受。
-        </p>
-      </div>
-
-      <!-- 評分及評論 -->
-      <div class="section">
-        <div class="section-title">評分及評論</div>
-        <div class="rating-block">
-          <div class="rating-header">
-            <div class="rating-left">
-              <span class="big-score">4.9</span>
-              <span class="rating-small-star">★★★★★</span>
-              <span class="rating-total">滿分 5 分．10088 個評分</span>
-            </div>
-            <div style="flex:1; margin-left:12px;">
-              <div class="star-line"></div>
-            </div>
-          </div>
-
-          <div class="review-card">
-            <div class="review-title-row">
-              <span>Very good app, recommended!</span>
-              <span style="font-size:11px;color:#8f96a5;">11-16</span>
-            </div>
-            <div style="font-size:11px;color:#ffcc48;margin-bottom:4px;">★★★★★</div>
-            <div class="review-name">James Levine</div>
-            <div class="review-text" style="margin-top:4px;">
-              This app is really easy to use, the app is smooth and not stuck,
-              the picture is clear, the operation is simple and convenient.
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- 資訊 -->
-      <div class="section">
-        <div class="section-title">信息</div>
-        <div class="info-list">
-          <div class="info-row">
-            <span class="info-label">供應商</span>
-            <span class="info-value">大老爺</span>
-          </div>
-          <div class="info-row">
-            <span class="info-label">安裝包大小</span>
-            <span class="info-value">2.87M</span>
-          </div>
-          <div class="info-row">
-            <span class="info-label">版本</span>
-            <span class="info-value">V2.0.12</span>
-          </div>
-          <div class="info-row">
-            <span class="info-label">兼容性</span>
-            <span class="info-value">iOS 9.0 或更高版本</span>
-          </div>
-          <div class="info-row">
-            <span class="info-label">語言</span>
-            <span class="info-value">繁體中文</span>
-          </div>
-          <div class="info-row">
-            <span class="info-label">年齡分級</span>
-            <span class="info-value">限 18 歲以上</span>
-          </div>
-          <div class="info-row">
-            <span class="info-label">價格</span>
-            <span class="info-value">免費</span>
-          </div>
-        </div>
-
-        <p class="disclaimer">
-          免責聲明：本網站僅提供下載託管，App 內容相關事項由開發者負責，與本網站無關。
-        </p>
-      </div>
-    </div>
-  </div>
-
-  <script>
-    // TODO：把這個改成你要導向的網址
-    const INSTALL_URL = 'https://your-install-url.com';
-
-    document.getElementById('install-btn').addEventListener('click', () => {
-      window.location.href = "/pwa/";
-    });
-  </script>
-
-  <!-- ✅ 修好最後一張跳動 + 自動輪播穩定版 -->
-  <script>
-    (function () {
-      const track = document.getElementById('appGalleryTrack');
-      if (!track) return;
-
-      const cards = Array.from(track.querySelectorAll('.app-gallery-card'));
-      const dotsBox = document.getElementById('appGalleryDots');
-      const leftArrow = document.querySelector('.app-gallery-arrow--left');
-      const rightArrow = document.querySelector('.app-gallery-arrow--right');
-      const preview = document.getElementById('appGalleryPreview');
-      const previewImg = document.getElementById('appGalleryPreviewImg');
-
-      let current = 0;
-      let autoTimer = null;
-      let isProgrammaticScroll = false; // ✅ 程式捲動旗標
-
-      /* 建立小圓點 */
-      cards.forEach((_, i) => {
-        const dot = document.createElement('span');
-        if (i === 0) dot.classList.add('active');
-        dot.addEventListener('click', () => goTo(i, true));
-        dotsBox.appendChild(dot);
-      });
-      const dots = Array.from(dotsBox.querySelectorAll('span'));
-
-      /* Lazy Load + 載入動畫 */
-      const io = 'IntersectionObserver' in window
-        ? new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-              if (!entry.isIntersecting) return;
-              const card = entry.target;
-              const img = card.querySelector('img');
-              const dataSrc = img.getAttribute('data-src');
-              if (dataSrc && !img.src) img.src = dataSrc;
-              io.unobserve(card);
-            });
-          }, { root: track, threshold: 0.2 })
-        : null;
-
-      cards.forEach(card => {
-        const img = card.querySelector('img');
-
-        if (io) io.observe(card);
-        else {
-          const dataSrc = img.getAttribute('data-src');
-          if (dataSrc && !img.src) img.src = dataSrc;
-        }
-
-        if (img.complete && img.naturalWidth !== 0) {
-          card.classList.add('loaded');
-        } else {
-          img.addEventListener('load', () => card.classList.add('loaded'));
-          img.addEventListener('error', () => card.classList.add('loaded'));
-        }
-
-        img.addEventListener('click', (e) => {
-          e.stopPropagation();
-          if (!img.src) return;
-          previewImg.src = img.src;
-          preview.style.display = 'flex';
-        });
-      });
-
-      preview.addEventListener('click', () => {
-        preview.style.display = 'none';
-        previewImg.src = '';
-      });
-
-      function updateActive(index) {
-        cards.forEach((c, i) => c.classList.toggle('active', i === index));
-        dots.forEach((d, i) => d.classList.toggle('active', i === index));
-      }
-
-      function scrollToCard(index) {
-        const card = cards[index];
-        if (!card) return;
-        const left = card.offsetLeft - track.offsetLeft - 10;
-
-        isProgrammaticScroll = true;
-        track.scrollTo({ left, behavior: 'smooth' });
-
-        setTimeout(() => { isProgrammaticScroll = false; }, 450);
-      }
-
-      function goTo(index, fromUser) {
-        if (index < 0) index = cards.length - 1;
-        if (index >= cards.length) index = 0;
-        current = index;
-        updateActive(current);
-        scrollToCard(current);
-        if (fromUser) restartAuto();
-      }
-
-      function startAuto() {
-        if (autoTimer) clearInterval(autoTimer);
-        autoTimer = setInterval(() => goTo(current + 1, false), 3000);
-      }
-      function restartAuto() {
-        clearInterval(autoTimer);
-        startAuto();
-      }
-      startAuto();
-
-      leftArrow.addEventListener('click', () => goTo(current - 1, true));
-      rightArrow.addEventListener('click', () => goTo(current + 1, true));
-
-      let scrollTimeout = null;
-      track.addEventListener('scroll', () => {
-        if (isProgrammaticScroll) return;
-
-        if (scrollTimeout) clearTimeout(scrollTimeout);
-        scrollTimeout = setTimeout(() => {
-          let closestIndex = 0;
-          let closestDist = Infinity;
-          const trackLeft = track.scrollLeft;
-          cards.forEach((card, i) => {
-            const dist = Math.abs(card.offsetLeft - trackLeft);
-            if (dist < closestDist) {
-              closestDist = dist;
-              closestIndex = i;
-            }
-          });
-          current = closestIndex;
-          updateActive(current);
-        }, 80);
-      });
-
-    })();
-  </script>
-</body>
-</html>
