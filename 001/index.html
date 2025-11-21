@@ -117,25 +117,72 @@
       animation: installSpin 0.8s linear infinite;
     }
     @keyframes installSpin { to { transform: rotate(360deg); } }
+/* ===== App Store 風格統計列 ===== */
 .stats-row {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      margin: 18px 0 16px;
-      text-align: center;
-      font-size: 11px;
-      color: #cfd3dd;
-    }
-    .stats-item-title {
-      font-size: 10px;
-      color: #8a92a2;
-      margin-bottom: 4px;
-    }
-    .big-score {
-      font-size: 20px;
-      font-weight: 600;
-    }
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  margin: 18px 0 16px;
+  text-align: center;
+  color: #cfd3dd;
+  background: transparent;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  padding: 14px 0;
+}
+.stats-col {
+  position: relative;
+  padding: 4px 6px;
+}
+.stats-col:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 18%;
+  bottom: 18%;
+  width: 1px;
+  background: rgba(255,255,255,0.08);
+}
+.stats-top {
+  font-size: 11px;
+  color: #9aa0b3;
+  margin-bottom: 8px;
+  letter-spacing: 0.2px;
+  white-space: nowrap;
+}
+.stats-main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 36px;
+  margin-bottom: 6px;
+}
+.stats-big {
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  color: #e9edf7;
+  line-height: 1;
+}
+.stats-bottom {
+  font-size: 11px;
+  color: #aeb4c2;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+.stats-bottom.stars {
+  color: #aeb4c2;
+  letter-spacing: 1px;
+  font-size: 12px;
+}
 
-    .star-line {
+@media (max-width: 480px) {
+  .stats-big { font-size: 24px; }
+  .stats-top, .stats-bottom { font-size: 10px; }
+  .stats-row { padding: 12px 0; }
+}
+
+.star-line {
       height: 6px;
       border-radius: 999px;
       background: linear-gradient(90deg, #ffcc48 0, #ffcc48 70%, #2b2f3a 70%);
