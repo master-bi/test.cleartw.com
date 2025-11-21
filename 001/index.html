@@ -575,12 +575,16 @@
 }
 
 
-/* ===== 第二輪播（精選 / 16:9）覆蓋樣式 ===== */
+
+
+
+/* ===== 第二輪播（精選 / 直版 6:19）覆蓋樣式 ===== */
 .app-gallery-card.second{
-  width: 320px;
-  max-width: 78vw;
-  aspect-ratio: 16 / 9;   /* ✅ 強制 16:9 */
+  width: 260px;
+  max-width: 64vw;
+  aspect-ratio: 6 / 19;   /* ✅ 直版 6:19 */
   border-radius: 18px;
+  overflow: hidden;
 }
 .gallery-media.second{
   width:100%;
@@ -589,6 +593,8 @@
   object-position: center;
   border-radius: 18px;
 }
+
+/* 預覽維持原始比例（不壓扁） */
 #appGalleryPreviewMedia2{
   width: 92vw;
   max-width: 520px;
@@ -602,9 +608,14 @@
   width: 100%;
   height: auto;
   max-height: calc(90vh - 120px);
+  object-fit: contain;
   border-radius: 18px;
   display:block;
 }
+
+/* 精選標題上方多留白，避免黏到查看更多 */
+.section.featured-section{ margin-top: 14px; }
+.section.featured-section .section-title{ margin-top: 0; }
 </style>
 </head>
 <body>
@@ -712,8 +723,8 @@
         <div id="introToggle" class="intro-toggle">...查看更多</div>
       </div>
 
-<!-- 第二輪播（評論下方 / 16:9） -->
-      <div class="section">
+<!-- 第二輪播（精選 / 直版 6:19） -->
+      <div class="section featured-section">
         <div class="section-title">精選</div>
 
         <div class="app-gallery">
