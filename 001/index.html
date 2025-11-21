@@ -229,7 +229,7 @@
     /* ===== APP 商店風格 螢幕截圖輪播（全暗黑主題） ===== */
     .app-gallery {
       width: 100%;
-      margin: 4px 0 4px;
+      margin: 6px 0 6px;
       padding: 2px 0 6px;
     }
 
@@ -255,10 +255,11 @@
       display: none;                /* Chrome / Safari / Edge */
     }
 
+    /* ✅ 放大輪播卡片比例 */
     .app-gallery-card {
       position: relative;
-      width: 200px;
-      max-width: 42vw;
+      width: 230px;           /* 原 200px → 放大 */
+      max-width: 55vw;        /* 原 42vw → 放大 */
       border-radius: 20px;
       overflow: hidden;
       flex-shrink: 0;
@@ -274,7 +275,7 @@
     }
 
     .app-gallery-card.active {
-      transform: translateY(-4px) scale(1.02) rotateY(0deg);
+      transform: translateY(-4px) scale(1.03) rotateY(0deg);
       box-shadow: 0 14px 30px rgba(0,0,0,0.95);
       background: #0b0b10;
       opacity: 1;
@@ -409,8 +410,8 @@
         padding: 4px 24px;
       }
       .app-gallery-card {
-        width: 170px;
-        max-width: 70vw;
+        width: 200px;  /* 手機也放大一點 */
+        max-width: 78vw;
       }
     }
   </style>
@@ -455,47 +456,26 @@
         </div>
       </div>
 
-      <!-- 簡介 -->
-      <div class="section">
-        <div class="section-title">簡介</div>
-        <p class="intro-text">
-          大老爺 是一款免費版的 App，由專業團隊打造，為您提供流暢、清晰的視覺體驗與最佳操作感受。
-        </p>
-      </div>
-
-      <!-- 螢幕截圖輪播 -->
+      <!-- ✅ 螢幕截圖輪播（移到簡介上面） -->
       <div class="section">
         <div class="section-title">螢幕截圖</div>
 
-        <!-- ===== APP 商店風格 極致輪播區塊 ===== -->
         <div class="app-gallery">
           <div class="app-gallery-viewport">
-            <button class="app-gallery-arrow app-gallery-arrow--left" type="button" aria-label="上一張">
-              ‹
-            </button>
+            <button class="app-gallery-arrow app-gallery-arrow--left" type="button" aria-label="上一張">‹</button>
 
             <div class="app-gallery-track" id="appGalleryTrack">
-              <div class="app-gallery-card active">
-                <div class="app-gallery-loader"></div>
-                <img data-src="/001/001.png" alt="Screenshot 1" loading="lazy">
-              </div>
-              <div class="app-gallery-card">
-                <div class="app-gallery-loader"></div>
-                <img data-src="/001/002.png" alt="Screenshot 2" loading="lazy">
-              </div>
-              <div class="app-gallery-card">
-                <div class="app-gallery-loader"></div>
-                <img data-src="/001/003.png" alt="Screenshot 3" loading="lazy">
-              </div>
-              <div class="app-gallery-card">
-                <div class="app-gallery-loader"></div>
-                <img data-src="/001/004.png" alt="Screenshot 4" loading="lazy">
-              </div>
+              <div class="app-gallery-card active"><div class="app-gallery-loader"></div><img data-src="/001/001.png" alt="Screenshot 1" loading="lazy"></div>
+              <div class="app-gallery-card"><div class="app-gallery-loader"></div><img data-src="/001/002.png" alt="Screenshot 2" loading="lazy"></div>
+              <div class="app-gallery-card"><div class="app-gallery-loader"></div><img data-src="/001/003.png" alt="Screenshot 3" loading="lazy"></div>
+              <div class="app-gallery-card"><div class="app-gallery-loader"></div><img data-src="/001/004.png" alt="Screenshot 4" loading="lazy"></div>
+              <div class="app-gallery-card"><div class="app-gallery-loader"></div><img data-src="/001/005.png" alt="Screenshot 5" loading="lazy"></div>
+              <div class="app-gallery-card"><div class="app-gallery-loader"></div><img data-src="/001/006.png" alt="Screenshot 6" loading="lazy"></div>
+              <div class="app-gallery-card"><div class="app-gallery-loader"></div><img data-src="/001/007.png" alt="Screenshot 7" loading="lazy"></div>
+              <div class="app-gallery-card"><div class="app-gallery-loader"></div><img data-src="/001/008.png" alt="Screenshot 8" loading="lazy"></div>
             </div>
 
-            <button class="app-gallery-arrow app-gallery-arrow--right" type="button" aria-label="下一張">
-              ›
-            </button>
+            <button class="app-gallery-arrow app-gallery-arrow--right" type="button" aria-label="下一張">›</button>
           </div>
 
           <div class="app-gallery-dots" id="appGalleryDots"></div>
@@ -507,6 +487,14 @@
             <img id="appGalleryPreviewImg">
           </div>
         </div>
+      </div>
+
+      <!-- 簡介 -->
+      <div class="section">
+        <div class="section-title">簡介</div>
+        <p class="intro-text">
+          大老爺 是一款免費版的 App，由專業團隊打造，為您提供流暢、清晰的視覺體驗與最佳操作感受。
+        </p>
       </div>
 
       <!-- 評分及評論 -->
@@ -589,6 +577,7 @@
     });
   </script>
 
+  <!-- ✅ 修好最後一張跳動 + 自動輪播穩定版 -->
   <script>
     (function () {
       const track = document.getElementById('appGalleryTrack');
@@ -603,6 +592,7 @@
 
       let current = 0;
       let autoTimer = null;
+      let isProgrammaticScroll = false; // ✅ 程式捲動旗標
 
       /* 建立小圓點 */
       cards.forEach((_, i) => {
@@ -621,9 +611,7 @@
               const card = entry.target;
               const img = card.querySelector('img');
               const dataSrc = img.getAttribute('data-src');
-              if (dataSrc && !img.src) {
-                img.src = dataSrc;
-              }
+              if (dataSrc && !img.src) img.src = dataSrc;
               io.unobserve(card);
             });
           }, { root: track, threshold: 0.2 })
@@ -632,9 +620,8 @@
       cards.forEach(card => {
         const img = card.querySelector('img');
 
-        if (io) {
-          io.observe(card);
-        } else {
+        if (io) io.observe(card);
+        else {
           const dataSrc = img.getAttribute('data-src');
           if (dataSrc && !img.src) img.src = dataSrc;
         }
@@ -642,15 +629,10 @@
         if (img.complete && img.naturalWidth !== 0) {
           card.classList.add('loaded');
         } else {
-          img.addEventListener('load', () => {
-            card.classList.add('loaded');
-          });
-          img.addEventListener('error', () => {
-            card.classList.add('loaded');
-          });
+          img.addEventListener('load', () => card.classList.add('loaded'));
+          img.addEventListener('error', () => card.classList.add('loaded'));
         }
 
-        // 點擊開啟預覽
         img.addEventListener('click', (e) => {
           e.stopPropagation();
           if (!img.src) return;
@@ -659,13 +641,11 @@
         });
       });
 
-      /* 預覽關閉 */
       preview.addEventListener('click', () => {
         preview.style.display = 'none';
         previewImg.src = '';
       });
 
-      /* 更新狀態 */
       function updateActive(index) {
         cards.forEach((c, i) => c.classList.toggle('active', i === index));
         dots.forEach((d, i) => d.classList.toggle('active', i === index));
@@ -675,7 +655,11 @@
         const card = cards[index];
         if (!card) return;
         const left = card.offsetLeft - track.offsetLeft - 10;
+
+        isProgrammaticScroll = true;
         track.scrollTo({ left, behavior: 'smooth' });
+
+        setTimeout(() => { isProgrammaticScroll = false; }, 450);
       }
 
       function goTo(index, fromUser) {
@@ -687,28 +671,23 @@
         if (fromUser) restartAuto();
       }
 
-      /* 自動輪播 */
       function startAuto() {
         if (autoTimer) clearInterval(autoTimer);
-        autoTimer = setInterval(() => {
-          goTo(current + 1, false);
-        }, 3000);
+        autoTimer = setInterval(() => goTo(current + 1, false), 3000);
       }
-
       function restartAuto() {
         clearInterval(autoTimer);
         startAuto();
       }
-
       startAuto();
 
-      /* 箭頭控制 */
       leftArrow.addEventListener('click', () => goTo(current - 1, true));
       rightArrow.addEventListener('click', () => goTo(current + 1, true));
 
-      /* 手動滑動時，根據捲動位置更新 active / dots */
       let scrollTimeout = null;
       track.addEventListener('scroll', () => {
+        if (isProgrammaticScroll) return;
+
         if (scrollTimeout) clearTimeout(scrollTimeout);
         scrollTimeout = setTimeout(() => {
           let closestIndex = 0;
