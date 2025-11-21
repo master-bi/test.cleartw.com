@@ -155,7 +155,6 @@
       letter-spacing: 1px;
       font-size: 12px;
     }
-
     .rating-total {
       font-size: 11px;
       color: #8f96a5;
@@ -230,7 +229,6 @@
     }
     .app-gallery-track::-webkit-scrollbar { display: none; }
 
-    /* 輪播比例放大 */
     .app-gallery-card {
       position: relative;
       width: 255px;
@@ -330,7 +328,7 @@
       background: rgba(0,0,0,0.96);
       z-index: 999;
       touch-action: pan-y;
-      padding-bottom: 88px; /* 留縮圖列空間 */
+      padding-bottom: 96px; /* 縮圖列空間更大 */
     }
     .app-gallery-preview-inner {
       position: relative;
@@ -346,7 +344,7 @@
     .app-gallery-preview img {
       width: 92vw;
       max-width: 520px;
-      max-height: calc(90vh - 110px);
+      max-height: calc(90vh - 120px);
       border-radius: 18px;
       box-shadow: 0 18px 40px rgba(0,0,0,1);
       transition: transform 0.25s ease, opacity 0.25s ease;
@@ -354,30 +352,14 @@
       -webkit-user-drag: none;
     }
 
-    .preview-arrow {
-      position: absolute;
-      top: 45%;
-      transform: translateY(-50%);
-      width: 40px; height: 40px;
-      border-radius: 50%;
-      border: none;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 26px;
-      cursor: pointer;
-      background: rgba(255,255,255,0.12);
-      color: #fff;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.9);
-      backdrop-filter: blur(8px);
-    }
-    .preview-arrow.left { left: 10px; }
-    .preview-arrow.right { right: 10px; }
-    .preview-arrow:active { transform: translateY(-50%) scale(0.92); }
+    /* ✅ 預覽左右箭頭隱藏（但左右滑/鍵盤仍可用） */
+    .preview-arrow { display: none !important; }
 
+    /* ✅ X 改 fixed + 往上移到畫面頂部 */
     .preview-close {
-      position: absolute;
-      top: 12px; right: 12px;
+      position: fixed;
+      top: 8px;          /* 更靠上 */
+      right: 8px;
       width: 38px; height: 38px;
       border-radius: 50%;
       border: none;
@@ -388,18 +370,20 @@
       display: flex; align-items: center; justify-content: center;
       backdrop-filter: blur(8px);
       box-shadow: 0 2px 10px rgba(0,0,0,0.9);
-      z-index: 2;
+      z-index: 1002;      /* 壓過縮圖列 */
     }
 
-    /* 縮圖列 */
+    /* ✅ 縮圖列：加高 + 加大上內距 + 允許上方溢出避免被切 */
     .preview-thumbs {
       position: fixed;
       left: 0; right: 0; bottom: 0;
-      height: 80px;
-      padding: 8px 10px 10px;
+      height: 92px;                 /* 原 80px → 加高 */
+      padding: 14px 10px 12px;      /* 原 top 8px → 加大 */
       display: flex;
+      align-items: center;
       gap: 8px;
       overflow-x: auto;
+      overflow-y: visible;          /* ✅ 允許上方溢出 */
       background: linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,0.9));
       backdrop-filter: blur(6px);
       z-index: 1000;
@@ -419,6 +403,7 @@
       border: 1px solid rgba(255,255,255,0.08);
       cursor: pointer;
       background: #0b0b10;
+      margin-top: 2px;              /* ✅ 再往下 2px，避免頂到上緣 */
     }
     .preview-thumb img {
       width: 100%;
@@ -437,9 +422,13 @@
     @media (max-width: 480px) {
       .app-gallery-viewport { padding: 4px 24px; }
       .app-gallery-card { width: 220px; max-width: 82vw; }
-      .preview-arrow { width: 34px; height: 34px; font-size: 22px; }
-      .preview-thumbs { height: 72px; }
+
+      .preview-thumbs {
+        height: 84px;
+        padding-top: 12px;
+      }
       .preview-thumb { width: 50px; height: 50px; }
+      .preview-close { top: 6px; right: 6px; }
     }
   </style>
 </head>
@@ -517,7 +506,7 @@
           </div>
         </div>
 
-        <!-- 縮圖列容器（JS 會自動塞圖） -->
+        <!-- 縮圖列（JS 自動塞） -->
         <div class="preview-thumbs" id="previewThumbs" style="display:none;"></div>
       </div>
 
@@ -672,7 +661,6 @@
           img.addEventListener('error', () => card.classList.add('loaded'));
         }
 
-        // click open preview
         img.addEventListener('click', (e) => {
           e.stopPropagation();
           if (!img.src) return;
@@ -768,7 +756,6 @@
 
       function openPreview(i) {
         previewIndex = i;
-
         if (!previewThumbs.children.length) buildThumbs();
         previewThumbs.style.display = 'flex';
 
@@ -847,4 +834,3 @@
   </script>
 </body>
 </html>
-
