@@ -211,7 +211,6 @@
       padding: 2px 0 6px;
     }
 
-    /* 修切頂 + 加寬對齊評論區 */
     .app-gallery-viewport {
       position: relative;
       width: 100%;
@@ -225,16 +224,18 @@
       gap: 14px;
       overflow-x: auto;
       scroll-behavior: smooth;
-      padding: 10px 2px 10px;
+      padding: 12px 2px 12px;  /* 多一點上緣，避免 active 放大被切 */
       perspective: 1000px;
       scrollbar-width: none;
     }
     .app-gallery-track::-webkit-scrollbar { display: none; }
 
+    /* ✅ A 大型 1:1 卡片 */
     .app-gallery-card {
       position: relative;
-      width: 255px;
-      max-width: 62vw;
+      width: 270px;          /* A 尺寸 */
+      max-width: 68vw;       /* 手機自適應 */
+      aspect-ratio: 1 / 1;   /* ✅ 強制正方形 */
       border-radius: 20px;
       overflow: hidden;
       flex-shrink: 0;
@@ -251,10 +252,13 @@
       opacity: 1;
     }
 
+    /* ✅ 主輪播媒體在方形內滿版置中裁切 */
     .gallery-media {
       display: block;
       width: 100%;
-      height: auto;
+      height: 100%;
+      object-fit: cover;         /* ✅ 滿版裁切 */
+      object-position: center;   /* ✅ 正中間 */
       border-radius: 20px;
       opacity: 0;
       transition: opacity 0.35s ease;
@@ -301,7 +305,7 @@
     }
     .app-gallery-dots span.active { width: 18px; background: #ffffff; }
 
-    /* ===== 全螢幕預覽 ===== */
+    /* ===== 全螢幕預覽（顯示完整比例） ===== */
     .app-gallery-preview {
       position: fixed;
       inset: 0;
@@ -410,7 +414,10 @@
     }
 
     @media (max-width: 480px) {
-      .app-gallery-card { width: 220px; max-width: 82vw; }
+      .app-gallery-card {
+        width: 252px;   /* 手機略縮但仍是 A 大感 */
+        max-width: 82vw;
+      }
       .preview-thumbs {
         height: 84px;
         padding-top: 12px;
@@ -423,6 +430,7 @@
 <body>
   <div class="page">
     <div class="card">
+
       <div class="top-row">
         <div class="icon">
           <img src="icons/icon.png" alt="App Icon">
@@ -670,7 +678,6 @@
           }
         }
 
-        // click open preview
         media.addEventListener('click', (e) => {
           e.stopPropagation();
           if (!media.src) return;
@@ -686,14 +693,13 @@
       function scrollToCard(index) {
         const card = cards[index];
         if (!card) return;
-
         const left = card.offsetLeft - track.offsetLeft - 10;
         isProgrammaticScroll = true;
         track.scrollTo({ left, behavior: 'smooth' });
         setTimeout(() => { isProgrammaticScroll = false; }, 450);
       }
 
-      // ====== ✅ 主輪播：只播放當前卡片影片（muted loop） ======
+      // 主輪播只播當前影片（muted loop）
       function pauseAllVideos(reset = false) {
         medias.forEach(m => {
           if (m && m.tagName === 'VIDEO') {
@@ -718,7 +724,6 @@
       function playActiveMedia(index) {
         if (isPreviewOpen) return;
 
-        // 先停全部（並回到開頭，切換更乾淨）
         pauseAllVideos(true);
 
         const media = medias[index];
@@ -743,7 +748,6 @@
           }
         }
       }
-      // ============================================================
 
       function goTo(index, fromUser) {
         if (index < 0) index = cards.length - 1;
@@ -752,7 +756,7 @@
 
         updateActive(current);
         scrollToCard(current);
-        playActiveMedia(current);   // ✅ 切到就播放
+        playActiveMedia(current);
 
         if (fromUser) restartAuto();
       }
@@ -773,7 +777,7 @@
       }
 
       startAuto();
-      playActiveMedia(0); // ✅ 頁面進來先播第一張（無聲）
+      playActiveMedia(0);
 
       let scrollTimeout = null;
       track.addEventListener('scroll', () => {
@@ -792,12 +796,12 @@
           });
           current = closestIndex;
           updateActive(current);
-          playActiveMedia(current); // ✅ 手滑停下來後播對應影片
+          playActiveMedia(current);
           restartAuto();
         }, 120);
       });
 
-      // ===== Preview + Thumbs =====
+      // Preview + Thumbs
       function buildThumbs() {
         previewThumbs.innerHTML = '';
         medias.forEach((media, i) => {
@@ -861,7 +865,7 @@
 
         isPreviewOpen = false;
         restartAuto();
-        playActiveMedia(current); // ✅ 回來後繼續播目前那張
+        playActiveMedia(current);
       }
 
       function setPreviewMedia(i, dir = 0) {
