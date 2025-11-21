@@ -204,20 +204,20 @@
       line-height: 1.5;
     }
 
-    /* ===== APP 商店風格 活動輪播（主輪播） ===== */
+    /* ===== 活動輪播（主輪播） ===== */
     .app-gallery {
       width: 100%;
       margin: 6px 0;
       padding: 2px 0 6px;
     }
 
-    /* ✅ 修切頂 + ✅ 加寬對齊評論區 */
+    /* 修切頂 + 加寬對齊評論區 */
     .app-gallery-viewport {
       position: relative;
       width: 100%;
-      overflow-x: hidden;   /* 只藏左右 */
-      overflow-y: visible;  /* ✅ 上下不裁切 */
-      padding: 12px 0 4px;  /* ✅ 上面加高，左右清掉，跟評論區切齊 */
+      overflow-x: hidden;
+      overflow-y: visible;     /* ✅ 上下不裁切 */
+      padding: 12px 0 4px;     /* ✅ 左右清掉，跟評論區切齊 */
     }
 
     .app-gallery-track {
@@ -225,7 +225,7 @@
       gap: 14px;
       overflow-x: auto;
       scroll-behavior: smooth;
-      padding: 10px 2px 10px;  /* ✅ 上面加空間避免 active 浮起切到 */
+      padding: 10px 2px 10px;  /* ✅ 上面留空間給 active 放大 */
       perspective: 1000px;
       scrollbar-width: none;
     }
@@ -250,7 +250,9 @@
       background: #0b0b10;
       opacity: 1;
     }
-    .app-gallery-card img {
+
+    /* 主輪播媒體（影片/圖片通用樣式） */
+    .gallery-media {
       display: block;
       width: 100%;
       height: auto;
@@ -258,6 +260,7 @@
       opacity: 0;
       transition: opacity 0.35s ease;
       cursor: zoom-in;
+      background: #000; /* 避免載入前閃白 */
     }
 
     .app-gallery-loader {
@@ -278,15 +281,13 @@
     }
     @keyframes appGallerySpin { to { transform: rotate(360deg); } }
 
-    .app-gallery-card.loaded img { opacity: 1; }
+    .app-gallery-card.loaded .gallery-media { opacity: 1; }
     .app-gallery-card.loaded .app-gallery-loader {
       opacity: 0; pointer-events: none; transition: opacity 0.25s ease;
     }
 
-    /* ✅ 主輪播左右 <> 隱藏 */
-    .app-gallery-arrow { 
-      display: none !important; 
-    }
+    /* 主輪播左右 <> 隱藏（保留手滑） */
+    .app-gallery-arrow { display: none !important; }
 
     .app-gallery-dots {
       text-align: center;
@@ -325,20 +326,29 @@
       flex-direction: column;
       gap: 10px;
     }
-    .app-gallery-preview img {
+
+    /* 預覽主媒體（img/video 都會塞進來） */
+    #appGalleryPreviewMedia {
       width: 92vw;
       max-width: 520px;
       max-height: calc(90vh - 120px);
       border-radius: 18px;
       box-shadow: 0 18px 40px rgba(0,0,0,1);
-      transition: transform 0.25s ease, opacity 0.25s ease;
-      user-select: none;
-      -webkit-user-drag: none;
+      background: #000;
+    }
+    #appGalleryPreviewMedia video,
+    #appGalleryPreviewMedia img {
+      width: 100%;
+      height: auto;
+      max-height: calc(90vh - 120px);
+      border-radius: 18px;
+      display: block;
     }
 
-    /* 預覽左右箭頭隱藏（保留手滑） */
+    /* 預覽左右 <> 隱藏（保留手滑/鍵盤） */
     .preview-arrow { display: none !important; }
 
+    /* X 往上移 */
     .preview-close {
       position: fixed;
       top: 8px;
@@ -356,7 +366,7 @@
       z-index: 1002;
     }
 
-    /* 縮圖列 */
+    /* 縮圖列（加高 + 不切 active 放大） */
     .preview-thumbs {
       position: fixed;
       left: 0; right: 0; bottom: 0;
@@ -387,13 +397,16 @@
       cursor: pointer;
       background: #0b0b10;
       margin-top: 2px;
+      position: relative;
     }
+    .preview-thumb video,
     .preview-thumb img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
       border-radius: 10px;
+      background: #000;
     }
     .preview-thumb.active {
       opacity: 1;
@@ -452,43 +465,61 @@
         </div>
       </div>
 
-      <!-- 活動輪播（放在簡介上面） -->
+      <!-- 活動輪播（8 段影片） -->
       <div class="section">
         <div class="section-title">活動</div>
 
         <div class="app-gallery">
           <div class="app-gallery-viewport">
-            <!-- 主輪播箭頭保留 DOM 但已隱藏 -->
-            <button class="app-gallery-arrow app-gallery-arrow--left" type="button" aria-label="上一張">‹</button>
-
             <div class="app-gallery-track" id="appGalleryTrack">
-              <div class="app-gallery-card active"><div class="app-gallery-loader"></div><img data-src="/BM/001.png" alt="Activity 1" loading="lazy"></div>
-              <div class="app-gallery-card"><div class="app-gallery-loader"></div><img data-src="/BM/002.png" alt="Activity 2" loading="lazy"></div>
-              <div class="app-gallery-card"><div class="app-gallery-loader"></div><img data-src="/BM/003.png" alt="Activity 3" loading="lazy"></div>
-              <div class="app-gallery-card"><div class="app-gallery-loader"></div><img data-src="/BM/004.png" alt="Activity 4" loading="lazy"></div>
-              <div class="app-gallery-card"><div class="app-gallery-loader"></div><img data-src="/BM/005.png" alt="Activity 5" loading="lazy"></div>
-              <div class="app-gallery-card"><div class="app-gallery-loader"></div><img data-src="/BM/006.png" alt="Activity 6" loading="lazy"></div>
-              <div class="app-gallery-card"><div class="app-gallery-loader"></div><img data-src="/BM/007.png" alt="Activity 7" loading="lazy"></div>
-              <div class="app-gallery-card"><div class="app-gallery-loader"></div><img data-src="/BM/008.png" alt="Activity 8" loading="lazy"></div>
+              <!-- 8 段影片：101.mp4 ~ 108.mp4 -->
+              <div class="app-gallery-card active">
+                <div class="app-gallery-loader"></div>
+                <video class="gallery-media" data-src="/video/101.mp4" preload="metadata" muted playsinline></video>
+              </div>
+              <div class="app-gallery-card">
+                <div class="app-gallery-loader"></div>
+                <video class="gallery-media" data-src="/video/102.mp4" preload="metadata" muted playsinline></video>
+              </div>
+              <div class="app-gallery-card">
+                <div class="app-gallery-loader"></div>
+                <video class="gallery-media" data-src="/video/103.mp4" preload="metadata" muted playsinline></video>
+              </div>
+              <div class="app-gallery-card">
+                <div class="app-gallery-loader"></div>
+                <video class="gallery-media" data-src="/video/104.mp4" preload="metadata" muted playsinline></video>
+              </div>
+              <div class="app-gallery-card">
+                <div class="app-gallery-loader"></div>
+                <video class="gallery-media" data-src="/video/105.mp4" preload="metadata" muted playsinline></video>
+              </div>
+              <div class="app-gallery-card">
+                <div class="app-gallery-loader"></div>
+                <video class="gallery-media" data-src="/video/106.mp4" preload="metadata" muted playsinline></video>
+              </div>
+              <div class="app-gallery-card">
+                <div class="app-gallery-loader"></div>
+                <video class="gallery-media" data-src="/video/107.mp4" preload="metadata" muted playsinline></video>
+              </div>
+              <div class="app-gallery-card">
+                <div class="app-gallery-loader"></div>
+                <video class="gallery-media" data-src="/video/108.mp4" preload="metadata" muted playsinline></video>
+              </div>
             </div>
 
-            <button class="app-gallery-arrow app-gallery-arrow--right" type="button" aria-label="下一張">›</button>
+            <div class="app-gallery-dots" id="appGalleryDots"></div>
           </div>
-
-          <div class="app-gallery-dots" id="appGalleryDots"></div>
         </div>
 
-        <!-- 全螢幕預覽 -->
+        <!-- 全螢幕預覽（有聲 autoplay + controls） -->
         <div class="app-gallery-preview" id="appGalleryPreview">
           <div class="app-gallery-preview-inner">
             <button class="preview-close" id="previewClose" aria-label="關閉">✕</button>
-            <button class="preview-arrow left" id="previewPrev" aria-label="上一張">‹</button>
-            <img id="appGalleryPreviewImg" alt="Preview">
-            <button class="preview-arrow right" id="previewNext" aria-label="下一張">›</button>
+            <div id="appGalleryPreviewMedia"></div>
           </div>
         </div>
 
-        <!-- 縮圖列（JS 自動塞） -->
+        <!-- 縮圖列（JS 自動塞影片縮圖） -->
         <div class="preview-thumbs" id="previewThumbs" style="display:none;"></div>
       </div>
 
@@ -584,15 +615,11 @@
       if (!track) return;
 
       const cards = Array.from(track.querySelectorAll('.app-gallery-card'));
-      const imgs = cards.map(c => c.querySelector('img'));
+      const medias = cards.map(c => c.querySelector('.gallery-media'));
       const dotsBox = document.getElementById('appGalleryDots');
-      const leftArrow = document.querySelector('.app-gallery-arrow--left');
-      const rightArrow = document.querySelector('.app-gallery-arrow--right');
 
       const preview = document.getElementById('appGalleryPreview');
-      const previewImg = document.getElementById('appGalleryPreviewImg');
-      const previewPrev = document.getElementById('previewPrev');
-      const previewNext = document.getElementById('previewNext');
+      const previewMediaBox = document.getElementById('appGalleryPreviewMedia');
       const previewClose = document.getElementById('previewClose');
       const previewThumbs = document.getElementById('previewThumbs');
 
@@ -613,39 +640,54 @@
       });
       const dots = Array.from(dotsBox.querySelectorAll('span'));
 
-      // lazy load
+      // lazy load (img + video)
       const io = 'IntersectionObserver' in window
         ? new IntersectionObserver((entries) => {
             entries.forEach(entry => {
               if (!entry.isIntersecting) return;
               const card = entry.target;
-              const img = card.querySelector('img');
-              const dataSrc = img.getAttribute('data-src');
-              if (dataSrc && !img.src) img.src = dataSrc;
+              const media = card.querySelector('img, video');
+              const dataSrc = media.getAttribute('data-src');
+              if (dataSrc && !media.src) media.src = dataSrc;
+
+              if (media.tagName === 'VIDEO') {
+                media.load();
+                media.addEventListener('loadedmetadata', () => {
+                  try { media.currentTime = 0.05; } catch(e){}
+                }, { once: true });
+              }
+
               io.unobserve(card);
             });
           }, { root: track, threshold: 0.2 })
         : null;
 
       cards.forEach((card, i) => {
-        const img = card.querySelector('img');
+        const media = card.querySelector('img, video');
 
         if (io) io.observe(card);
         else {
-          const dataSrc = img.getAttribute('data-src');
-          if (dataSrc && !img.src) img.src = dataSrc;
+          const dataSrc = media.getAttribute('data-src');
+          if (dataSrc && !media.src) media.src = dataSrc;
+          if (media.tagName === 'VIDEO') media.load();
         }
 
-        if (img.complete && img.naturalWidth !== 0) {
-          card.classList.add('loaded');
+        const markLoaded = () => card.classList.add('loaded');
+        if (media.tagName === 'VIDEO') {
+          media.addEventListener('loadeddata', markLoaded);
+          media.addEventListener('error', markLoaded);
         } else {
-          img.addEventListener('load', () => card.classList.add('loaded'));
-          img.addEventListener('error', () => card.classList.add('loaded'));
+          if (media.complete && media.naturalWidth !== 0) markLoaded();
+          else {
+            media.addEventListener('load', markLoaded);
+            media.addEventListener('error', markLoaded);
+          }
         }
 
-        img.addEventListener('click', (e) => {
+        // click open preview
+        media.addEventListener('click', (e) => {
           e.stopPropagation();
-          if (!img.src) return;
+          if (!media.src) return;
           openPreview(i);
         });
       });
@@ -684,10 +726,6 @@
       }
       startAuto();
 
-      // 主輪播箭頭已隱藏，這兩行留著不影響（避免你之後想開回來）
-      leftArrow.addEventListener('click', () => goTo(current - 1, true));
-      rightArrow.addEventListener('click', () => goTo(current + 1, true));
-
       let scrollTimeout = null;
       track.addEventListener('scroll', () => {
         if (isProgrammaticScroll) return;
@@ -711,16 +749,29 @@
       // ===== Preview + Thumbs =====
       function buildThumbs() {
         previewThumbs.innerHTML = '';
-        imgs.forEach((img, i) => {
+        medias.forEach((media, i) => {
           const thumb = document.createElement('div');
           thumb.className = 'preview-thumb' + (i === 0 ? ' active' : '');
-          const timg = document.createElement('img');
-          timg.src = img.src || img.getAttribute('data-src');
-          thumb.appendChild(timg);
+
+          if (media.tagName === 'VIDEO') {
+            const v = document.createElement('video');
+            v.src = media.src || media.getAttribute('data-src');
+            v.muted = true;
+            v.playsInline = true;
+            v.preload = "metadata";
+            v.addEventListener('loadedmetadata', () => {
+              try { v.currentTime = 0.05; } catch(e){}
+            }, { once: true });
+            thumb.appendChild(v);
+          } else {
+            const im = document.createElement('img');
+            im.src = media.src || media.getAttribute('data-src');
+            thumb.appendChild(im);
+          }
 
           thumb.addEventListener('click', (e) => {
             e.stopPropagation();
-            setPreviewImage(i, i > previewIndex ? 1 : -1);
+            setPreviewMedia(i, i > previewIndex ? 1 : -1);
           });
 
           previewThumbs.appendChild(thumb);
@@ -730,7 +781,6 @@
       function updateThumbActive(i) {
         const thumbs = Array.from(previewThumbs.querySelectorAll('.preview-thumb'));
         thumbs.forEach((t, idx) => t.classList.toggle('active', idx === i));
-
         const activeThumb = thumbs[i];
         if (activeThumb) {
           activeThumb.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
@@ -742,7 +792,7 @@
         if (!previewThumbs.children.length) buildThumbs();
         previewThumbs.style.display = 'flex';
 
-        setPreviewImage(previewIndex);
+        setPreviewMedia(previewIndex);
         preview.style.display = 'flex';
         document.body.style.overflow = 'hidden';
         updateThumbActive(previewIndex);
@@ -751,39 +801,54 @@
       function closePreview() {
         preview.style.display = 'none';
         previewThumbs.style.display = 'none';
-        previewImg.src = '';
+        previewMediaBox.innerHTML = '';
         document.body.style.overflow = '';
       }
 
-      function setPreviewImage(i, dir = 0) {
-        if (i < 0) i = imgs.length - 1;
-        if (i >= imgs.length) i = 0;
+      function setPreviewMedia(i, dir = 0) {
+        if (i < 0) i = medias.length - 1;
+        if (i >= medias.length) i = 0;
         previewIndex = i;
 
-        previewImg.style.opacity = '0';
-        previewImg.style.transform = `translateX(${dir * 18}px) scale(0.98)`;
+        const media = medias[previewIndex];
+        const src = media.src || media.getAttribute('data-src');
 
-        setTimeout(() => {
-          const src = imgs[previewIndex].src || imgs[previewIndex].getAttribute('data-src');
-          previewImg.src = src;
+        // 清空舊的 media
+        previewMediaBox.innerHTML = '';
 
-          previewImg.onload = () => {
-            previewImg.style.opacity = '1';
-            previewImg.style.transform = 'translateX(0) scale(1)';
-          };
+        if (media.tagName === 'VIDEO') {
+          const v = document.createElement('video');
+          v.src = src;
+          v.controls = true;
+          v.autoplay = true;
+          v.playsInline = true;   // iOS inline
+          v.preload = "auto";
+          v.style.opacity = '0';
+          v.style.transform = `translateX(${dir * 18}px) scale(0.98)`;
 
-          updateThumbActive(previewIndex);
-        }, 120);
+          previewMediaBox.appendChild(v);
+
+          v.addEventListener('loadeddata', () => {
+            v.style.transition = 'transform 0.25s ease, opacity 0.25s ease';
+            v.style.opacity = '1';
+            v.style.transform = 'translateX(0) scale(1)';
+          }, { once: true });
+        } else {
+          const im = document.createElement('img');
+          im.src = src;
+          im.style.opacity = '0';
+          im.style.transform = `translateX(${dir * 18}px) scale(0.98)`;
+          previewMediaBox.appendChild(im);
+          requestAnimationFrame(() => {
+            im.style.transition = 'transform 0.25s ease, opacity 0.25s ease';
+            im.style.opacity = '1';
+            im.style.transform = 'translateX(0) scale(1)';
+          });
+        }
+
+        updateThumbActive(previewIndex);
       }
 
-      previewPrev.addEventListener('click', (e) => {
-        e.stopPropagation();
-        setPreviewImage(previewIndex - 1, -1);
-      });
-      previewNext.addEventListener('click', (e) => {
-        e.stopPropagation();
-        setPreviewImage(previewIndex + 1, 1);
-      });
       previewClose.addEventListener('click', (e) => {
         e.stopPropagation();
         closePreview();
@@ -793,6 +858,7 @@
         if (e.target === preview) closePreview();
       });
 
+      // 手指左右滑（預覽）
       preview.addEventListener('touchstart', (e) => {
         touchStartX = e.changedTouches[0].screenX;
       }, { passive: true });
@@ -801,15 +867,16 @@
         touchEndX = e.changedTouches[0].screenX;
         const dx = touchEndX - touchStartX;
         if (Math.abs(dx) > 40) {
-          if (dx < 0) setPreviewImage(previewIndex + 1, 1);
-          else setPreviewImage(previewIndex - 1, -1);
+          if (dx < 0) setPreviewMedia(previewIndex + 1, 1);
+          else setPreviewMedia(previewIndex - 1, -1);
         }
       });
 
+      // 鍵盤左右鍵/ESC（預覽）
       document.addEventListener('keydown', (e) => {
         if (preview.style.display !== 'flex') return;
-        if (e.key === 'ArrowRight') setPreviewImage(previewIndex + 1, 1);
-        if (e.key === 'ArrowLeft') setPreviewImage(previewIndex - 1, -1);
+        if (e.key === 'ArrowRight') setPreviewMedia(previewIndex + 1, 1);
+        if (e.key === 'ArrowLeft') setPreviewMedia(previewIndex - 1, -1);
         if (e.key === 'Escape') closePreview();
       });
 
