@@ -709,31 +709,31 @@
               </div>
               <div class="app-gallery-card">
                 <div class="app-gallery-loader"></div>
-                <video class="gallery-media" data-src="/video/102.mp4" preload="metadata" muted playsinline></video>
+                <video class="gallery-media" data-src="/video/102.mp4" preload="none" muted playsinline></video>
               </div>
               <div class="app-gallery-card">
                 <div class="app-gallery-loader"></div>
-                <video class="gallery-media" data-src="/video/103.mp4" preload="metadata" muted playsinline></video>
+                <video class="gallery-media" data-src="/video/103.mp4" preload="none" muted playsinline></video>
               </div>
               <div class="app-gallery-card">
                 <div class="app-gallery-loader"></div>
-                <video class="gallery-media" data-src="/video/104.mp4" preload="metadata" muted playsinline></video>
+                <video class="gallery-media" data-src="/video/104.mp4" preload="none" muted playsinline></video>
               </div>
               <div class="app-gallery-card">
                 <div class="app-gallery-loader"></div>
-                <video class="gallery-media" data-src="/video/105.mp4" preload="metadata" muted playsinline></video>
+                <video class="gallery-media" data-src="/video/105.mp4" preload="none" muted playsinline></video>
               </div>
               <div class="app-gallery-card">
                 <div class="app-gallery-loader"></div>
-                <video class="gallery-media" data-src="/video/106.mp4" preload="metadata" muted playsinline></video>
+                <video class="gallery-media" data-src="/video/106.mp4" preload="none" muted playsinline></video>
               </div>
               <div class="app-gallery-card">
                 <div class="app-gallery-loader"></div>
-                <video class="gallery-media" data-src="/video/107.mp4" preload="metadata" muted playsinline></video>
+                <video class="gallery-media" data-src="/video/107.mp4" preload="none" muted playsinline></video>
               </div>
               <div class="app-gallery-card">
                 <div class="app-gallery-loader"></div>
-                <video class="gallery-media" data-src="/video/108.mp4" preload="metadata" muted playsinline></video>
+                <video class="gallery-media" data-src="/video/108.mp4" preload="none" muted playsinline></video>
               </div>
             </div>
 
@@ -784,37 +784,37 @@
 
               <div class="app-gallery-card second">
                 <div class="app-gallery-loader"></div>
-                <video class="gallery-media second" data-src="/video/202.mp4" preload="metadata" muted playsinline></video>
+                <video class="gallery-media second" data-src="/video/202.mp4" preload="none" muted playsinline></video>
               </div>
 
               <div class="app-gallery-card second">
                 <div class="app-gallery-loader"></div>
-                <video class="gallery-media second" data-src="/video/203.mp4" preload="metadata" muted playsinline></video>
+                <video class="gallery-media second" data-src="/video/203.mp4" preload="none" muted playsinline></video>
               </div>
 
               <div class="app-gallery-card second">
                 <div class="app-gallery-loader"></div>
-                <video class="gallery-media second" data-src="/video/204.mp4" preload="metadata" muted playsinline></video>
+                <video class="gallery-media second" data-src="/video/204.mp4" preload="none" muted playsinline></video>
               </div>
 
               <div class="app-gallery-card second">
                 <div class="app-gallery-loader"></div>
-                <video class="gallery-media second" data-src="/video/205.mp4" preload="metadata" muted playsinline></video>
+                <video class="gallery-media second" data-src="/video/205.mp4" preload="none" muted playsinline></video>
               </div>
 
               <div class="app-gallery-card second">
                 <div class="app-gallery-loader"></div>
-                <video class="gallery-media second" data-src="/video/206.mp4" preload="metadata" muted playsinline></video>
+                <video class="gallery-media second" data-src="/video/206.mp4" preload="none" muted playsinline></video>
               </div>
 
               <div class="app-gallery-card second">
                 <div class="app-gallery-loader"></div>
-                <video class="gallery-media second" data-src="/video/207.mp4" preload="metadata" muted playsinline></video>
+                <video class="gallery-media second" data-src="/video/207.mp4" preload="none" muted playsinline></video>
               </div>
 
               <div class="app-gallery-card second">
                 <div class="app-gallery-loader"></div>
-                <video class="gallery-media second" data-src="/video/208.mp4" preload="metadata" muted playsinline></video>
+                <video class="gallery-media second" data-src="/video/208.mp4" preload="none" muted playsinline></video>
               </div>
 
             </div>
@@ -1128,16 +1128,26 @@
       }
 
       // 主輪播只播當前影片（muted loop）
-      function pauseAllVideos(reset = false) {
-        medias.forEach(m => {
-          if (m && m.tagName === 'VIDEO') {
-            try { m.pause(); } catch(e){}
-            if (reset) {
-              try { m.currentTime = 0; } catch(e){}
-            }
-          }
-        });
-      }
+      function pauseAllVideos(exceptIndex=null) {
+  medias.forEach((m, i) => {
+    if (m && m.tagName === 'VIDEO' && i !== exceptIndex) {
+      try { m.pause(); } catch(e){}
+      // 不重置時間，避免重解碼造成卡頓/發燙
+      m.muted = true;
+    }
+  });
+}
+
+function ensureVideoSrc(video) {
+  if (!video.src) {
+    const dataSrc = video.getAttribute('data-src');
+    if (dataSrc) {
+      video.src = dataSrc;
+      // 只 load 一次，避免反覆 load
+      try { video.load(); } catch(e){}
+    }
+  }
+}
 
       function ensureVideoSrc(video) {
         if (!video.src) {
@@ -1150,32 +1160,32 @@
       }
 
       function playActiveMedia(index) {
-        if (isPreviewOpen) return;
+  if (isPreviewOpen) return;
 
-        pauseAllVideos(true);
+  pauseAllVideos(index);
 
-        const media = medias[index];
-        if (!media) return;
+  const media = medias[index];
+  if (!media) return;
 
-        if (media.tagName === 'VIDEO') {
-          ensureVideoSrc(media);
+  if (media.tagName === 'VIDEO') {
+    ensureVideoSrc(media);
 
-          media.muted = true;
-          media.playsInline = true;
-          media.loop = true;
+    media.muted = true;
+    media.playsInline = true;
+    media.loop = true;
 
-          const tryPlay = () => {
-            const p = media.play();
-            if (p && typeof p.catch === 'function') p.catch(()=>{});
-          };
+    const tryPlay = () => {
+      const p = media.play();
+      if (p && typeof p.catch === 'function') p.catch(()=>{});
+    };
 
-          if (media.readyState >= 2) {
-            tryPlay();
-          } else {
-            media.addEventListener('canplay', tryPlay, { once: true });
-          }
-        }
-      }
+    if (media.readyState >= 2) {
+      tryPlay();
+    } else {
+      media.addEventListener('canplay', tryPlay, { once: true });
+    }
+  }
+}
 
       function goTo(index, fromUser) {
         if (index < 0) index = cards.length - 1;
@@ -1193,7 +1203,7 @@
         if (autoTimer) clearInterval(autoTimer);
         autoTimer = setInterval(() => {
           if (!isPreviewOpen) goTo(current + 1, false);
-        }, 3000);
+        }, 4000);
       }
       function stopAuto() {
         if (autoTimer) clearInterval(autoTimer);
@@ -1493,7 +1503,7 @@
 
     function playActiveMedia(index) {
       if (isPreviewOpen) return;
-      pauseAllVideos(true);
+      pauseAllVideos(current);
       const media = medias[index];
       if (!media) return;
       if (media.tagName === 'VIDEO') {
@@ -1524,7 +1534,7 @@
       if (autoTimer) clearInterval(autoTimer);
       autoTimer = setInterval(() => {
         if (!isPreviewOpen) goTo(current + 1, false);
-      }, 3000);
+      }, 4000);
     }
     function stopAuto() {
       if (autoTimer) clearInterval(autoTimer);
