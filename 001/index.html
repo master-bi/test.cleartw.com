@@ -18,13 +18,11 @@
     }
 
     body {
-      background: #050508;
-      color: #ffffff;
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      padding: 16px;
-    }
+  background: #050508;
+  color: #ffffff;
+  min-height: 100vh;
+  padding: 16px;
+}
 
     .page {
       width: 100%;
@@ -43,7 +41,8 @@
         0 0 0 1px rgba(255,255,255,0.10) inset,
         0 0 24px rgba(80,160,255,0.12);
       border: 1px solid rgba(255,255,255,0.10);
-}
+
+      overflow: visible;}
 
     .top-row {
       display: flex;
@@ -400,7 +399,9 @@
       z-index: 999;
       touch-action: pan-y;
       padding-bottom: 96px;
-    }
+    
+      transform: none !important;
+      -webkit-transform: none !important;}
     .app-gallery-preview-inner {
       position: relative;
       width: 100%;
@@ -1736,6 +1737,9 @@ function ensureVideoSrc(video) {
 
 <!-- 縮圖列（JS 自動塞影片縮圖） -->
 <div class="preview-thumbs" id="previewThumbs" style="display:none;"></div>
+
+<!-- preview moved to bottom -->
+
 <div class="app-gallery-preview" id="appGalleryPreview2">
           <div class="app-gallery-preview-inner">
             <button class="preview-close" id="previewClose2" aria-label="關閉">✕</button>
@@ -1744,5 +1748,6 @@ function ensureVideoSrc(video) {
         </div>
 
         <div class="preview-thumbs" id="previewThumbs2" style="display:none;"></div>
+
 </body>
 </html>
