@@ -628,47 +628,29 @@
 .section.featured-section{ margin-top: 14px; }
 
 
-/* ===== 推薦區（你可能也會喜歡）===== */
-.recommend-section{ margin-top: 32px; }
-.recommend-card{
+/* ===== 推薦區（你可能也會喜歡）+ 查看按鈕 ===== */
+.recommend-section{ margin-top:20px; }
+.recommend-list{ display:flex; flex-direction:column; gap:12px; margin-top:12px; }
+.recommend-item{
   display:flex;
   align-items:center;
-  padding: 14px;
-  border-radius: 18px;
-  background: #111218;
-  margin-top: 14px;
-  text-decoration:none;
-  color:#fff;
+  justify-content:space-between;
+  background:#111218;
+  border-radius:18px;
+  padding:12px;
   box-shadow: 0 6px 18px rgba(0,0,0,0.55);
-  border: 1px solid rgba(255,255,255,0.06);
-  transition: transform .12s ease, box-shadow .12s ease;
+  border:1px solid rgba(255,255,255,0.06);
 }
-.recommend-card:active{
-  transform: scale(.98);
-  box-shadow: 0 3px 10px rgba(0,0,0,0.5);
-}
+.recommend-left{ display:flex; align-items:center; gap:12px; }
 .recommend-icon{
-  width:64px;height:64px;
+  width:64px; height:64px;
   border-radius:16px;
-  flex-shrink:0;
-  background:#000;
   object-fit:cover;
+  background:#000;
+  flex-shrink:0;
 }
-.recommend-info{ flex:1; margin-left:12px; }
 .recommend-title{ font-size:17px; font-weight:600; }
-.recommend-sub{ font-size:13px; opacity:.6; margin-top:2px; }
-.recommend-btn{
-  background:#0a84ff;
-  color:#fff;
-  border:none;
-  padding:6px 14px;
-  border-radius:12px;
-  font-size:14px;
-  font-weight:600;
-  white-space:nowrap;
-  cursor:pointer;
-}
-.recommend-btn:active{ opacity:.85; }
+.recommend-btn{ font-size:13px; padding:2px 10px; } /* 沿用 line-btn 風格，微調寬 */
 </style>
 </head>
 <body>
@@ -756,6 +738,17 @@
             </div>
 
             <div class="app-gallery-dots" id="appGalleryDots"></div>
+
+<!-- 全螢幕預覽（有聲 autoplay + controls） -->
+<div class="app-gallery-preview" id="appGalleryPreview">
+  <div class="app-gallery-preview-inner">
+    <button class="preview-close" id="previewClose" aria-label="關閉">✕</button>
+    <div id="appGalleryPreviewMedia"></div>
+  </div>
+</div>
+
+<!-- 縮圖列（JS 自動塞影片縮圖） -->
+<div class="preview-thumbs" id="previewThumbs" style="display:none;"></div>
           </div>
         </div>
 
@@ -937,6 +930,41 @@
         </div>
 
         
+<div class="recommend-section">
+  <div class="section-title">你可能也會喜歡</div>
+  <div class="recommend-list">
+    <div class="recommend-item">
+      <div class="recommend-left">
+        <img src="/recommend/001.png" class="recommend-icon" alt="雄厚遊戲城">
+        <div class="recommend-title">雄厚遊戲城</div>
+      </div>
+      <a class="line-btn recommend-btn" href="https://app918.cleartw.com" target="_blank" rel="noopener">查看</a>
+    </div>
+
+    <div class="recommend-item">
+      <div class="recommend-left">
+        <img src="/recommend/002.png" class="recommend-icon" alt="8方遊戲城">
+        <div class="recommend-title">8方遊戲城</div>
+      </div>
+      <a class="line-btn recommend-btn" href="https://app178.cleartw.com" target="_blank" rel="noopener">查看</a>
+    </div>
+
+    <div class="recommend-item">
+      <div class="recommend-left">
+        <img src="/recommend/003.png" class="recommend-icon" alt="OFA168遊戲城">
+        <div class="recommend-title">OFA168遊戲城</div>
+      </div>
+      <a class="line-btn recommend-btn" href="https://apphk.cleartw.com" target="_blank" rel="noopener">查看</a>
+    </div>
+  </div>
+</div>
+
+      </div>
+    </div>
+
+</div>
+  </div>
+
       </div>
     </div>
 
