@@ -829,6 +829,72 @@ body{
   margin-top: 18px;
 }
 
+
+/* ===== iOS 預覽跑版修復（覆蓋舊設定，不動輪播參數） ===== */
+.app-gallery-preview{
+  padding: 0 !important;              /* 移除底部留白，避免被影片撐高 */
+  align-items: center !important;
+}
+.app-gallery-preview-inner{
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100vw !important;
+  max-height: 100vh !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+#appGalleryPreviewMedia,
+#appGalleryPreviewMedia2{
+  width: auto !important;
+  height: auto !important;
+  max-width: 92vw !important;
+  max-height: 92vh !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  margin: 0 auto !important;
+}
+#appGalleryPreviewMedia video,
+#appGalleryPreviewMedia img,
+#appGalleryPreviewMedia2 video,
+#appGalleryPreviewMedia2 img{
+  width: auto !important;
+  height: auto !important;
+  max-width: 92vw !important;
+  max-height: 92vh !important;
+  object-fit: contain !important;     /* ✅ 不裁切、不放大變形 */
+  border-radius: 18px !important;
+  display: block !important;
+  background:#000 !important;
+}
+/* 縮圖列固定底部，不推擠預覽 */
+.preview-thumbs,
+.preview-thumbs#previewThumbs2{
+  height: 88px !important;
+  padding: 12px 10px !important;
+  bottom: 0 !important;
+}
+/* 手機再小一點 */
+@media (max-width:480px){
+  #appGalleryPreviewMedia,
+  #appGalleryPreviewMedia2{
+    max-width: 94vw !important;
+    max-height: 90vh !important;
+  }
+  #appGalleryPreviewMedia video,
+  #appGalleryPreviewMedia img,
+  #appGalleryPreviewMedia2 video,
+  #appGalleryPreviewMedia2 img{
+    max-width: 94vw !important;
+    max-height: 90vh !important;
+  }
+  .preview-thumbs,
+  .preview-thumbs#previewThumbs2{
+    height: 82px !important;
+  }
+}
+
 </style>
 </head>
 <body>
