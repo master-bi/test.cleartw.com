@@ -626,6 +626,49 @@
 
 /* 精選標題上方留白，避免黏到查看更多 */
 .section.featured-section{ margin-top: 14px; }
+
+
+/* ===== 推薦區（你可能也會喜歡）===== */
+.recommend-section{ margin-top: 32px; }
+.recommend-card{
+  display:flex;
+  align-items:center;
+  padding: 14px;
+  border-radius: 18px;
+  background: #111218;
+  margin-top: 14px;
+  text-decoration:none;
+  color:#fff;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.55);
+  border: 1px solid rgba(255,255,255,0.06);
+  transition: transform .12s ease, box-shadow .12s ease;
+}
+.recommend-card:active{
+  transform: scale(.98);
+  box-shadow: 0 3px 10px rgba(0,0,0,0.5);
+}
+.recommend-icon{
+  width:64px;height:64px;
+  border-radius:16px;
+  flex-shrink:0;
+  background:#000;
+  object-fit:cover;
+}
+.recommend-info{ flex:1; margin-left:12px; }
+.recommend-title{ font-size:17px; font-weight:600; }
+.recommend-sub{ font-size:13px; opacity:.6; margin-top:2px; }
+.recommend-btn{
+  background:#0a84ff;
+  color:#fff;
+  border:none;
+  padding:6px 14px;
+  border-radius:12px;
+  font-size:14px;
+  font-weight:600;
+  white-space:nowrap;
+  cursor:pointer;
+}
+.recommend-btn:active{ opacity:.85; }
 </style>
 </head>
 <body>
@@ -713,17 +756,6 @@
             </div>
 
             <div class="app-gallery-dots" id="appGalleryDots"></div>
-
-<!-- 全螢幕預覽（有聲 autoplay + controls） -->
-<div class="app-gallery-preview" id="appGalleryPreview">
-  <div class="app-gallery-preview-inner">
-    <button class="preview-close" id="previewClose" aria-label="關閉">✕</button>
-    <div id="appGalleryPreviewMedia"></div>
-  </div>
-</div>
-
-<!-- 縮圖列（JS 自動塞影片縮圖） -->
-<div class="preview-thumbs" id="previewThumbs" style="display:none;"></div>
           </div>
         </div>
 
@@ -905,28 +937,6 @@
         </div>
 
         
-<div class="recommend-section" style="margin-top:20px;">
-  <div class="section-title">你可能也會喜歡</div>
-  <div class="recommend-item" style="display:flex;align-items:center;margin-top:12px;">
-    <img src="/recommend/001.png" style="width:64px;height:64px;border-radius:16px;margin-right:12px;">
-    <div style="flex:1;">
-      <div style="font-size:17px;font-weight:600;">雄厚遊戲城</div>
-    </div>
-  </div>
-  <div class="recommend-item" style="display:flex;align-items:center;margin-top:12px;">
-    <img src="/recommend/002.png" style="width:64px;height:64px;border-radius:16px;margin-right:12px;">
-    <div style="flex:1;">
-      <div style="font-size:17px;font-weight:600;">8方遊戲城</div>
-    </div>
-  </div>
-  <div class="recommend-item" style="display:flex;align-items:center;margin-top:12px;">
-    <img src="/recommend/003.png" style="width:64px;height:64px;border-radius:16px;margin-right:12px;">
-    <div style="flex:1;">
-      <div style="font-size:17px;font-weight:600;">OFA168遊戲城</div>
-    </div>
-  </div>
-</div>
-
       </div>
     </div>
 
