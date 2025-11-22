@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>大老爺 - 安裝頁面</title>
+  <title>大老爺 - 安裝</title>
 
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="favicon.png">
@@ -637,6 +637,208 @@
 }
 .recommend-title{ font-size:17px; font-weight:600; }
 .recommend-btn{ font-size:13px; padding:2px 10px; } /* 沿用 line-btn 風格，微調寬 */
+/* ===== iOS-like depth glow (NO glass/backdrop-filter) ===== */
+.card{
+  box-shadow:
+    0 18px 40px rgba(0,0,0,0.85),
+    0 0 0 1px rgba(255,255,255,0.07),
+    inset 0 1px 0 rgba(255,255,255,0.04);
+}
+
+.rating-block,
+.info-list{
+  box-shadow:
+    0 10px 22px rgba(0,0,0,0.75),
+    0 0 0 1px rgba(255,255,255,0.06),
+    inset 0 1px 0 rgba(255,255,255,0.035);
+  border-color: rgba(255,255,255,0.08) !important;
+}
+
+.app-gallery-card{
+  box-shadow:
+    0 10px 26px rgba(0,0,0,0.9),
+    0 0 0 1px rgba(255,255,255,0.06),
+    inset 0 1px 0 rgba(255,255,255,0.04);
+}
+
+.app-gallery-card.active{
+  box-shadow:
+    0 18px 36px rgba(0,0,0,0.95),
+    0 0 0 1px rgba(255,255,255,0.10),
+    0 0 18px rgba(255,255,255,0.08),
+    inset 0 1px 0 rgba(255,255,255,0.06);
+}
+
+.app-gallery-dots span.active{
+  box-shadow: 0 0 10px rgba(255,255,255,0.55);
+}
+
+.btn-primary{
+  box-shadow:
+    0 8px 18px rgba(10,132,255,0.35),
+    inset 0 1px 0 rgba(255,255,255,0.25);
+}
+
+.line-btn{
+  box-shadow:
+    0 6px 14px rgba(10,132,255,0.25),
+    inset 0 1px 0 rgba(255,255,255,0.18);
+}
+
+.recommend-item img{
+  box-shadow:
+    0 8px 18px rgba(0,0,0,0.8),
+    0 0 0 1px rgba(255,255,255,0.06),
+    inset 0 1px 0 rgba(255,255,255,0.04);
+}
+
+
+/* ===============================
+   White Highlight Theme (Luxury)
+   Style B + Mi-white bg + Bright Gold borders
+   No glass / no backdrop-filter
+   =============================== */
+
+/* page background */
+body{
+  background: #F7F5F0 !important;
+  color: #111318 !important;
+}
+
+/* main card: mi-white surface + gold filigree */
+.card{
+  background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(250,247,240,0.98)) !important;
+  border-radius: 22px !important;
+  border: 1px solid rgba(255,189,74,0.9) !important;
+  box-shadow:
+    0 18px 40px rgba(0,0,0,0.10),
+    0 0 0 1px rgba(255,216,122,0.65),
+    inset 0 1px 0 rgba(255,255,255,0.95),
+    inset 0 0 0 1px rgba(255,216,122,0.18) !important;
+  position: relative;
+}
+.card::before{
+  content:"";
+  position:absolute; inset:8px;
+  border-radius: 18px;
+  border: 1px solid rgba(255,216,122,0.7);
+  pointer-events:none;
+  box-shadow: inset 0 0 0 1px rgba(210,143,42,0.25);
+}
+.card::after{
+  content:"";
+  position:absolute; inset:0;
+  border-radius: 22px;
+  pointer-events:none;
+  box-shadow: 0 0 26px rgba(255,189,74,0.22);
+}
+
+/* text colors */
+.app-title{ color:#0E0F12 !important; }
+.app-subtitle, .stats-top, .stats-bottom, .rating-total, .stats-item-title, .info-label{
+  color:#646A78 !important;
+}
+.intro-text, .review-text, .info-value, .review-name{
+  color:#1C1F26 !important;
+}
+
+/* section titles */
+.section-title{
+  color:#121319 !important;
+  letter-spacing: .2px;
+}
+
+/* stats row separators & lines */
+.stats-row{
+  border-top: 1px solid rgba(255,189,74,0.35) !important;
+  border-bottom: 1px solid rgba(255,189,74,0.35) !important;
+}
+.stats-col:not(:last-child)::after{
+  background: rgba(255,189,74,0.45) !important;
+}
+
+/* rating/info mini cards */
+.rating-block,
+.info-list{
+  background: linear-gradient(180deg,#FFFFFF,#FAF7F0) !important;
+  border: 1px solid rgba(255,189,74,0.7) !important;
+  border-radius: 16px !important;
+  box-shadow:
+    0 10px 22px rgba(0,0,0,0.08),
+    0 0 0 1px rgba(255,216,122,0.45),
+    inset 0 1px 0 rgba(255,255,255,0.9) !important;
+}
+
+/* star color slightly warmer */
+.rating-small-star,
+.stars,
+.star-line{
+  color: #D28F2A !important;
+}
+
+/* buttons */
+.btn-primary{
+  background: linear-gradient(180deg,#FFD87A,#FFBD4A) !important;
+  color:#2A1A00 !important;
+  box-shadow:
+    0 8px 18px rgba(255,189,74,0.45),
+    inset 0 1px 0 rgba(255,255,255,0.55) !important;
+}
+.btn-primary.loading::after{
+  border-top-color:#2A1A00 !important;
+}
+.line-btn{
+  background: rgba(255,189,74,0.15) !important;
+  color:#8A5200 !important;
+  border: 1px solid rgba(255,189,74,0.9) !important;
+  box-shadow:
+    0 6px 14px rgba(255,189,74,0.25),
+    inset 0 1px 0 rgba(255,255,255,0.7) !important;
+}
+
+/* gallery cards */
+.app-gallery-card{
+  background: #FFFFFF !important;
+  border: 1px solid rgba(255,189,74,0.75) !important;
+  box-shadow:
+    0 10px 26px rgba(0,0,0,0.14),
+    inset 0 1px 0 rgba(255,255,255,0.85) !important;
+}
+.app-gallery-card.active{
+  border-color: rgba(255,189,74,1) !important;
+  box-shadow:
+    0 16px 32px rgba(0,0,0,0.18),
+    0 0 18px rgba(255,189,74,0.35),
+    inset 0 1px 0 rgba(255,255,255,0.9) !important;
+}
+
+/* dots */
+.app-gallery-dots span{
+  background: rgba(0,0,0,0.12) !important;
+}
+.app-gallery-dots span.active{
+  background: #FFBD4A !important;
+  box-shadow: 0 0 10px rgba(255,189,74,0.9) !important;
+}
+
+/* review separators */
+.review-card{
+  border-top: 1px solid rgba(0,0,0,0.06) !important;
+}
+
+/* info rows */
+.info-row{
+  border-bottom: 1px solid rgba(0,0,0,0.06) !important;
+}
+
+/* recommend section */
+.recommend-section .section-title{ color:#121319 !important; }
+.recommend-item img{
+  border: 1px solid rgba(255,189,74,0.8) !important;
+  box-shadow:
+    0 8px 18px rgba(0,0,0,0.12),
+    0 0 12px rgba(255,189,74,0.25) !important;
+}
 </style>
 </head>
 <body>
@@ -752,7 +954,7 @@
 <p>取得聯繫LINE : <a class="line-btn" href="https://lin.ee/tVAQF3P" target="_blank" rel="noopener">@ofa1688</a></p>
           </div>
         
-        <div id="introToggle" class="intro-toggle">...查看更多</div>
+        <div id="introToggle" class="intro-toggle">更多</div>
       </div>
 
 <!-- 第二輪播（精選 / 直版 6:19） -->
@@ -819,7 +1021,7 @@
       <div class="rating-left">
         <span class="big-score">4.9</span>
         <span class="rating-small-star">★★★★★</span>
-        <span class="rating-total">滿分 5 分．10088 個評分</span>
+        <span class="rating-total">滿分 5 分．3.2萬則評分</span>
       </div>
       <div style="flex:1; margin-left:12px;">
         <div class="star-line"></div>
@@ -883,7 +1085,7 @@
     
 
 <div class="section">
-        <div class="section-title">信息</div>
+        <div class="section-title">資訊</div>
         <div class="info-list">
           <div class="info-row">
             <span class="info-label">供應商</span>
@@ -977,7 +1179,7 @@
 <script>
   /* ===== Stats 可配置區（改這裡就會自動更新顯示） ===== */
   const STATS_CONFIG = {
-    ratingsCount: 10088,
+    ratingsCount: 3.2,
     ratingValue: 4.9,        // 0~5
     stars: 5,                // 0~5
     ageValue: "18+",
@@ -993,7 +1195,7 @@
     const starsText = "★★★★★".slice(0, STATS_CONFIG.stars).padEnd(5, "☆");
 
     document.querySelectorAll('[data-key="ratingsCountTop"]').forEach(el=>{
-      el.textContent = `${fmtCount(STATS_CONFIG.ratingsCount)}個評分`;
+      el.textContent = `${fmtCount(STATS_CONFIG.ratingsCount)}萬則評分`;
     });
     document.querySelectorAll('[data-key="ratingValue"]').forEach(el=>{
       el.textContent = STATS_CONFIG.ratingValue;
@@ -1691,7 +1893,7 @@ function ensureVideoSrc(video) {
 
     introToggle.addEventListener('click', () => {
       const isCollapsed = introBox.classList.toggle('intro-collapsed');
-      introToggle.textContent = isCollapsed ? "...查看更多" : "收合";
+      introToggle.textContent = isCollapsed ? "更多" : "收合";
     });
   })();
 </script>
