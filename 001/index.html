@@ -9,7 +9,7 @@
   <link rel="icon" type="image/png" href="favicon.png">
 
   <style>
-    * {
+* {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
@@ -375,6 +375,349 @@
     .app-gallery-dots span.active { width: 18px; background: #ffffff; }
 
     /* ===== 全螢幕預覽（顯示完整比例） ===== */
+@media (max-width: 480px) {
+      .app-gallery-card {
+        width: 252px;   /* 手機略縮但仍是 A 大感 */
+        max-width: 82vw;
+      }
+}
+  
+.stats-col:last-child{
+  border-right:none;
+}
+
+
+
+/* ===== 免費安裝按鈕 loading（轉圈 + 2 秒後跳轉） ===== */
+.btn-primary.loading {
+  position: relative;
+  color: transparent !important; /* 隱藏原文字 */
+  pointer-events: none;
+  opacity: 0.95;
+}
+.btn-primary.loading::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 18px;
+  height: 18px;
+  margin: -9px 0 0 -9px;
+  border: 2px solid rgba(255,255,255,0.35);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: installSpin 0.8s linear infinite;
+}
+@keyframes installSpin { to { transform: rotate(360deg); } }
+
+    .intro-toggle {
+      margin-top: 6px;
+      font-size: 13px;
+      color: #0a84ff;
+      cursor: pointer;
+      user-select: none;
+    }
+
+
+
+
+
+/* ===== 簡介展開/收合（B 版：保留段落與 1.2.3.） ===== */
+.intro-paragraphs p{
+  margin: 0 0 8px;
+}
+.intro-paragraphs p:last-child{
+  margin-bottom: 0;
+}
+#introBox.intro-collapsed #introText {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.intro-toggle {
+  margin-top: 6px;
+  font-size: 13px;
+  color: #0a84ff;
+  cursor: pointer;
+  user-select: none;
+}
+
+
+/* LINE 按鈕 */
+.line-btn{
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: rgba(10,132,255,0.16);
+  color: #0a84ff;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 13px;
+  border: 1px solid rgba(10,132,255,0.35);
+  vertical-align: middle;
+}
+.line-btn:active{
+  transform: translateY(1px);
+}
+
+
+
+
+
+
+
+/* 預覽維持原始比例（不壓扁） */
+/* 精選標題上方多留白，避免黏到查看更多 */
+.section.featured-section{ margin-top: 14px; }
+.section.featured-section .section-title{ margin-top: 0; }
+
+
+/* ===== 第二輪播（精選 / 直版 9:16 / 滿版裁切 A 版）===== */
+.app-gallery-card.second{
+  width: 260px;
+  max-width: 64vw;
+  aspect-ratio: 9 / 16;   /* ✅ 直版 9:16 */
+  border-radius: 18px;
+  overflow: hidden;
+  background: #050508;
+}
+.gallery-media.second{
+  width:100%;
+  height:100%;
+  object-fit: cover;      /* ✅ 滿版裁切 */
+  object-position: center;
+  border-radius: 18px;
+  background:#000;
+}
+
+/* 預覽：不裁切避免變形 */
+
+/* 精選標題上方留白，避免黏到查看更多 */
+.section.featured-section{ margin-top: 14px; }
+
+
+/* ===== 推薦區（你可能也會喜歡）+ 查看按鈕 ===== */
+.recommend-section{ margin-top:20px; }
+.recommend-list{ display:flex; flex-direction:column; gap:12px; margin-top:12px; }
+.recommend-item{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  background:#111218;
+  border-radius:18px;
+  padding:12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.55);
+  border:1px solid rgba(255,255,255,0.06);
+}
+.recommend-left{ display:flex; align-items:center; gap:12px; }
+.recommend-icon{
+  width:64px; height:64px;
+  border-radius:16px;
+  object-fit:cover;
+  background:#000;
+  flex-shrink:0;
+}
+.recommend-title{ font-size:17px; font-weight:600; }
+.recommend-btn{ font-size:13px; padding:2px 10px; } /* 沿用 line-btn 風格，微調寬 */
+/* =========================
+   iOS 18 Strong Glass (C)
+   視覺升級：不動輪播/參數
+========================= */
+
+/* 背景更像 iOS 深色漸層 */
+body{
+  background:
+    radial-gradient(1200px 700px at 8% -12%, rgba(98,148,255,0.16), transparent 60%),
+    radial-gradient(900px 600px at 112% 6%, rgba(255,205,120,0.12), transparent 55%),
+    radial-gradient(700px 500px at 50% 110%, rgba(140,90,255,0.10), transparent 60%),
+    #050508;
+}
+
+/* 主卡片：強玻璃 + 高模糊 */
+.card{
+  position: relative;
+  background: rgba(14, 16, 22, 0.58);
+  border: 1px solid rgba(255,255,255,0.14);
+  box-shadow:
+    0 20px 48px rgba(0,0,0,0.78),
+    inset 0 1px 0 rgba(255,255,255,0.08);
+  backdrop-filter: blur(28px) saturate(175%);
+  -webkit-backdrop-filter: blur(28px) saturate(175%);
+}
+
+/* 卡片光暈層（iOS 玻璃高光） */
+.card::before{
+  content:"";
+  position:absolute; inset:0;
+  border-radius: inherit;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.02) 38%, rgba(255,255,255,0.00)),
+    radial-gradient(600px 220px at 12% 0%, rgba(255,255,255,0.10), transparent 60%);
+  pointer-events:none;
+  mix-blend-mode: screen;
+}
+
+/* 小區塊：評分/資訊/推薦 玻璃 */
+.rating-block,
+.info-list{
+  position: relative;
+  background: rgba(20, 22, 30, 0.55);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 18px;
+  box-shadow:
+    0 12px 28px rgba(0,0,0,0.60),
+    inset 0 1px 0 rgba(255,255,255,0.07);
+  backdrop-filter: blur(22px) saturate(165%);
+  -webkit-backdrop-filter: blur(22px) saturate(165%);
+}
+
+.rating-block::before,
+.info-list::before{
+  content:"";
+  position:absolute; inset:0;
+  border-radius: inherit;
+  background: linear-gradient(180deg, rgba(255,255,255,0.07), transparent 45%);
+  pointer-events:none;
+}
+
+/* 統計列更像 iOS */
+.stats-row{
+  background: rgba(18, 20, 28, 0.50);
+  border-top: 1px solid rgba(255,255,255,0.12);
+  border-bottom: 1px solid rgba(255,255,255,0.12);
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+}
+.stats-col:not(:last-child)::after{
+  background: rgba(255,255,255,0.18);
+}
+
+/* 活動/精選卡片玻璃框 + 漂浮感 */
+.app-gallery-card,
+.app-gallery-card.second{
+  background: rgba(8, 9, 12, 0.72);
+  border: 1px solid rgba(255,255,255,0.10);
+  box-shadow:
+    0 10px 26px rgba(0,0,0,0.90),
+    inset 0 1px 0 rgba(255,255,255,0.06);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+.app-gallery-card.active,
+.app-gallery-card.second.active{
+  background: rgba(18, 19, 26, 0.90);
+  border-color: rgba(255,255,255,0.16);
+}
+
+/* section 標題 spacing 更 iOS */
+.section-title{
+  letter-spacing: 0.2px;
+}
+.section.featured-section{
+  margin-top: 16px;
+}
+
+/* 按鈕：iOS 藍強高光 */
+.btn-primary{
+  box-shadow:
+    0 10px 22px rgba(10,132,255,0.40),
+    inset 0 1px 0 rgba(255,255,255,0.30);
+}
+
+/* LINE / 查看 pill：更像 iOS tag */
+.line-btn{
+  background: rgba(10,132,255,0.20);
+  border: 1px solid rgba(10,132,255,0.55);
+  box-shadow:
+    0 2px 8px rgba(10,132,255,0.25),
+    inset 0 1px 0 rgba(255,255,255,0.30);
+}
+
+/* 推薦區卡片（你可能也會喜歡）變玻璃 */
+.recommend-section .recommend-item{
+  background: rgba(20, 22, 30, 0.52);
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: 16px;
+  padding: 10px 10px;
+  box-shadow:
+    0 8px 20px rgba(0,0,0,0.65),
+    inset 0 1px 0 rgba(255,255,255,0.06);
+  backdrop-filter: blur(18px) saturate(165%);
+  -webkit-backdrop-filter: blur(18px) saturate(165%);
+}
+
+/* fallback：不支援 blur 時 */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))){
+  .card,.rating-block,.info-list,.stats-row,.recommend-section .recommend-item{
+    background: #12131b;
+  }
+}
+
+
+/* ===== iOS 文字 spacing 微調（不改任何參數/功能） ===== */
+.app-title{
+  letter-spacing: 0.2px;
+  line-height: 1.25;
+  margin-bottom: 6px;
+}
+.app-subtitle{
+  letter-spacing: 0.1px;
+  line-height: 1.35;
+  margin-top: 2px;
+}
+.section-title{
+  font-size: 16px;
+  letter-spacing: 0.2px;
+  line-height: 1.3;
+  margin-bottom: 8px;
+}
+.intro-text{
+  line-height: 1.6;
+  letter-spacing: 0.1px;
+  word-break: break-word;
+}
+.review-title-row{
+  line-height: 1.35;
+  letter-spacing: 0.1px;
+}
+.review-name{
+  letter-spacing: 0.1px;
+}
+.review-text{
+  line-height: 1.6;
+  letter-spacing: 0.1px;
+}
+.rating-total{
+  letter-spacing: 0.1px;
+}
+.stats-top, .stats-bottom{
+  letter-spacing: 0.12px;
+}
+.section.featured-section{
+  margin-top: 18px;
+}
+
+
+/* ===== C方案：預覽完全回復25版 + 強制不吃任何新CSS ===== */
+#appGalleryPreview, #appGalleryPreview2{
+  all: initial !important;
+  position: fixed !important;
+  inset: 0 !important;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0,0,0,0.96);
+  z-index: 99999 !important;
+  touch-action: pan-y;
+  padding-bottom: 96px;
+}
+#appGalleryPreview *, #appGalleryPreview2 *{
+  all: unset !important;
+  box-sizing: border-box !important;
+}
+
+/* ===== 全螢幕預覽（顯示完整比例） ===== */
     .app-gallery-preview {
       position: fixed;
       inset: 0;
@@ -651,208 +994,6 @@
 }
 .recommend-title{ font-size:17px; font-weight:600; }
 .recommend-btn{ font-size:13px; padding:2px 10px; } /* 沿用 line-btn 風格，微調寬 */
-/* =========================
-   iOS 18 Strong Glass (C)
-   視覺升級：不動輪播/參數
-========================= */
-
-/* 背景更像 iOS 深色漸層 */
-body{
-  background:
-    radial-gradient(1200px 700px at 8% -12%, rgba(98,148,255,0.16), transparent 60%),
-    radial-gradient(900px 600px at 112% 6%, rgba(255,205,120,0.12), transparent 55%),
-    radial-gradient(700px 500px at 50% 110%, rgba(140,90,255,0.10), transparent 60%),
-    #050508;
-}
-
-/* 主卡片：強玻璃 + 高模糊 */
-.card{
-  position: relative;
-  background: rgba(14, 16, 22, 0.58);
-  border: 1px solid rgba(255,255,255,0.14);
-  box-shadow:
-    0 20px 48px rgba(0,0,0,0.78),
-    inset 0 1px 0 rgba(255,255,255,0.08);
-  backdrop-filter: blur(28px) saturate(175%);
-  -webkit-backdrop-filter: blur(28px) saturate(175%);
-}
-
-/* 卡片光暈層（iOS 玻璃高光） */
-.card::before{
-  content:"";
-  position:absolute; inset:0;
-  border-radius: inherit;
-  background:
-    linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.02) 38%, rgba(255,255,255,0.00)),
-    radial-gradient(600px 220px at 12% 0%, rgba(255,255,255,0.10), transparent 60%);
-  pointer-events:none;
-  mix-blend-mode: screen;
-}
-
-/* 小區塊：評分/資訊/推薦 玻璃 */
-.rating-block,
-.info-list{
-  position: relative;
-  background: rgba(20, 22, 30, 0.55);
-  border: 1px solid rgba(255,255,255,0.12);
-  border-radius: 18px;
-  box-shadow:
-    0 12px 28px rgba(0,0,0,0.60),
-    inset 0 1px 0 rgba(255,255,255,0.07);
-  backdrop-filter: blur(22px) saturate(165%);
-  -webkit-backdrop-filter: blur(22px) saturate(165%);
-}
-
-.rating-block::before,
-.info-list::before{
-  content:"";
-  position:absolute; inset:0;
-  border-radius: inherit;
-  background: linear-gradient(180deg, rgba(255,255,255,0.07), transparent 45%);
-  pointer-events:none;
-}
-
-/* 統計列更像 iOS */
-.stats-row{
-  background: rgba(18, 20, 28, 0.50);
-  border-top: 1px solid rgba(255,255,255,0.12);
-  border-bottom: 1px solid rgba(255,255,255,0.12);
-  backdrop-filter: blur(18px) saturate(160%);
-  -webkit-backdrop-filter: blur(18px) saturate(160%);
-}
-.stats-col:not(:last-child)::after{
-  background: rgba(255,255,255,0.18);
-}
-
-/* 活動/精選卡片玻璃框 + 漂浮感 */
-.app-gallery-card,
-.app-gallery-card.second{
-  background: rgba(8, 9, 12, 0.72);
-  border: 1px solid rgba(255,255,255,0.10);
-  box-shadow:
-    0 10px 26px rgba(0,0,0,0.90),
-    inset 0 1px 0 rgba(255,255,255,0.06);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-}
-.app-gallery-card.active,
-.app-gallery-card.second.active{
-  background: rgba(18, 19, 26, 0.90);
-  border-color: rgba(255,255,255,0.16);
-}
-
-/* section 標題 spacing 更 iOS */
-.section-title{
-  letter-spacing: 0.2px;
-}
-.section.featured-section{
-  margin-top: 16px;
-}
-
-/* 按鈕：iOS 藍強高光 */
-.btn-primary{
-  box-shadow:
-    0 10px 22px rgba(10,132,255,0.40),
-    inset 0 1px 0 rgba(255,255,255,0.30);
-}
-
-/* LINE / 查看 pill：更像 iOS tag */
-.line-btn{
-  background: rgba(10,132,255,0.20);
-  border: 1px solid rgba(10,132,255,0.55);
-  box-shadow:
-    0 2px 8px rgba(10,132,255,0.25),
-    inset 0 1px 0 rgba(255,255,255,0.30);
-}
-
-/* 推薦區卡片（你可能也會喜歡）變玻璃 */
-.recommend-section .recommend-item{
-  background: rgba(20, 22, 30, 0.52);
-  border: 1px solid rgba(255,255,255,0.10);
-  border-radius: 16px;
-  padding: 10px 10px;
-  box-shadow:
-    0 8px 20px rgba(0,0,0,0.65),
-    inset 0 1px 0 rgba(255,255,255,0.06);
-  backdrop-filter: blur(18px) saturate(165%);
-  -webkit-backdrop-filter: blur(18px) saturate(165%);
-}
-
-/* fallback：不支援 blur 時 */
-@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))){
-  .card,.rating-block,.info-list,.stats-row,.recommend-section .recommend-item{
-    background: #12131b;
-  }
-}
-
-
-/* ===== iOS 文字 spacing 微調（不改任何參數/功能） ===== */
-.app-title{
-  letter-spacing: 0.2px;
-  line-height: 1.25;
-  margin-bottom: 6px;
-}
-.app-subtitle{
-  letter-spacing: 0.1px;
-  line-height: 1.35;
-  margin-top: 2px;
-}
-.section-title{
-  font-size: 16px;
-  letter-spacing: 0.2px;
-  line-height: 1.3;
-  margin-bottom: 8px;
-}
-.intro-text{
-  line-height: 1.6;
-  letter-spacing: 0.1px;
-  word-break: break-word;
-}
-.review-title-row{
-  line-height: 1.35;
-  letter-spacing: 0.1px;
-}
-.review-name{
-  letter-spacing: 0.1px;
-}
-.review-text{
-  line-height: 1.6;
-  letter-spacing: 0.1px;
-}
-.rating-total{
-  letter-spacing: 0.1px;
-}
-.stats-top, .stats-bottom{
-  letter-spacing: 0.12px;
-}
-.section.featured-section{
-  margin-top: 18px;
-}
-
-
-/* ===== Preview hard reset (fix iOS glass interference) ===== */
-#appGalleryPreviewMedia, #appGalleryPreviewMedia2{
-  all: unset;
-  display: block;
-  width: 92vw;
-  max-width: 520px;
-  max-height: calc(90vh - 120px);
-  border-radius: 18px;
-  box-shadow: 0 18px 40px rgba(0,0,0,1);
-  background:#000;
-}
-#appGalleryPreviewMedia video, #appGalleryPreviewMedia img,
-#appGalleryPreviewMedia2 video, #appGalleryPreviewMedia2 img{
-  all: unset;
-  display: block;
-  width: 100%;
-  height: auto;
-  max-height: calc(90vh - 120px);
-  object-fit: contain;
-  border-radius: 18px;
-  background:#000;
-}
-
 </style>
 </head>
 <body>
@@ -1310,23 +1451,8 @@ body{
 
         media.addEventListener('click', (e) => {
           e.stopPropagation();
-          // ensure src ready before opening preview
-          if (!media.src) {
-            const dataSrc = media.getAttribute('data-src');
-            if (dataSrc) {
-              media.src = dataSrc;
-              if (media.tagName === 'VIDEO') media.load();
-            }
-          }
-          const idx = cards.indexOf(card);
-          if (media.tagName === 'VIDEO') {
-            const go = () => openPreview(idx);
-            if (media.readyState >= 2) go();
-            else media.addEventListener('loadeddata', go, { once: true });
-          } else {
-            if (media.complete && media.naturalWidth !== 0) openPreview(idx);
-            else media.addEventListener('load', () => openPreview(idx), { once: true });
-          }
+          if (!media.src) return;
+          openPreview(cards.indexOf(card));
         });
       });
 
@@ -1677,25 +1803,10 @@ function ensureVideoSrc(video) {
       }
 
       media.addEventListener('click', (e) => {
-          e.stopPropagation();
-          // ensure src ready before opening preview
-          if (!media.src) {
-            const dataSrc = media.getAttribute('data-src');
-            if (dataSrc) {
-              media.src = dataSrc;
-              if (media.tagName === 'VIDEO') media.load();
-            }
-          }
-          const idx = cards.indexOf(card);
-          if (media.tagName === 'VIDEO') {
-            const go = () => openPreview(idx);
-            if (media.readyState >= 2) go();
-            else media.addEventListener('loadeddata', go, { once: true });
-          } else {
-            if (media.complete && media.naturalWidth !== 0) openPreview(idx);
-            else media.addEventListener('load', () => openPreview(idx), { once: true });
-          }
-        });
+        e.stopPropagation();
+        if (!media.src) return;
+        openPreview(cards.indexOf(card));
+      });
     });
 
     function updateActive(index) {
