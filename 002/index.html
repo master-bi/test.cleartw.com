@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>大老爺 - 安裝頁面</title>
+  <title>大老爺 - 安裝</title>
 
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="favicon.png">
@@ -806,7 +806,7 @@
 <p>取得聯繫LINE : <a class="line-btn" href="https://lin.ee/tVAQF3P" target="_blank" rel="noopener">@ofa1688</a></p>
           </div>
         
-        <div id="introToggle" class="intro-toggle">...查看更多</div>
+        <div id="introToggle" class="intro-toggle">更多</div>
       </div>
 
 <!-- 第二輪播（精選 / 直版 6:19） -->
@@ -873,7 +873,7 @@
       <div class="rating-left">
         <span class="big-score">4.9</span>
         <span class="rating-small-star">★★★★★</span>
-        <span class="rating-total">滿分 5 分．10088 個評分</span>
+        <span class="rating-total">滿分 5 分．3.2萬則評分</span>
       </div>
       <div style="flex:1; margin-left:12px;">
         <div class="star-line"></div>
@@ -937,7 +937,7 @@
     
 
 <div class="section">
-        <div class="section-title">信息</div>
+        <div class="section-title">資訊</div>
         <div class="info-list">
           <div class="info-row">
             <span class="info-label">供應商</span>
@@ -1031,7 +1031,7 @@
 <script>
   /* ===== Stats 可配置區（改這裡就會自動更新顯示） ===== */
   const STATS_CONFIG = {
-    ratingsCount: 10088,
+    ratingsCount: 3.2,
     ratingValue: 4.9,        // 0~5
     stars: 5,                // 0~5
     ageValue: "18+",
@@ -1047,7 +1047,7 @@
     const starsText = "★★★★★".slice(0, STATS_CONFIG.stars).padEnd(5, "☆");
 
     document.querySelectorAll('[data-key="ratingsCountTop"]').forEach(el=>{
-      el.textContent = `${fmtCount(STATS_CONFIG.ratingsCount)}個評分`;
+      el.textContent = `${fmtCount(STATS_CONFIG.ratingsCount)}萬則評分`;
     });
     document.querySelectorAll('[data-key="ratingValue"]').forEach(el=>{
       el.textContent = STATS_CONFIG.ratingValue;
@@ -1745,7 +1745,7 @@ function ensureVideoSrc(video) {
 
     introToggle.addEventListener('click', () => {
       const isCollapsed = introBox.classList.toggle('intro-collapsed');
-      introToggle.textContent = isCollapsed ? "...查看更多" : "收合";
+      introToggle.textContent = isCollapsed ? "更多" : "收合";
     });
   })();
 </script>
