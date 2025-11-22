@@ -691,6 +691,18 @@
     0 0 0 1px rgba(255,255,255,0.06),
     inset 0 1px 0 rgba(255,255,255,0.04);
 }
+
+
+/* ===== 只解放「下面輪播圖(第二輪播)」超出裁切，不動其他 ===== */
+.app-gallery-viewport.second{
+  overflow: visible !important; /* 允許卡片放大超出 */
+}
+.app-gallery-track.second{
+  overflow-y: visible !important; /* 防止上緣被裁切 */
+  padding-top: 14px !important;   /* 給 active 放大留空間 */
+  padding-bottom: 14px !important;
+}
+
 </style>
 </head>
 <body>
