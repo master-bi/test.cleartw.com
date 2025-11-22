@@ -280,23 +280,9 @@
       padding: 2px 0 6px;
     }
 
-    .app-gallery-viewport {
-      position: relative;
-      width: 100%;
-      overflow-x: hidden;
-      overflow-y: visible;
-      padding: 12px 0 4px;
-    }
+    .app-gallery-viewport { position: relative; width: 100%; overflow-x: visible; overflow-y: visible; padding: 12px 0 4px; }
 
-    .app-gallery-track {
-      display: flex;
-      gap: 14px;
-      overflow-x: auto;
-      scroll-behavior: smooth;
-      padding: 12px 2px 12px;  /* 多一點上緣，避免 active 放大被切 */
-      perspective: 1000px;
-      scrollbar-width: none;
-    }
+    .app-gallery-track { display:flex; gap:14px; overflow-x:auto; scroll-behavior:smooth; padding:12px 16px 12px; scroll-padding-left:16px; scroll-padding-right:16px; perspective:1000px; scrollbar-width:none; }
     .app-gallery-track::-webkit-scrollbar { display: none; }
 
     /* ✅ A 大型 1:1 卡片 */
@@ -651,6 +637,60 @@
 }
 .recommend-title{ font-size:17px; font-weight:600; }
 .recommend-btn{ font-size:13px; padding:2px 10px; } /* 沿用 line-btn 風格，微調寬 */
+/* ===== iOS-like depth glow (NO glass/backdrop-filter) ===== */
+.card{
+  box-shadow:
+    0 18px 40px rgba(0,0,0,0.85),
+    0 0 0 1px rgba(255,255,255,0.07),
+    inset 0 1px 0 rgba(255,255,255,0.04);
+}
+
+.rating-block,
+.info-list{
+  box-shadow:
+    0 10px 22px rgba(0,0,0,0.75),
+    0 0 0 1px rgba(255,255,255,0.06),
+    inset 0 1px 0 rgba(255,255,255,0.035);
+  border-color: rgba(255,255,255,0.08) !important;
+}
+
+.app-gallery-card{
+  box-shadow:
+    0 10px 26px rgba(0,0,0,0.9),
+    0 0 0 1px rgba(255,255,255,0.06),
+    inset 0 1px 0 rgba(255,255,255,0.04);
+}
+
+.app-gallery-card.active{
+  box-shadow:
+    0 18px 36px rgba(0,0,0,0.95),
+    0 0 0 1px rgba(255,255,255,0.10),
+    0 0 18px rgba(255,255,255,0.08),
+    inset 0 1px 0 rgba(255,255,255,0.06);
+}
+
+.app-gallery-dots span.active{
+  box-shadow: 0 0 10px rgba(255,255,255,0.55);
+}
+
+.btn-primary{
+  box-shadow:
+    0 8px 18px rgba(10,132,255,0.35),
+    inset 0 1px 0 rgba(255,255,255,0.25);
+}
+
+.line-btn{
+  box-shadow:
+    0 6px 14px rgba(10,132,255,0.25),
+    inset 0 1px 0 rgba(255,255,255,0.18);
+}
+
+.recommend-item img{
+  box-shadow:
+    0 8px 18px rgba(0,0,0,0.8),
+    0 0 0 1px rgba(255,255,255,0.06),
+    inset 0 1px 0 rgba(255,255,255,0.04);
+}
 </style>
 </head>
 <body>
