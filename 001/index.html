@@ -1081,7 +1081,7 @@
 
               io.unobserve(card);
             });
-          }, { root: track, threshold: 0.01, rootMargin: "200px 0px" })
+          }, { root: track, threshold: 0.2 })
         : null;
 
       cards.forEach((card) => {
@@ -1140,31 +1140,13 @@
       }
 
       function ensureVideoSrc(video) {
-        if (!video) return;
         if (!video.src) {
           const dataSrc = video.getAttribute('data-src');
           if (dataSrc) {
             video.src = dataSrc;
+            video.load();
           }
         }
-        // 一旦有 src 就改成 auto 讓瀏覽器快取下一段
-        video.preload = 'auto';
-        try { video.load(); } catch(e){}
-      }
-
-      // 預載鄰近卡片，滑到時幾乎秒開
-      function prewarmNeighbors(index) {
-        const neigh = [index-2, index-1, index+1, index+2];
-        neigh.forEach(i=>{
-          if (i<0 || i>=medias.length) return;
-          const m = medias[i];
-          if (m && m.tagName === 'VIDEO') {
-            ensureVideoSrc(m);
-          } else if (m && m.tagName === 'IMG' && !m.src) {
-            const ds = m.getAttribute('data-src');
-            if (ds) m.src = ds;
-          }
-        });
       }
 
       function playActiveMedia(index) {
@@ -1174,9 +1156,6 @@
 
         const media = medias[index];
         if (!media) return;
-
-        // 先預載前後幾張
-        prewarmNeighbors(index);
 
         if (media.tagName === 'VIDEO') {
           ensureVideoSrc(media);
@@ -1227,9 +1206,6 @@
 
       startAuto();
       playActiveMedia(0);
-    setTimeout(()=>prewarmNeighbors(0), 400);
-      // 進頁先預載前兩張
-      setTimeout(()=>prewarmNeighbors(0), 400);
 
       let scrollTimeout = null;
       track.addEventListener('scroll', () => {
@@ -1448,7 +1424,7 @@
 
             io.unobserve(card);
           });
-        }, { root: track, threshold: 0.01, rootMargin: "200px 0px" })
+        }, { root: track, threshold: 0.2 })
       : null;
 
     cards.forEach((card) => {
@@ -1506,29 +1482,13 @@
     }
 
     function ensureVideoSrc(video) {
-      if (!video) return;
       if (!video.src) {
         const dataSrc = video.getAttribute('data-src');
         if (dataSrc) {
           video.src = dataSrc;
+          video.load();
         }
       }
-      video.preload = 'auto';
-      try { video.load(); } catch(e){}
-    }
-
-    function prewarmNeighbors(index) {
-      const neigh = [index-2, index-1, index+1, index+2];
-      neigh.forEach(i=>{
-        if (i<0 || i>=medias.length) return;
-        const m = medias[i];
-        if (m && m.tagName === 'VIDEO') {
-          ensureVideoSrc(m);
-        } else if (m && m.tagName === 'IMG' && !m.src) {
-          const ds = m.getAttribute('data-src');
-          if (ds) m.src = ds;
-        }
-      });
     }
 
     function playActiveMedia(index) {
@@ -1536,9 +1496,6 @@
       pauseAllVideos(true);
       const media = medias[index];
       if (!media) return;
-
-      prewarmNeighbors(index);
-
       if (media.tagName === 'VIDEO') {
         ensureVideoSrc(media);
         media.muted = true;
