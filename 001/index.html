@@ -1454,7 +1454,7 @@ function ensureVideoSrc(video) {
         thumbs.forEach((t, idx) => t.classList.toggle('active', idx === i));
         const activeThumb = thumbs[i];
         if (activeThumb) {
-          activeThumb.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+          activeThumb
         }
       }
 
@@ -1780,7 +1780,7 @@ function ensureVideoSrc(video) {
       thumbs.forEach((t, idx) => t.classList.toggle('active', idx === i));
       const activeThumb = thumbs[i];
       if (activeThumb) {
-        activeThumb.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+        activeThumb
       }
     }
 
