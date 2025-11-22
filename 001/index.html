@@ -18,11 +18,13 @@
     }
 
     body {
-  background: #050508;
-  color: #ffffff;
-  min-height: 100vh;
-  padding: 16px;
-}
+      background: #050508;
+      color: #ffffff;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      padding: 16px;
+    }
 
     .page {
       width: 100%;
@@ -31,18 +33,12 @@
     }
 
     .card {
-      background: rgba(20, 20, 28, 0.68);
-      backdrop-filter: blur(18px) saturate(140%);
-      -webkit-backdrop-filter: blur(18px) saturate(140%);
+      background: #101018;
       border-radius: 22px;
       padding: 18px 16px 20px;
-      box-shadow:
-        0 16px 36px rgba(0,0,0,0.8),
-        0 0 0 1px rgba(255,255,255,0.10) inset,
-        0 0 24px rgba(80,160,255,0.12);
-      border: 1px solid rgba(255,255,255,0.10);
-
-      overflow: visible;}
+      box-shadow: 0 16px 36px rgba(0,0,0,0.75);
+      border: 1px solid rgba(255,255,255,0.06);
+    }
 
     .top-row {
       display: flex;
@@ -204,16 +200,11 @@
     }
 
     .rating-block {
-      background: rgba(24,24,33,0.72);
-      backdrop-filter: blur(14px) saturate(135%);
-      -webkit-backdrop-filter: blur(14px) saturate(135%);
+      background: #181821;
       border-radius: 16px;
       padding: 12px;
-      border: 1px solid rgba(255,255,255,0.10);
-      box-shadow:
-        0 8px 20px rgba(0,0,0,0.6),
-        0 0 0 1px rgba(255,255,255,0.08) inset;
-}
+      border: 1px solid rgba(255,255,255,0.06);
+    }
 
     .rating-header {
       display: flex;
@@ -259,17 +250,12 @@
     }
 
     .info-list {
-      background: rgba(24,24,33,0.72);
-      backdrop-filter: blur(14px) saturate(135%);
-      -webkit-backdrop-filter: blur(14px) saturate(135%);
+      background: #181821;
       border-radius: 16px;
-      border: 1px solid rgba(255,255,255,0.10);
+      border: 1px solid rgba(255,255,255,0.06);
       padding: 10px 12px;
       font-size: 12px;
-      box-shadow:
-        0 8px 20px rgba(0,0,0,0.6),
-        0 0 0 1px rgba(255,255,255,0.08) inset;
-}
+    }
     .info-row {
       display: flex;
       justify-content: space-between;
@@ -294,23 +280,9 @@
       padding: 2px 0 6px;
     }
 
-    .app-gallery-viewport {
-      position: relative;
-      width: 100%;
-      overflow-x: hidden;
-      overflow-y: visible;
-      padding: 12px 0 4px;
-    }
+    .app-gallery-viewport { position: relative; width: 100%; overflow-x: visible; overflow-y: visible; padding: 12px 0 4px; }
 
-    .app-gallery-track {
-      display: flex;
-      gap: 14px;
-      overflow-x: auto;
-      scroll-behavior: smooth;
-      padding: 12px 2px 12px;  /* 多一點上緣，避免 active 放大被切 */
-      perspective: 1000px;
-      scrollbar-width: none;
-    }
+    .app-gallery-track { display:flex; gap:14px; overflow-x:auto; scroll-behavior:smooth; padding:12px 16px 12px; scroll-padding-left:16px; scroll-padding-right:16px; perspective:1000px; scrollbar-width:none; }
     .app-gallery-track::-webkit-scrollbar { display: none; }
 
     /* ✅ A 大型 1:1 卡片 */
@@ -399,9 +371,7 @@
       z-index: 999;
       touch-action: pan-y;
       padding-bottom: 96px;
-    
-      transform: none !important;
-      -webkit-transform: none !important;}
+    }
     .app-gallery-preview-inner {
       position: relative;
       width: 100%;
@@ -756,7 +726,15 @@
             <div class="app-gallery-dots" id="appGalleryDots"></div>
 
 <!-- 全螢幕預覽（有聲 autoplay + controls） -->
-<!-- preview1 moved to body end -->
+<div class="app-gallery-preview" id="appGalleryPreview">
+  <div class="app-gallery-preview-inner">
+    <button class="preview-close" id="previewClose" aria-label="關閉">✕</button>
+    <div id="appGalleryPreviewMedia"></div>
+  </div>
+</div>
+
+<!-- 縮圖列（JS 自動塞影片縮圖） -->
+<div class="preview-thumbs" id="previewThumbs" style="display:none;"></div>
           </div>
         </div>
 
@@ -890,7 +868,14 @@
 
       
 
-        <!-- preview2 moved to body end -->
+        <div class="app-gallery-preview" id="appGalleryPreview2">
+          <div class="app-gallery-preview-inner">
+            <button class="preview-close" id="previewClose2" aria-label="關閉">✕</button>
+            <div id="appGalleryPreviewMedia2"></div>
+          </div>
+        </div>
+
+        <div class="preview-thumbs" id="previewThumbs2" style="display:none;"></div>
       </div>
 
 
@@ -1725,29 +1710,5 @@ function ensureVideoSrc(video) {
     });
   })();
 </script>
-
-
-<!-- ===== Previews (moved to body end to avoid glass ancestor issues) ===== -->
-<div class="app-gallery-preview" id="appGalleryPreview">
-  <div class="app-gallery-preview-inner">
-    <button class="preview-close" id="previewClose" aria-label="關閉">✕</button>
-    <div id="appGalleryPreviewMedia"></div>
-  </div>
-</div>
-
-<!-- 縮圖列（JS 自動塞影片縮圖） -->
-<div class="preview-thumbs" id="previewThumbs" style="display:none;"></div>
-
-<!-- preview moved to bottom -->
-
-<div class="app-gallery-preview" id="appGalleryPreview2">
-          <div class="app-gallery-preview-inner">
-            <button class="preview-close" id="previewClose2" aria-label="關閉">✕</button>
-            <div id="appGalleryPreviewMedia2"></div>
-          </div>
-        </div>
-
-        <div class="preview-thumbs" id="previewThumbs2" style="display:none;"></div>
-
 </body>
 </html>
