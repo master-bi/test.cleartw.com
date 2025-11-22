@@ -1,0 +1,1906 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>大老爺 - 安裝頁面</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon.png">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text",
+                   "Segoe UI", system-ui, sans-serif;
+    }
+
+    body {
+      background: #050508;
+      color: #ffffff;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      padding: 16px;
+    }
+
+    .page {
+      width: 100%;
+      max-width: 480px;
+      margin: auto;
+    }
+
+    .card {
+      background: #101018;
+      border-radius: 22px;
+      padding: 18px 16px 20px;
+      box-shadow: 0 16px 36px rgba(0,0,0,0.75);
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .top-row {
+      display: flex;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .icon {
+      width: 120px;
+      height: 120px;
+      border-radius: 16px;
+      overflow: hidden;
+      margin-right: 14px;
+      flex-shrink: 0;
+      background: #000000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 30px;
+      color: #1a1204;
+    }
+    .icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .app-main-info { flex: 1; }
+    .app-title {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .app-subtitle {
+      font-size: 12px;
+      color: #a8afbd;
+    }
+
+    .btn-row { margin-top: 10px; }
+    .btn {
+      width: 100%;
+      border-radius: 999px;
+      border: none;
+      padding: 10px 0;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .btn-primary {
+      background: #0a84ff;
+      color: #ffffff;
+    }
+
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      margin: 18px 0 16px;
+      text-align: center;
+      font-size: 11px;
+      color: #cfd3dd;
+    }
+    .stats-item-title {
+      font-size: 10px;
+      color: #8a92a2;
+      margin-bottom: 4px;
+    }
+    .big-score {
+      font-size: 20px;
+      font-weight: 600;
+    }
+
+    /* ===== App Store 風格統計列（對齊 iOS App Store） ===== */
+.stats-row{
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  margin: 14px 0 12px;
+  padding: 12px 0;
+  text-align: center;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.stats-col{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 2px 6px;
+}
+/* 豎線（只在中段，像 App Store） */
+.stats-col:not(:last-child)::after{
+  content:"";
+  position:absolute;
+  right:0;
+  top:50%;
+  transform: translateY(-50%);
+  height: 60%;
+  width:1px;
+  background: rgba(255,255,255,0.12);
+}
+
+.stats-top{
+  font-size: 11px;
+  font-weight: 500;
+  color:#9aa0b3;
+  line-height: 1;
+  margin-bottom: 2px;
+  white-space: nowrap;
+}
+
+.stats-big{
+  font-size: 26px;
+  font-weight: 700;
+  color:#eef1f8;
+  line-height: 1;
+  letter-spacing: 0.2px;
+  margin-top: 2px;
+}
+
+.stats-bottom{
+  font-size: 11px;
+  font-weight: 500;
+  color:#aeb4c2;
+  line-height: 1;
+  white-space: nowrap;
+  margin-top: 2px;
+}
+.stats-bottom.stars{
+  letter-spacing: 1.3px;
+  font-size: 12px;
+}
+
+@media (max-width:480px){
+  .stats-row{ padding: 10px 0; }
+  .stats-big{ font-size: 24px; }
+  .stats-top,.stats-bottom{ font-size: 10px; }
+  .stats-col:not(:last-child)::after{ height: 58%; }
+}
+
+.star-line {
+      height: 6px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #ffcc48 0, #ffcc48 70%, #2b2f3a 70%);
+      margin: 6px 0;
+    }
+
+    .section { margin-bottom: 18px; }
+    .section-title {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+    .intro-text {
+      font-size: 13px;
+      color: #d5dae6;
+      line-height: 1.5;
+    }
+
+    .rating-block {
+      background: #181821;
+      border-radius: 16px;
+      padding: 12px;
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .rating-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .rating-left {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .rating-small-star {
+      color: #ffcc48;
+      letter-spacing: 1px;
+      font-size: 12px;
+    }
+    .rating-total {
+      font-size: 11px;
+      color: #8f96a5;
+    }
+
+    .review-card {
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .review-title-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 4px;
+      font-size: 12px;
+    }
+
+    .review-name { font-size: 11px; color: #c2c9d6; }
+    .review-text {
+      font-size: 11px;
+      color: #d5dae6;
+      line-height: 1.5;
+    }
+
+    .info-list {
+      background: #181821;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.06);
+      padding: 10px 12px;
+      font-size: 12px;
+    }
+    .info-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 6px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .info-row:last-child { border-bottom: none; }
+    .info-label { color: #9aa0b3; }
+    .info-value { color: #e1e5f2; }
+
+    .disclaimer {
+      font-size: 11px;
+      color: #8b93a3;
+      margin-top: 8px;
+      line-height: 1.5;
+    }
+
+    /* ===== 活動輪播（主輪播） ===== */
+    .app-gallery {
+      width: 100%;
+      margin: 6px 0;
+      padding: 2px 0 6px;
+    }
+
+    .app-gallery-viewport {
+      position: relative;
+      width: 100%;
+      overflow-x: hidden;
+      overflow-y: visible;
+      padding: 12px 0 4px;
+    }
+
+    .app-gallery-track {
+      display: flex;
+      gap: 14px;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      padding: 12px 2px 12px;  /* 多一點上緣，避免 active 放大被切 */
+      perspective: 1000px;
+      scrollbar-width: none;
+    }
+    .app-gallery-track::-webkit-scrollbar { display: none; }
+
+    /* ✅ A 大型 1:1 卡片 */
+    .app-gallery-card {
+      position: relative;
+      width: 270px;          /* A 尺寸 */
+      max-width: 68vw;       /* 手機自適應 */
+      aspect-ratio: 1 / 1;   /* ✅ 強制正方形 */
+      border-radius: 20px;
+      overflow: hidden;
+      flex-shrink: 0;
+      background: #050508;
+      transform: translateY(0) scale(0.97) rotateY(-3deg);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.8);
+      transition: transform 0.4s ease, box-shadow 0.4s ease, background 0.3s ease, opacity 0.3s ease;
+      opacity: 0.85;
+    }
+    .app-gallery-card.active {
+      transform: translateY(-3px) scale(1.04) rotateY(0deg);
+      box-shadow: 0 14px 30px rgba(0,0,0,0.95);
+      background: #0b0b10;
+      opacity: 1;
+    }
+
+    /* ✅ 主輪播媒體在方形內滿版置中裁切 */
+    .gallery-media {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;         /* ✅ 滿版裁切 */
+      object-position: center;   /* ✅ 正中間 */
+      border-radius: 20px;
+      opacity: 0;
+      transition: opacity 0.35s ease;
+      cursor: zoom-in;
+      background: #000;
+    }
+
+    .app-gallery-loader {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: radial-gradient(circle at 20% 20%, rgba(255,255,255,0.06), transparent 55%);
+    }
+    .app-gallery-loader::after {
+      content: "";
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      border: 2px solid rgba(255,255,255,0.1);
+      border-top-color: rgba(255,255,255,0.7);
+      animation: appGallerySpin 0.8s linear infinite;
+    }
+    @keyframes appGallerySpin { to { transform: rotate(360deg); } }
+
+    .app-gallery-card.loaded .gallery-media { opacity: 1; }
+    .app-gallery-card.loaded .app-gallery-loader {
+      opacity: 0; pointer-events: none; transition: opacity 0.25s ease;
+    }
+
+    .app-gallery-arrow { display: none !important; }
+
+    .app-gallery-dots {
+      text-align: center;
+      margin-top: 4px;
+    }
+    .app-gallery-dots span {
+      display: inline-block;
+      width: 8px; height: 8px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.18);
+      margin: 0 3px;
+      transition: all 0.25s ease;
+    }
+    .app-gallery-dots span.active { width: 18px; background: #ffffff; }
+
+    /* ===== 全螢幕預覽（顯示完整比例） ===== */
+    .app-gallery-preview {
+      position: fixed;
+      inset: 0;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      background: rgba(0,0,0,0.96);
+      z-index: 999;
+      touch-action: pan-y;
+      padding-bottom: 96px;
+    }
+    .app-gallery-preview-inner {
+      position: relative;
+      width: 100%;
+      max-width: 100vw;
+      max-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    #appGalleryPreviewMedia {
+      width: 92vw;
+      max-width: 520px;
+      max-height: calc(90vh - 120px);
+      border-radius: 18px;
+      box-shadow: 0 18px 40px rgba(0,0,0,1);
+      background: #000;
+    }
+    #appGalleryPreviewMedia video,
+    #appGalleryPreviewMedia img {
+      width: 100%;
+      height: auto;
+      max-height: calc(90vh - 120px);
+      border-radius: 18px;
+      display: block;
+    }
+
+    .preview-arrow { display: none !important; }
+
+    .preview-close {
+      position: fixed;
+      top: 8px;
+      right: 8px;
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      border: none;
+      font-size: 22px;
+      cursor: pointer;
+      background: rgba(255,255,255,0.12);
+      color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.9);
+      z-index: 1002;
+    }
+
+    .preview-thumbs {
+      position: fixed;
+      left: 0; right: 0; bottom: 0;
+      height: 92px;
+      padding: 14px 10px 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      overflow-x: auto;
+      overflow-y: visible;
+      background: linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,0.9));
+      backdrop-filter: blur(6px);
+      z-index: 1000;
+      scrollbar-width: none;
+    }
+    .preview-thumbs::-webkit-scrollbar { display: none; }
+
+    .preview-thumb {
+      width: 56px;
+      height: 56px;
+      border-radius: 10px;
+      overflow: hidden;
+      flex-shrink: 0;
+      opacity: 0.6;
+      transform: scale(0.96);
+      transition: opacity 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+      border: 1px solid rgba(255,255,255,0.08);
+      cursor: pointer;
+      background: #0b0b10;
+      margin-top: 2px;
+      position: relative;
+    }
+    .preview-thumb video,
+    .preview-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      border-radius: 10px;
+      background: #000;
+    }
+    .preview-thumb.active {
+      opacity: 1;
+      transform: scale(1.06);
+      box-shadow: 0 0 0 2px rgba(255,255,255,0.9);
+      border-color: transparent;
+    }
+
+    @media (max-width: 480px) {
+      .app-gallery-card {
+        width: 252px;   /* 手機略縮但仍是 A 大感 */
+        max-width: 82vw;
+      }
+      .preview-thumbs {
+        height: 84px;
+        padding-top: 12px;
+      }
+      .preview-thumb { width: 50px; height: 50px; }
+      .preview-close { top: 6px; right: 6px; }
+    }
+  
+.stats-col:last-child{
+  border-right:none;
+}
+
+
+
+/* ===== 免費安裝按鈕 loading（轉圈 + 2 秒後跳轉） ===== */
+.btn-primary.loading {
+  position: relative;
+  color: transparent !important; /* 隱藏原文字 */
+  pointer-events: none;
+  opacity: 0.95;
+}
+.btn-primary.loading::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 18px;
+  height: 18px;
+  margin: -9px 0 0 -9px;
+  border: 2px solid rgba(255,255,255,0.35);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: installSpin 0.8s linear infinite;
+}
+@keyframes installSpin { to { transform: rotate(360deg); } }
+
+    .intro-toggle {
+      margin-top: 6px;
+      font-size: 13px;
+      color: #0a84ff;
+      cursor: pointer;
+      user-select: none;
+    }
+
+
+
+
+
+/* ===== 簡介展開/收合（B 版：保留段落與 1.2.3.） ===== */
+.intro-paragraphs p{
+  margin: 0 0 8px;
+}
+.intro-paragraphs p:last-child{
+  margin-bottom: 0;
+}
+#introBox.intro-collapsed #introText {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.intro-toggle {
+  margin-top: 6px;
+  font-size: 13px;
+  color: #0a84ff;
+  cursor: pointer;
+  user-select: none;
+}
+
+
+/* LINE 按鈕 */
+.line-btn{
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: rgba(10,132,255,0.16);
+  color: #0a84ff;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 13px;
+  border: 1px solid rgba(10,132,255,0.35);
+  vertical-align: middle;
+}
+.line-btn:active{
+  transform: translateY(1px);
+}
+
+
+
+
+
+
+
+/* 預覽維持原始比例（不壓扁） */
+/* 精選標題上方多留白，避免黏到查看更多 */
+.section.featured-section{ margin-top: 14px; }
+.section.featured-section .section-title{ margin-top: 0; }
+
+
+/* ===== 第二輪播（精選 / 直版 9:16 / 滿版裁切 A 版）===== */
+.app-gallery-card.second{
+  width: 260px;
+  max-width: 64vw;
+  aspect-ratio: 9 / 16;   /* ✅ 直版 9:16 */
+  border-radius: 18px;
+  overflow: hidden;
+  background: #050508;
+}
+.gallery-media.second{
+  width:100%;
+  height:100%;
+  object-fit: cover;      /* ✅ 滿版裁切 */
+  object-position: center;
+  border-radius: 18px;
+  background:#000;
+}
+
+/* 預覽：不裁切避免變形 */
+#appGalleryPreviewMedia2{
+  width: 92vw;
+  max-width: 520px;
+  max-height: calc(90vh - 120px);
+  border-radius: 18px;
+  box-shadow: 0 18px 40px rgba(0,0,0,1);
+  background: #000;
+}
+#appGalleryPreviewMedia2 video,
+#appGalleryPreviewMedia2 img{
+  width: 100%;
+  height: auto;
+  max-height: calc(90vh - 120px);
+  object-fit: contain;
+  border-radius: 18px;
+  display:block;
+  background:#000;
+}
+
+/* 精選標題上方留白，避免黏到查看更多 */
+.section.featured-section{ margin-top: 14px; }
+
+
+/* ===== 推薦區（你可能也會喜歡）+ 查看按鈕 ===== */
+.recommend-section{ margin-top:20px; }
+.recommend-list{ display:flex; flex-direction:column; gap:12px; margin-top:12px; }
+.recommend-item{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  background:#111218;
+  border-radius:18px;
+  padding:12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.55);
+  border:1px solid rgba(255,255,255,0.06);
+}
+.recommend-left{ display:flex; align-items:center; gap:12px; }
+.recommend-icon{
+  width:64px; height:64px;
+  border-radius:16px;
+  object-fit:cover;
+  background:#000;
+  flex-shrink:0;
+}
+.recommend-title{ font-size:17px; font-weight:600; }
+.recommend-btn{ font-size:13px; padding:2px 10px; } /* 沿用 line-btn 風格，微調寬 */
+/* =========================
+   iOS 18 Strong Glass (C)
+   視覺升級：不動輪播/參數
+========================= */
+
+/* 背景更像 iOS 深色漸層 */
+body{
+  background:
+    radial-gradient(1200px 700px at 8% -12%, rgba(98,148,255,0.16), transparent 60%),
+    radial-gradient(900px 600px at 112% 6%, rgba(255,205,120,0.12), transparent 55%),
+    radial-gradient(700px 500px at 50% 110%, rgba(140,90,255,0.10), transparent 60%),
+    #050508;
+}
+
+/* 主卡片：強玻璃 + 高模糊 */
+.card{
+  position: relative;
+  background: rgba(14, 16, 22, 0.58);
+  border: 1px solid rgba(255,255,255,0.14);
+  box-shadow:
+    0 20px 48px rgba(0,0,0,0.78),
+    inset 0 1px 0 rgba(255,255,255,0.08);
+  backdrop-filter: blur(28px) saturate(175%);
+  -webkit-backdrop-filter: blur(28px) saturate(175%);
+}
+
+/* 卡片光暈層（iOS 玻璃高光） */
+.card::before{
+  content:"";
+  position:absolute; inset:0;
+  border-radius: inherit;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.02) 38%, rgba(255,255,255,0.00)),
+    radial-gradient(600px 220px at 12% 0%, rgba(255,255,255,0.10), transparent 60%);
+  pointer-events:none;
+  mix-blend-mode: screen;
+}
+
+/* 小區塊：評分/資訊/推薦 玻璃 */
+.rating-block,
+.info-list{
+  position: relative;
+  background: rgba(20, 22, 30, 0.55);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 18px;
+  box-shadow:
+    0 12px 28px rgba(0,0,0,0.60),
+    inset 0 1px 0 rgba(255,255,255,0.07);
+  backdrop-filter: blur(22px) saturate(165%);
+  -webkit-backdrop-filter: blur(22px) saturate(165%);
+}
+
+.rating-block::before,
+.info-list::before{
+  content:"";
+  position:absolute; inset:0;
+  border-radius: inherit;
+  background: linear-gradient(180deg, rgba(255,255,255,0.07), transparent 45%);
+  pointer-events:none;
+}
+
+/* 統計列更像 iOS */
+.stats-row{
+  background: rgba(18, 20, 28, 0.50);
+  border-top: 1px solid rgba(255,255,255,0.12);
+  border-bottom: 1px solid rgba(255,255,255,0.12);
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+}
+.stats-col:not(:last-child)::after{
+  background: rgba(255,255,255,0.18);
+}
+
+/* 活動/精選卡片玻璃框 + 漂浮感 */
+.app-gallery-card,
+.app-gallery-card.second{
+  background: rgba(8, 9, 12, 0.72);
+  border: 1px solid rgba(255,255,255,0.10);
+  box-shadow:
+    0 10px 26px rgba(0,0,0,0.90),
+    inset 0 1px 0 rgba(255,255,255,0.06);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+.app-gallery-card.active,
+.app-gallery-card.second.active{
+  background: rgba(18, 19, 26, 0.90);
+  border-color: rgba(255,255,255,0.16);
+}
+
+/* section 標題 spacing 更 iOS */
+.section-title{
+  letter-spacing: 0.2px;
+}
+.section.featured-section{
+  margin-top: 16px;
+}
+
+/* 按鈕：iOS 藍強高光 */
+.btn-primary{
+  box-shadow:
+    0 10px 22px rgba(10,132,255,0.40),
+    inset 0 1px 0 rgba(255,255,255,0.30);
+}
+
+/* LINE / 查看 pill：更像 iOS tag */
+.line-btn{
+  background: rgba(10,132,255,0.20);
+  border: 1px solid rgba(10,132,255,0.55);
+  box-shadow:
+    0 2px 8px rgba(10,132,255,0.25),
+    inset 0 1px 0 rgba(255,255,255,0.30);
+}
+
+/* 推薦區卡片（你可能也會喜歡）變玻璃 */
+.recommend-section .recommend-item{
+  background: rgba(20, 22, 30, 0.52);
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: 16px;
+  padding: 10px 10px;
+  box-shadow:
+    0 8px 20px rgba(0,0,0,0.65),
+    inset 0 1px 0 rgba(255,255,255,0.06);
+  backdrop-filter: blur(18px) saturate(165%);
+  -webkit-backdrop-filter: blur(18px) saturate(165%);
+}
+
+/* fallback：不支援 blur 時 */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))){
+  .card,.rating-block,.info-list,.stats-row,.recommend-section .recommend-item{
+    background: #12131b;
+  }
+}
+
+
+/* ===== iOS 文字 spacing 微調（不改任何參數/功能） ===== */
+.app-title{
+  letter-spacing: 0.2px;
+  line-height: 1.25;
+  margin-bottom: 6px;
+}
+.app-subtitle{
+  letter-spacing: 0.1px;
+  line-height: 1.35;
+  margin-top: 2px;
+}
+.section-title{
+  font-size: 16px;
+  letter-spacing: 0.2px;
+  line-height: 1.3;
+  margin-bottom: 8px;
+}
+.intro-text{
+  line-height: 1.6;
+  letter-spacing: 0.1px;
+  word-break: break-word;
+}
+.review-title-row{
+  line-height: 1.35;
+  letter-spacing: 0.1px;
+}
+.review-name{
+  letter-spacing: 0.1px;
+}
+.review-text{
+  line-height: 1.6;
+  letter-spacing: 0.1px;
+}
+.rating-total{
+  letter-spacing: 0.1px;
+}
+.stats-top, .stats-bottom{
+  letter-spacing: 0.12px;
+}
+.section.featured-section{
+  margin-top: 18px;
+}
+
+</style>
+</head>
+<body>
+  <div class="page">
+    <div class="card">
+      <!-- 上半部：icon + 名稱 + 按鈕 -->
+      <div class="top-row">
+        <div class="icon">
+          <img src="icons/icon.png" alt="App Icon">
+        </div>
+        <div class="app-main-info">
+          <div class="app-title">大老爺</div>
+          <div class="app-subtitle">高品質遊戲體驗，立即安裝</div>
+          <div class="btn-row">
+            <button class="btn btn-primary" id="install-btn">免費安裝</button>
+          </div>
+        </div>
+      </div>
+
+<!-- 中間統計數據（App Store 風格） -->
+<div class="stats-row" id="statsRow">
+  <div class="stats-col">
+    <div class="stats-top" data-key="ratingsCountTop">10088個評分</div>
+    <div class="stats-big" data-key="ratingValue">4.9</div>
+    <div class="stats-bottom stars" data-key="starsText">★★★★★</div>
+  </div>
+
+  <div class="stats-col">
+    <div class="stats-top">年齡</div>
+    <div class="stats-big" data-key="ageValue">18+</div>
+    <div class="stats-bottom">歲</div>
+  </div>
+
+  <div class="stats-col">
+    <div class="stats-top">排行榜</div>
+    <div class="stats-big" data-key="rankValue">#1</div>
+    <div class="stats-bottom">應用</div>
+  </div>
+
+  <div class="stats-col">
+    <div class="stats-top">大小</div>
+    <div class="stats-big" data-key="sizeValue">1.20</div>
+    <div class="stats-bottom" data-key="sizeUnit">MB</div>
+  </div>
+</div>
+
+<div class="section">
+        <div class="section-title">活動</div>
+
+        <div class="app-gallery">
+          <div class="app-gallery-viewport">
+            <div class="app-gallery-track" id="appGalleryTrack">
+              <div class="app-gallery-card active">
+                <div class="app-gallery-loader"></div>
+                <video class="gallery-media" data-src="/video/101.mp4" preload="metadata" muted playsinline></video>
+              </div>
+              <div class="app-gallery-card">
+                <div class="app-gallery-loader"></div>
+                <video class="gallery-media" data-src="/video/102.mp4" preload="none" muted playsinline></video>
+              </div>
+              <div class="app-gallery-card">
+                <div class="app-gallery-loader"></div>
+                <video class="gallery-media" data-src="/video/103.mp4" preload="none" muted playsinline></video>
+              </div>
+              <div class="app-gallery-card">
+                <div class="app-gallery-loader"></div>
+                <video class="gallery-media" data-src="/video/104.mp4" preload="none" muted playsinline></video>
+              </div>
+              <div class="app-gallery-card">
+                <div class="app-gallery-loader"></div>
+                <video class="gallery-media" data-src="/video/105.mp4" preload="none" muted playsinline></video>
+              </div>
+              <div class="app-gallery-card">
+                <div class="app-gallery-loader"></div>
+                <video class="gallery-media" data-src="/video/106.mp4" preload="none" muted playsinline></video>
+              </div>
+              <div class="app-gallery-card">
+                <div class="app-gallery-loader"></div>
+                <video class="gallery-media" data-src="/video/107.mp4" preload="none" muted playsinline></video>
+              </div>
+              <div class="app-gallery-card">
+                <div class="app-gallery-loader"></div>
+                <video class="gallery-media" data-src="/video/108.mp4" preload="none" muted playsinline></video>
+              </div>
+            </div>
+
+            <div class="app-gallery-dots" id="appGalleryDots"></div>
+
+<!-- 全螢幕預覽（有聲 autoplay + controls） -->
+<div class="app-gallery-preview" id="appGalleryPreview">
+  <div class="app-gallery-preview-inner">
+    <button class="preview-close" id="previewClose" aria-label="關閉">✕</button>
+    <div id="appGalleryPreviewMedia"></div>
+  </div>
+</div>
+
+<!-- 縮圖列（JS 自動塞影片縮圖） -->
+<div class="preview-thumbs" id="previewThumbs" style="display:none;"></div>
+          </div>
+        </div>
+
+<!-- 簡介 -->
+      <div class="section">
+        <div class="section-title">簡介</div>
+
+        <div id="introBox" class="intro-collapsed">
+          <div id="introText" class="intro-text intro-paragraphs">
+            <p>1. 大老爺遊戲平台經營亞太區線上遊戲平台領域多年,擁有堅強的自主研發團隊、客戶服務團隊,提供全面可靠信任的網路遊戲平台</p>
+<p>2. 所開發出來的遊戲軟體都是經由著名的全美權威系統技術測試(TST)嚴格考核認可,確保系統隨機產生的資料百分百精確無誤。並通過國際遊戲平台實驗室(GLI)系統平台測試,確保遊戲的公信力。</p>
+<p>3. 我們移轉線下遊戲的真人百家、棋牌及老虎機等之外,更多了體育電競賽事、彩票等更豐富多樣的遊戲,如臨現場實境。</p>
+<p>4. 我們的電子遊戲使用最公平的亂數產生機率,讓玩家安心享受多元的娛樂性遊戲。提供最熱誠的服務,最即時、最具臨場刺激的遊戲氣氛。</p>
+<p>5. 並以服務至上的精神,全年無休,24小時處理解決玩家對於網站、遊戲的種種疑難雜症,讓每位玩家有賓至如歸,親臨現場的至上的尊榮感。感謝會員支持,我們將不定時舉辦優惠與促銷活動,給玩家提供更多的回饋與驚喜。</p>
+<p>取得聯繫LINE : <a class="line-btn" href="https://lin.ee/tVAQF3P" target="_blank" rel="noopener">@ofa1688</a></p>
+          </div>
+        
+        <div id="introToggle" class="intro-toggle">...查看更多</div>
+      </div>
+
+<!-- 第二輪播（精選 / 直版 6:19） -->
+      <div class="section featured-section">
+        <div class="section-title">精選</div>
+
+        <div class="app-gallery">
+          <div class="app-gallery-viewport second">
+            <div class="app-gallery-track second" id="appGalleryTrack2">
+
+              <div class="app-gallery-card second">
+                <div class="app-gallery-loader"></div>
+                <video class="gallery-media second" data-src="/video/201.mp4" preload="metadata" muted playsinline></video>
+              </div>
+
+              <div class="app-gallery-card second">
+                <div class="app-gallery-loader"></div>
+                <video class="gallery-media second" data-src="/video/202.mp4" preload="none" muted playsinline></video>
+              </div>
+
+              <div class="app-gallery-card second">
+                <div class="app-gallery-loader"></div>
+                <video class="gallery-media second" data-src="/video/203.mp4" preload="none" muted playsinline></video>
+              </div>
+
+              <div class="app-gallery-card second">
+                <div class="app-gallery-loader"></div>
+                <video class="gallery-media second" data-src="/video/204.mp4" preload="none" muted playsinline></video>
+              </div>
+
+              <div class="app-gallery-card second">
+                <div class="app-gallery-loader"></div>
+                <video class="gallery-media second" data-src="/video/205.mp4" preload="none" muted playsinline></video>
+              </div>
+
+              <div class="app-gallery-card second">
+                <div class="app-gallery-loader"></div>
+                <video class="gallery-media second" data-src="/video/206.mp4" preload="none" muted playsinline></video>
+              </div>
+
+              <div class="app-gallery-card second">
+                <div class="app-gallery-loader"></div>
+                <video class="gallery-media second" data-src="/video/207.mp4" preload="none" muted playsinline></video>
+              </div>
+
+              <div class="app-gallery-card second">
+                <div class="app-gallery-loader"></div>
+                <video class="gallery-media second" data-src="/video/208.mp4" preload="none" muted playsinline></video>
+              </div>
+
+            </div>
+            <div class="app-gallery-dots second" id="appGalleryDots2"></div>
+          </div>
+        </div>
+
+        
+      </div>
+
+<!-- 評分及評論 -->
+<div class="section">
+  <div class="section-title">評分及評論</div>
+  <div class="rating-block">
+    <div class="rating-header">
+      <div class="rating-left">
+        <span class="big-score">4.9</span>
+        <span class="rating-small-star">★★★★★</span>
+        <span class="rating-total">滿分 5 分．10088 個評分</span>
+      </div>
+      <div style="flex:1; margin-left:12px;">
+        <div class="star-line"></div>
+      </div>
+    </div>
+
+    <div class="review-card">
+  <div class="review-title-row">
+    <span>超級好玩，畫面精緻又流暢！</span>
+    <span class="review-date" data-offset="1">--</span>
+  </div>
+  <div style="font-size:11px;color:#ffcc48;margin-bottom:4px;">★★★★★</div>
+  <div class="review-name">阿哲</div>
+  <div class="review-text" style="margin-top:4px;">
+    遊戲種類很多，百家、老虎機、體育都有，體驗真的像在現場一樣，出金也很快。
+  </div>
+</div>
+
+<div class="review-card">
+  <div class="review-title-row">
+    <span>客服回覆快，活動也常常更新</span>
+    <span class="review-date" data-offset="2">--</span>
+  </div>
+  <div style="font-size:11px;color:#ffcc48;margin-bottom:4px;">★★★★★</div>
+  <div class="review-name">小安</div>
+  <div class="review-text" style="margin-top:4px;">
+    我遇到問題馬上有人處理，介面好上手，推薦給想找穩定平台的朋友。
+  </div>
+</div>
+
+<div class="review-card">
+  <div class="review-title-row">
+    <span>Very good app, recommended!</span>
+    <span class="review-date" data-offset="3">--</span>
+  </div>
+  <div style="font-size:11px;color:#ffcc48;margin-bottom:4px;">★★★★★</div>
+  <div class="review-name">James Levine</div>
+  <div class="review-text" style="margin-top:4px;">
+    This app is really easy to use, the app is smooth and not stuck,
+    the picture is clear, the operation is simple and convenient.
+  </div>
+</div>
+  </div>
+</div>
+
+
+      
+
+        <div class="app-gallery-preview" id="appGalleryPreview2">
+          <div class="app-gallery-preview-inner">
+            <button class="preview-close" id="previewClose2" aria-label="關閉">✕</button>
+            <div id="appGalleryPreviewMedia2"></div>
+          </div>
+        </div>
+
+        <div class="preview-thumbs" id="previewThumbs2" style="display:none;"></div>
+      </div>
+
+
+
+    
+
+<div class="section">
+        <div class="section-title">信息</div>
+        <div class="info-list">
+          <div class="info-row">
+            <span class="info-label">供應商</span>
+            <span class="info-value">大老爺</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">安裝包大小</span>
+            <span class="info-value">2.87M</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">版本</span>
+            <span class="info-value">V2.0.12</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">兼容性</span>
+            <span class="info-value">iOS 9.0 或更高版本</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">語言</span>
+            <span class="info-value">繁體中文</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">年齡分級</span>
+            <span class="info-value">限 18 歲以上</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">價格</span>
+            <span class="info-value">免費</span>
+          </div>
+        </div>
+
+        
+<div class="recommend-section">
+  <div class="section-title">你可能也會喜歡</div>
+  <div class="recommend-list">
+    <div class="recommend-item">
+      <div class="recommend-left">
+        <img src="/recommend/001.png" class="recommend-icon" alt="雄厚遊戲城">
+        <div class="recommend-title">雄厚遊戲城</div>
+      </div>
+      <a class="line-btn recommend-btn" href="https://app918.cleartw.com" target="_blank" rel="noopener">查看</a>
+    </div>
+
+    <div class="recommend-item">
+      <div class="recommend-left">
+        <img src="/recommend/002.png" class="recommend-icon" alt="8方遊戲城">
+        <div class="recommend-title">8方遊戲城</div>
+      </div>
+      <a class="line-btn recommend-btn" href="https://app178.cleartw.com" target="_blank" rel="noopener">查看</a>
+    </div>
+
+    <div class="recommend-item">
+      <div class="recommend-left">
+        <img src="/recommend/003.png" class="recommend-icon" alt="OFA168遊戲城">
+        <div class="recommend-title">OFA168遊戲城</div>
+      </div>
+      <a class="line-btn recommend-btn" href="https://apphk.cleartw.com" target="_blank" rel="noopener">查看</a>
+    </div>
+  </div>
+</div>
+
+      </div>
+    </div>
+
+</div>
+  </div>
+
+      </div>
+    </div>
+
+</div>
+  </div>
+
+<script>
+  const INSTALL_URL = "/pwa/";  // ← 你要跳轉的網址
+
+  const btn = document.getElementById('install-btn');
+
+  btn.addEventListener('click', () => {
+    if (btn.classList.contains('loading')) return;
+
+    btn.classList.add('loading');
+    btn.textContent = "安裝中…";
+
+    setTimeout(() => {
+      window.location.href = INSTALL_URL;
+    }, 2000);
+  });
+</script>
+
+<script>
+  /* ===== Stats 可配置區（改這裡就會自動更新顯示） ===== */
+  const STATS_CONFIG = {
+    ratingsCount: 10088,
+    ratingValue: 4.9,        // 0~5
+    stars: 5,                // 0~5
+    ageValue: "18+",
+    rankValue: "#1",
+    sizeValue: 1.20,
+    sizeUnit: "MB"
+  };
+
+  (function renderStats(){
+    const fmtCount = (n)=> {
+      try { return Number(n).toLocaleString('zh-Hant'); } catch(e){ return n; }
+    };
+    const starsText = "★★★★★".slice(0, STATS_CONFIG.stars).padEnd(5, "☆");
+
+    document.querySelectorAll('[data-key="ratingsCountTop"]').forEach(el=>{
+      el.textContent = `${fmtCount(STATS_CONFIG.ratingsCount)}個評分`;
+    });
+    document.querySelectorAll('[data-key="ratingValue"]').forEach(el=>{
+      el.textContent = STATS_CONFIG.ratingValue;
+    });
+    document.querySelectorAll('[data-key="starsText"]').forEach(el=>{
+      el.textContent = starsText;
+    });
+    document.querySelectorAll('[data-key="ageValue"]').forEach(el=>{
+      el.textContent = STATS_CONFIG.ageValue;
+    });
+    document.querySelectorAll('[data-key="rankValue"]').forEach(el=>{
+      el.textContent = STATS_CONFIG.rankValue;
+    });
+    document.querySelectorAll('[data-key="sizeValue"]').forEach(el=>{
+      el.textContent = STATS_CONFIG.sizeValue;
+    });
+    document.querySelectorAll('[data-key="sizeUnit"]').forEach(el=>{
+      el.textContent = STATS_CONFIG.sizeUnit;
+    });
+  })();
+</script>
+
+<script>
+    (function () {
+      const track = document.getElementById('appGalleryTrack');
+      if (!track) return;
+
+      const cards = Array.from(track.querySelectorAll('.app-gallery-card'));
+      const medias = cards.map(c => c.querySelector('.gallery-media'));
+      const dotsBox = document.getElementById('appGalleryDots');
+
+      const preview = document.getElementById('appGalleryPreview');
+      const previewMediaBox = document.getElementById('appGalleryPreviewMedia');
+      const previewClose = document.getElementById('previewClose');
+      const previewThumbs = document.getElementById('previewThumbs');
+
+      let current = 0;
+      let autoTimer = null;
+      let isProgrammaticScroll = false;
+      let isPreviewOpen = false;
+
+      let previewIndex = 0;
+      let touchStartX = 0;
+      let touchEndX = 0;
+
+      // dots
+      cards.forEach((_, i) => {
+        const dot = document.createElement('span');
+        if (i === 0) dot.classList.add('active');
+        dot.addEventListener('click', () => goTo(i, true));
+        dotsBox.appendChild(dot);
+      });
+      const dots = Array.from(dotsBox.querySelectorAll('span'));
+
+      // lazy load (img + video)
+      const io = 'IntersectionObserver' in window
+        ? new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+              if (!entry.isIntersecting) return;
+              const card = entry.target;
+              const media = card.querySelector('img, video');
+              const dataSrc = media.getAttribute('data-src');
+              if (dataSrc && !media.src) media.src = dataSrc;
+
+              if (media.tagName === 'VIDEO') {
+                media.load();
+                media.addEventListener('loadedmetadata', () => {
+                  try { media.currentTime = 0.05; } catch(e){}
+                }, { once: true });
+              }
+
+              io.unobserve(card);
+            });
+          }, { root: track, threshold: 0.2 })
+        : null;
+
+      cards.forEach((card) => {
+        const media = card.querySelector('img, video');
+
+        if (io) io.observe(card);
+        else {
+          const dataSrc = media.getAttribute('data-src');
+          if (dataSrc && !media.src) media.src = dataSrc;
+          if (media.tagName === 'VIDEO') media.load();
+        }
+
+        const markLoaded = () => card.classList.add('loaded');
+        if (media.tagName === 'VIDEO') {
+          media.addEventListener('loadeddata', markLoaded);
+          media.addEventListener('error', markLoaded);
+        } else {
+          if (media.complete && media.naturalWidth !== 0) markLoaded();
+          else {
+            media.addEventListener('load', markLoaded);
+            media.addEventListener('error', markLoaded);
+          }
+        }
+
+        media.addEventListener('click', (e) => {
+          e.stopPropagation();
+          if (!media.src) return;
+          openPreview(cards.indexOf(card));
+        });
+      });
+
+      function updateActive(index) {
+        cards.forEach((c, i) => c.classList.toggle('active', i === index));
+        dots.forEach((d, i) => d.classList.toggle('active', i === index));
+      }
+
+      function scrollToCard(index) {
+        const card = cards[index];
+        if (!card) return;
+        const left = card.offsetLeft - track.offsetLeft - 10;
+        isProgrammaticScroll = true;
+        track.scrollTo({ left, behavior: 'smooth' });
+        setTimeout(() => { isProgrammaticScroll = false; }, 450);
+      }
+
+      // 主輪播只播當前影片（muted loop）
+      function pauseAllVideos(exceptIndex=null) {
+  medias.forEach((m, i) => {
+    if (m && m.tagName === 'VIDEO' && i !== exceptIndex) {
+      try { m.pause(); } catch(e){}
+      // 不重置時間，避免重解碼造成卡頓/發燙
+      m.muted = true;
+    }
+  });
+}
+
+function ensureVideoSrc(video) {
+  if (!video.src) {
+    const dataSrc = video.getAttribute('data-src');
+    if (dataSrc) {
+      video.src = dataSrc;
+      // 只 load 一次，避免反覆 load
+      try { video.load(); } catch(e){}
+    }
+  }
+}
+
+      function ensureVideoSrc(video) {
+        if (!video.src) {
+          const dataSrc = video.getAttribute('data-src');
+          if (dataSrc) {
+            video.src = dataSrc;
+            video.load();
+          }
+        }
+      }
+
+      function playActiveMedia(index) {
+  if (isPreviewOpen) return;
+
+  pauseAllVideos(index);
+
+  const media = medias[index];
+  if (!media) return;
+
+  if (media.tagName === 'VIDEO') {
+    ensureVideoSrc(media);
+
+    media.muted = true;
+    media.playsInline = true;
+    media.loop = true;
+
+    const tryPlay = () => {
+      const p = media.play();
+      if (p && typeof p.catch === 'function') p.catch(()=>{});
+    };
+
+    if (media.readyState >= 2) {
+      tryPlay();
+    } else {
+      media.addEventListener('canplay', tryPlay, { once: true });
+    }
+  }
+}
+
+      function goTo(index, fromUser) {
+        if (index < 0) index = cards.length - 1;
+        if (index >= cards.length) index = 0;
+        current = index;
+
+        updateActive(current);
+        scrollToCard(current);
+        playActiveMedia(current);
+
+        if (fromUser) restartAuto();
+      }
+
+      function startAuto() {
+        if (autoTimer) clearInterval(autoTimer);
+        autoTimer = setInterval(() => {
+          if (!isPreviewOpen) goTo(current + 1, false);
+        }, 4000);
+      }
+      function stopAuto() {
+        if (autoTimer) clearInterval(autoTimer);
+        autoTimer = null;
+      }
+      function restartAuto() {
+        stopAuto();
+        startAuto();
+      }
+
+      startAuto();
+      playActiveMedia(0);
+
+      let scrollTimeout = null;
+      track.addEventListener('scroll', () => {
+        if (isProgrammaticScroll || isPreviewOpen) return;
+        if (scrollTimeout) clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(() => {
+          let closestIndex = 0;
+          let closestDist = Infinity;
+          const trackLeft = track.scrollLeft;
+          cards.forEach((card, i) => {
+            const dist = Math.abs(card.offsetLeft - trackLeft);
+            if (dist < closestDist) {
+              closestDist = dist;
+              closestIndex = i;
+            }
+          });
+          current = closestIndex;
+          updateActive(current);
+          playActiveMedia(current);
+          restartAuto();
+        }, 120);
+      });
+
+      // Preview + Thumbs
+      function buildThumbs() {
+        previewThumbs.innerHTML = '';
+        medias.forEach((media, i) => {
+          const thumb = document.createElement('div');
+          thumb.className = 'preview-thumb' + (i === 0 ? ' active' : '');
+
+          if (media.tagName === 'VIDEO') {
+            const v = document.createElement('video');
+            v.src = media.src || media.getAttribute('data-src');
+            v.muted = true;
+            v.playsInline = true;
+            v.preload = "metadata";
+            v.addEventListener('loadedmetadata', () => {
+              try { v.currentTime = 0.05; } catch(e){}
+            }, { once: true });
+            thumb.appendChild(v);
+          } else {
+            const im = document.createElement('img');
+            im.src = media.src || media.getAttribute('data-src');
+            thumb.appendChild(im);
+          }
+
+          thumb.addEventListener('click', (e) => {
+            e.stopPropagation();
+            setPreviewMedia(i, i > previewIndex ? 1 : -1);
+          });
+
+          previewThumbs.appendChild(thumb);
+        });
+      }
+
+      function updateThumbActive(i) {
+        const thumbs = Array.from(previewThumbs.querySelectorAll('.preview-thumb'));
+        thumbs.forEach((t, idx) => t.classList.toggle('active', idx === i));
+        const activeThumb = thumbs[i];
+        if (activeThumb) {
+          activeThumb.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+        }
+      }
+
+      function openPreview(i) {
+        isPreviewOpen = true;
+        stopAuto();
+        pauseAllVideos(false);
+
+        previewIndex = i;
+        if (!previewThumbs.children.length) buildThumbs();
+        previewThumbs.style.display = 'flex';
+
+        setPreviewMedia(previewIndex);
+        preview.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+        updateThumbActive(previewIndex);
+      }
+
+      function closePreview() {
+        preview.style.display = 'none';
+        previewThumbs.style.display = 'none';
+        previewMediaBox.innerHTML = '';
+        document.body.style.overflow = '';
+
+        isPreviewOpen = false;
+        restartAuto();
+        playActiveMedia(current);
+      }
+
+      function setPreviewMedia(i, dir = 0) {
+        if (i < 0) i = medias.length - 1;
+        if (i >= medias.length) i = 0;
+        previewIndex = i;
+
+        const media = medias[previewIndex];
+        const src = media.src || media.getAttribute('data-src');
+
+        previewMediaBox.innerHTML = '';
+
+        if (media.tagName === 'VIDEO') {
+          const v = document.createElement('video');
+          v.src = src;
+          v.controls = true;
+          v.autoplay = true;
+          v.playsInline = true;
+          v.preload = "auto";
+          v.style.opacity = '0';
+          v.style.transform = `translateX(${dir * 18}px) scale(0.98)`;
+
+          previewMediaBox.appendChild(v);
+
+          v.addEventListener('loadeddata', () => {
+            v.style.transition = 'transform 0.25s ease, opacity 0.25s ease';
+            v.style.opacity = '1';
+            v.style.transform = 'translateX(0) scale(1)';
+          }, { once: true });
+        } else {
+          const im = document.createElement('img');
+          im.src = src;
+          im.style.opacity = '0';
+          im.style.transform = `translateX(${dir * 18}px) scale(0.98)`;
+          previewMediaBox.appendChild(im);
+          requestAnimationFrame(() => {
+            im.style.transition = 'transform 0.25s ease, opacity 0.25s ease';
+            im.style.opacity = '1';
+            im.style.transform = 'translateX(0) scale(1)';
+          });
+        }
+
+        updateThumbActive(previewIndex);
+      }
+
+      previewClose.addEventListener('click', (e) => {
+        e.stopPropagation();
+        closePreview();
+      });
+
+      preview.addEventListener('click', (e) => {
+        if (e.target === preview) closePreview();
+      });
+
+      preview.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+      }, { passive: true });
+
+      preview.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        const dx = touchEndX - touchStartX;
+        if (Math.abs(dx) > 40) {
+          if (dx < 0) setPreviewMedia(previewIndex + 1, 1);
+          else setPreviewMedia(previewIndex - 1, -1);
+        }
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (preview.style.display !== 'flex') return;
+        if (e.key === 'ArrowRight') setPreviewMedia(previewIndex + 1, 1);
+        if (e.key === 'ArrowLeft') setPreviewMedia(previewIndex - 1, -1);
+        if (e.key === 'Escape') closePreview();
+      });
+
+    })();
+  </script>
+
+<script>
+  (function () {
+    const track = document.getElementById('appGalleryTrack2');
+    if (!track) return;
+
+    const cards = Array.from(track.querySelectorAll('.app-gallery-card.second'));
+    const medias = cards.map(c => c.querySelector('.gallery-media.second'));
+    const dotsBox = document.getElementById('appGalleryDots2');
+
+    const preview = document.getElementById('appGalleryPreview2');
+    const previewMediaBox = document.getElementById('appGalleryPreviewMedia2');
+    const previewClose = document.getElementById('previewClose2');
+    const previewThumbs = document.getElementById('previewThumbs2');
+
+    let current = 0;
+    let autoTimer = null;
+    let isProgrammaticScroll = false;
+    let isPreviewOpen = false;
+
+    let previewIndex = 0;
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    // dots
+    if (dotsBox){
+      cards.forEach((_, i) => {
+        const dot = document.createElement('span');
+        if (i === 0) dot.classList.add('active');
+        dot.addEventListener('click', () => goTo(i, true));
+        dotsBox.appendChild(dot);
+      });
+    }
+    const dots = dotsBox ? Array.from(dotsBox.querySelectorAll('span')) : [];
+
+    // lazy load
+    const io = 'IntersectionObserver' in window
+      ? new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            const card = entry.target;
+            const media = card.querySelector('img, video');
+            const dataSrc = media.getAttribute('data-src');
+            if (dataSrc && !media.src) media.src = dataSrc;
+
+            if (media.tagName === 'VIDEO') {
+              media.load();
+              media.addEventListener('loadedmetadata', () => {
+                try { media.currentTime = 0.05; } catch(e){}
+              }, { once: true });
+            }
+
+            io.unobserve(card);
+          });
+        }, { root: track, threshold: 0.2 })
+      : null;
+
+    cards.forEach((card) => {
+      const media = card.querySelector('img, video');
+
+      if (io) io.observe(card);
+      else {
+        const dataSrc = media.getAttribute('data-src');
+        if (dataSrc && !media.src) media.src = dataSrc;
+        if (media.tagName === 'VIDEO') media.load();
+      }
+
+      const markLoaded = () => card.classList.add('loaded');
+      if (media.tagName === 'VIDEO') {
+        media.addEventListener('loadeddata', markLoaded);
+        media.addEventListener('error', markLoaded);
+      } else {
+        if (media.complete && media.naturalWidth !== 0) markLoaded();
+        else {
+          media.addEventListener('load', markLoaded);
+          media.addEventListener('error', markLoaded);
+        }
+      }
+
+      media.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (!media.src) return;
+        openPreview(cards.indexOf(card));
+      });
+    });
+
+    function updateActive(index) {
+      cards.forEach((c, i) => c.classList.toggle('active', i === index));
+      dots.forEach((d, i) => d.classList.toggle('active', i === index));
+    }
+
+    function scrollToCard(index) {
+      const card = cards[index];
+      if (!card) return;
+      const left = card.offsetLeft - track.offsetLeft - 10;
+      isProgrammaticScroll = true;
+      track.scrollTo({ left, behavior: 'smooth' });
+      setTimeout(() => { isProgrammaticScroll = false; }, 450);
+    }
+
+    function pauseAllVideos(reset = false) {
+      medias.forEach(m => {
+        if (m && m.tagName === 'VIDEO') {
+          try { m.pause(); } catch(e){}
+          if (reset) {
+            try { m.currentTime = 0; } catch(e){}
+          }
+        }
+      });
+    }
+
+    function ensureVideoSrc(video) {
+      if (!video.src) {
+        const dataSrc = video.getAttribute('data-src');
+        if (dataSrc) {
+          video.src = dataSrc;
+          video.load();
+        }
+      }
+    }
+
+    function playActiveMedia(index) {
+      if (isPreviewOpen) return;
+      pauseAllVideos(current);
+      const media = medias[index];
+      if (!media) return;
+      if (media.tagName === 'VIDEO') {
+        ensureVideoSrc(media);
+        media.muted = true;
+        media.playsInline = true;
+        media.loop = true;
+        const tryPlay = () => {
+          const p = media.play();
+          if (p && typeof p.catch === 'function') p.catch(()=>{});
+        };
+        if (media.readyState >= 2) tryPlay();
+        else media.addEventListener('canplay', tryPlay, { once: true });
+      }
+    }
+
+    function goTo(index, fromUser) {
+      if (index < 0) index = cards.length - 1;
+      if (index >= cards.length) index = 0;
+      current = index;
+      updateActive(current);
+      scrollToCard(current);
+      playActiveMedia(current);
+      if (fromUser) restartAuto();
+    }
+
+    function startAuto() {
+      if (autoTimer) clearInterval(autoTimer);
+      autoTimer = setInterval(() => {
+        if (!isPreviewOpen) goTo(current + 1, false);
+      }, 4000);
+    }
+    function stopAuto() {
+      if (autoTimer) clearInterval(autoTimer);
+      autoTimer = null;
+    }
+    function restartAuto() {
+      stopAuto();
+      startAuto();
+    }
+    startAuto();
+    playActiveMedia(0);
+
+    let scrollTimeout = null;
+    track.addEventListener('scroll', () => {
+      if (isProgrammaticScroll || isPreviewOpen) return;
+      if (scrollTimeout) clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => {
+        let closestIndex = 0;
+        let closestDist = Infinity;
+        const trackLeft = track.scrollLeft;
+        cards.forEach((card, i) => {
+          const dist = Math.abs(card.offsetLeft - trackLeft);
+          if (dist < closestDist) {
+            closestDist = dist;
+            closestIndex = i;
+          }
+        });
+        current = closestIndex;
+        updateActive(current);
+        playActiveMedia(current);
+        restartAuto();
+      }, 120);
+    });
+
+    function buildThumbs() {
+      previewThumbs.innerHTML = '';
+      medias.forEach((media, i) => {
+        const thumb = document.createElement('div');
+        thumb.className = 'preview-thumb' + (i === 0 ? ' active' : '');
+        if (media.tagName === 'VIDEO') {
+          const v = document.createElement('video');
+          v.src = media.src || media.getAttribute('data-src');
+          v.muted = true;
+          v.playsInline = true;
+          v.preload = "metadata";
+          v.addEventListener('loadedmetadata', () => {
+            try { v.currentTime = 0.05; } catch(e){}
+          }, { once: true });
+          thumb.appendChild(v);
+        } else {
+          const im = document.createElement('img');
+          im.src = media.src || media.getAttribute('data-src');
+          thumb.appendChild(im);
+        }
+        thumb.addEventListener('click', (e) => {
+          e.stopPropagation();
+          setPreviewMedia(i, i > previewIndex ? 1 : -1);
+        });
+        previewThumbs.appendChild(thumb);
+      });
+    }
+
+    function updateThumbActive(i) {
+      const thumbs = Array.from(previewThumbs.querySelectorAll('.preview-thumb'));
+      thumbs.forEach((t, idx) => t.classList.toggle('active', idx === i));
+      const activeThumb = thumbs[i];
+      if (activeThumb) {
+        activeThumb.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+      }
+    }
+
+    function openPreview(i) {
+      isPreviewOpen = true;
+      stopAuto();
+      pauseAllVideos(false);
+      previewIndex = i;
+      if (!previewThumbs.children.length) buildThumbs();
+      previewThumbs.style.display = 'flex';
+      setPreviewMedia(previewIndex);
+      preview.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+      updateThumbActive(previewIndex);
+    }
+
+    function closePreview() {
+      preview.style.display = 'none';
+      previewThumbs.style.display = 'none';
+      previewMediaBox.innerHTML = '';
+      document.body.style.overflow = '';
+      isPreviewOpen = false;
+      restartAuto();
+      playActiveMedia(current);
+    }
+
+    function setPreviewMedia(i, dir = 0) {
+      if (i < 0) i = medias.length - 1;
+      if (i >= medias.length) i = 0;
+      previewIndex = i;
+      const media = medias[previewIndex];
+      const src = media.src || media.getAttribute('data-src');
+      previewMediaBox.innerHTML = '';
+      if (media.tagName === 'VIDEO') {
+        const v = document.createElement('video');
+        v.src = src;
+        v.controls = true;
+        v.autoplay = true;
+        v.playsInline = true;
+        v.preload = "auto";
+        v.style.opacity = '0';
+        v.style.transform = `translateX(${dir * 18}px) scale(0.98)`;
+        previewMediaBox.appendChild(v);
+        v.addEventListener('loadeddata', () => {
+          v.style.transition = 'transform 0.25s ease, opacity 0.25s ease';
+          v.style.opacity = '1';
+          v.style.transform = 'translateX(0) scale(1)';
+        }, { once: true });
+      } else {
+        const im = document.createElement('img');
+        im.src = src;
+        im.style.opacity = '0';
+        im.style.transform = `translateX(${dir * 18}px) scale(0.98)`;
+        previewMediaBox.appendChild(im);
+        requestAnimationFrame(() => {
+          im.style.transition = 'transform 0.25s ease, opacity 0.25s ease';
+          im.style.opacity = '1';
+          im.style.transform = 'translateX(0) scale(1)';
+        });
+      }
+      updateThumbActive(previewIndex);
+    }
+
+    previewClose.addEventListener('click', (e) => {
+      e.stopPropagation();
+      closePreview();
+    });
+
+    preview.addEventListener('click', (e) => {
+      if (e.target === preview) closePreview();
+    });
+
+    preview.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    preview.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      const dx = touchEndX - touchStartX;
+      if (Math.abs(dx) > 40) {
+        if (dx < 0) setPreviewMedia(previewIndex + 1, 1);
+        else setPreviewMedia(previewIndex - 1, -1);
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (preview.style.display !== 'flex') return;
+      if (e.key === 'ArrowRight') setPreviewMedia(previewIndex + 1, 1);
+      if (e.key === 'ArrowLeft') setPreviewMedia(previewIndex - 1, -1);
+      if (e.key === 'Escape') closePreview();
+    });
+  })();
+</script>
+
+<script>
+  (function(){
+    const introBox = document.getElementById('introBox');
+    const introToggle = document.getElementById('introToggle');
+    if (!introBox || !introToggle) return;
+
+    introToggle.addEventListener('click', () => {
+      const isCollapsed = introBox.classList.toggle('intro-collapsed');
+      introToggle.textContent = isCollapsed ? "...查看更多" : "收合";
+    });
+  })();
+</script>
+<script>
+  (function setReviewDates(){
+    const els = document.querySelectorAll('.review-date[data-offset]');
+    if (!els.length) return;
+    const now = new Date();
+    els.forEach(el=>{
+      const off = parseInt(el.getAttribute('data-offset'),10)||0;
+      const d = new Date(now);
+      d.setDate(now.getDate()-off);
+      const mm = String(d.getMonth()+1).padStart(2,'0');
+      const dd = String(d.getDate()).padStart(2,'0');
+      el.textContent = `${mm}-${dd}`;
+    });
+  })();
+</script>
+</body>
+</html>
