@@ -285,7 +285,7 @@
       width: 100%;
       overflow-x: hidden;
       overflow-y: visible;
-      padding: 12px 0 4px;
+      padding: 12px 10px 4px;   /* ✅ 左右加寬，避免首尾被切 */
     }
 
     .app-gallery-track {
@@ -293,7 +293,8 @@
       gap: 14px;
       overflow-x: auto;
       scroll-behavior: smooth;
-      padding: 12px 2px 12px;  /* 多一點上緣，避免 active 放大被切 */
+      padding: 12px 10px 12px;   /* ✅ 左右留白讓 active 放大不切 */
+      scroll-padding: 10px;
       perspective: 1000px;
       scrollbar-width: none;
     }
@@ -829,6 +830,25 @@ body{
   margin-top: 18px;
 }
 
+
+    /* ===== 預覽隔離（避免 iOS 透明/spacing 影響預覽跑版） ===== */
+    .app-gallery-preview,
+    #appGalleryPreview2{
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+    .app-gallery-preview-inner{
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+    /* 阻斷 section / title 全域樣式滲透到預覽層 */
+    .app-gallery-preview .section,
+    .app-gallery-preview .section-title,
+    #appGalleryPreview2 .section,
+    #appGalleryPreview2 .section-title{
+      all: unset !important;
+    }
+
 </style>
 </head>
 <body>
@@ -1231,7 +1251,23 @@ body{
       let touchStartX = 0;
       let touchEndX = 0;
 
-      // dots
+      
+
+      // ===== 防止開預覽時頁面跳到底（鎖定/還原 scroll）=====
+      let savedScrollY = 0;
+      function lockBodyScroll(){
+        savedScrollY = window.scrollY || window.pageYOffset || 0;
+        document.body.style.position = 'fixed';
+        document.body.style.top = `-${savedScrollY}px`;
+        document.body.style.width = '100%';
+      }
+      function unlockBodyScroll(){
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.width = '';
+        window.scrollTo(0, savedScrollY);
+      }
+// dots
       cards.forEach((_, i) => {
         const dot = document.createElement('span');
         if (i === 0) dot.classList.add('active');
@@ -1459,7 +1495,8 @@ function ensureVideoSrc(video) {
       }
 
       function openPreview(i) {
-        isPreviewOpen = true;
+        lockBodyScroll();
+isPreviewOpen = true;
         stopAuto();
         pauseAllVideos(false);
 
@@ -1474,7 +1511,8 @@ function ensureVideoSrc(video) {
       }
 
       function closePreview() {
-        preview.style.display = 'none';
+        unlockBodyScroll();
+preview.style.display = 'none';
         previewThumbs.style.display = 'none';
         previewMediaBox.innerHTML = '';
         document.body.style.overflow = '';
