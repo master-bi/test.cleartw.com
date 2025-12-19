@@ -5,305 +5,129 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 
   <title>雄厚 - 值得信賴的遊戲平台</title>
-  <meta name="description" content="這裡有超多有趣玩法，輕鬆體驗、樂趣不斷。多種模式自由選擇，享受獨一無二的互動體驗。驚喜內容不時出現，等你一起來探索！" />
-  <meta name="robots" content="index,follow" />
-  <meta name="theme-color" content="#000000" />
+  <meta name="description" content="這裡有超多有趣玩法，輕鬆體驗、樂趣不斷。多種模式自由選擇，享受獨一無二的互動體驗。" />
   <link rel="canonical" href="https://fbads.wogm208.com/ofa918/" />
 
   <meta property="og:type" content="website" />
   <meta property="og:title" content="雄厚 - 值得信賴的遊戲平台" />
-  <meta property="og:description" content="這裡有超多有趣玩法，輕鬆體驗、樂趣不斷。多種模式自由選擇，享受獨一無二的互動體驗。驚喜內容不時出現，等你一起來探索！" />
+  <meta property="og:description" content="這裡有超多有趣玩法，輕鬆體驗、樂趣不斷。" />
   <meta property="og:url" content="https://fbads.wogm208.com/ofa918/" />
-  <meta property="og:image" content="https://fbads.wogm208.com/ofa918/assets/og-image.png" />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
-
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="雄厚 - 值得信賴的遊戲平台" />
-  <meta name="twitter:description" content="這裡有超多有趣玩法，輕鬆體驗、樂趣不斷。多種模式自由選擇，享受獨一無二的互動體驗。驚喜內容不時出現，等你一起來探索！" />
-  <meta name="twitter:image" content="https://fbads.wogm208.com/ofa918/assets/og-image.png" />
 
   <style>
     :root{
       --accent:#ff8800;
       --accent2:#ffb45a;
-      --shadow: 0 18px 60px rgba(255,136,0,0.14);
-      --glow: 0 0 28px rgba(255,136,0,0.22), 0 0 70px rgba(255,136,0,0.10);
-      --radius: 22px;
-
-      /* CTA gold (keep) */
-      --gold1: rgba(242,210,122,0.98);
-      --gold2: rgba(214,178,90,0.92);
-      --gold3: rgba(154,123,47,0.92);
-      --goldBorder: rgba(242,210,122,0.85);
-      --goldShadow1: rgba(214,178,90,0.22);
-      --goldShadow2: rgba(214,178,90,0.16);
+      --gold1:#f2d27a;
+      --gold2:#d6b25a;
     }
-    *{ box-sizing:border-box; }
-    html,body{ height:100%; }
+    *{box-sizing:border-box}
     body{
       margin:0;
-      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", Arial, sans-serif;
+      min-height:100vh;
       background:
-        radial-gradient(1200px 900px at 50% -10%, rgba(255,136,0,0.18), transparent 60%),
-        radial-gradient(900px 700px at 20% 110%, rgba(255,180,90,0.14), transparent 55%),
+        radial-gradient(1200px 900px at 50% -10%, rgba(255,136,0,.18), transparent 60%),
+        radial-gradient(900px 700px at 20% 110%, rgba(255,180,90,.14), transparent 55%),
         #000;
-      color:#fff;
       display:flex;
       align-items:center;
       justify-content:center;
-      padding: 18px 14px;
-      padding-bottom: calc(18px + env(safe-area-inset-bottom));
-      padding-top: calc(18px + env(safe-area-inset-top));
+      font-family: system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      color:#fff;
+      padding:16px;
     }
     .stage{
-      width:min(440px, 100%);
-      aspect-ratio: 9 / 16;
-      max-height: calc(100vh - 36px);
+      width:min(440px,100%);
+      aspect-ratio:9/16;
       display:flex;
       flex-direction:column;
-      gap: 14px;
+      gap:14px;
     }
     .card{
-      background: linear-gradient(180deg, rgba(16,16,16,0.86), rgba(0,0,0,0.66));
-      border: 1px solid rgba(255,136,0,0.55);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow), var(--glow);
-      overflow:hidden;
-      position:relative;
+      background:rgba(0,0,0,.65);
+      border:1px solid rgba(255,136,0,.55);
+      border-radius:22px;
+      box-shadow:0 0 30px rgba(255,136,0,.25);
+      padding:18px 14px;
     }
-    .card::before{
-      content:"";
-      position:absolute; inset:-2px;
-      background: linear-gradient(135deg, rgba(255,180,90,0.32), rgba(0,0,0,0.08), rgba(255,180,90,0.18));
-      filter: blur(18px);
-      opacity: 0.35;
-      pointer-events:none;
-    }
-    .card > *{ position:relative; }
-
-    .logoWrap{ display:flex; justify-content:center; padding: 18px 14px; }
     .logo{
-      width: min(340px, 88%);
-      height: auto;
+      height:72px;          /* 與大老爺 LOGO 相同高度 */
+      width:auto;           /* 寬度自動依比例 */
+      max-width:88%;
+      margin:0 auto;
       display:block;
-      object-fit: contain;
-      filter: drop-shadow(0 10px 24px rgba(255,136,0,0.18));
-      user-select:none;
-      -webkit-user-drag:none;
+      object-fit:contain;
+      filter: drop-shadow(0 10px 24px rgba(255,136,0,.18));
     }
-
-    .promo{ padding: 14px; display:flex; flex-direction:column; gap: 12px; }
-    .promoTitle{
+    .title{
       text-align:center;
-      font-weight: 900;
-      letter-spacing: 1px;
-      color: var(--accent2);
-      font-size: 15px;
+      color:var(--accent2);
+      font-weight:900;
+      letter-spacing:1px;
+      margin-bottom:8px;
     }
-    .promoRule{
-      width: 86px;
-      height: 2px;
-      margin: 8px auto 0;
-      background: linear-gradient(90deg, transparent, rgba(255,180,90,0.95), transparent);
-      border-radius: 999px;
-      opacity: 0.9;
-    }
-
     .videoWrap{
-      width:100%;
-      aspect-ratio: 1 / 1;
-      border-radius: 16px;
+      aspect-ratio:1/1;
+      border-radius:16px;
       overflow:hidden;
-      border: 1px solid rgba(255,136,0,0.35);
+      border:1px solid rgba(255,136,0,.4);
       background:#000;
-      display:flex;
-      align-items:center;
-      justify-content:center;
     }
     video{
       width:100%;
       height:100%;
-      object-fit: contain;
-      display:block;
-      background:#000;
+      object-fit:contain;
     }
-
-    .ctaWrap{ margin-top:auto; padding: 0 14px 36px; }
     .cta{
-      width:100%;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      gap:12px;
-      padding: 18px 18px;
-      border-radius: 16px;
-      border: 1px solid var(--goldBorder);
-      background: linear-gradient(135deg, var(--gold1), var(--gold2), var(--gold3));
-      color: rgba(0,0,0,0.92);
-      font-weight: 900;
-      font-size: 22px;
-      letter-spacing: 0.4px;
-      cursor:pointer;
+      margin-top:auto;
+      padding:18px;
+      text-align:center;
+      font-size:22px;
+      font-weight:900;
+      border-radius:16px;
+      color:#000;
+      background:linear-gradient(135deg,var(--gold1),var(--gold2));
+      box-shadow:0 18px 40px rgba(214,178,90,.35);
       text-decoration:none;
-      box-shadow: 0 18px 50px var(--goldShadow1), 0 0 34px var(--goldShadow2);
-      -webkit-tap-highlight-color: transparent;
-      user-select:none;
-      position: relative;
-      overflow: hidden;
-      touch-action: manipulation;
-      transform: translateY(0);
-      transition: transform .12s ease, filter .12s ease, box-shadow .12s ease;
+      position:relative;
+      overflow:hidden;
     }
-    .cta small{ font-weight: 900; font-size: 14px; opacity: 0.88; }
-
-    .cta:active{
-      transform: translateY(1px) scale(0.99);
-      filter: brightness(0.98);
+    .cta small{
+      display:block;
+      font-size:14px;
+      opacity:.85;
     }
-
-    .ripple{
-      position:absolute;
-      border-radius: 999px;
-      transform: translate(-50%, -50%);
-      pointer-events:none;
-      background: rgba(255,255,255,0.35);
-      mix-blend-mode: overlay;
-      animation: ripple .55s ease-out forwards;
-    }
-    @keyframes ripple{
-      from{ width:0; height:0; opacity:0.55; }
-      to{ width:520px; height:520px; opacity:0; }
-    }
-
-    .footer{
+    footer{
       text-align:center;
       font-size:12px;
-      color: rgba(255,255,255,0.55);
-      padding: 0 14px 10px;
-    }
-
-    @media (max-height: 680px){
-      .cta{ padding: 16px 16px; font-size: 20px; }
-      .cta small{ font-size: 13px; }
-      .logo{ width: min(320px, 86%); }
+      opacity:.5;
+      margin-top:6px;
     }
   </style>
 </head>
 
 <body>
   <main class="stage">
-    <section class="card">
-      <div class="logoWrap">
-        <img class="logo" src="assets/LOGO.png" alt="雄厚 LOGO" width="1000" height="609" loading="eager" decoding="async" />
-      </div>
-    </section>
-
-    <section class="card promo">
-      <div>
-        <div class="promoTitle" id="t_promo">最新優惠</div>
-        <div class="promoRule" aria-hidden="true"></div>
-      </div>
-
-      <div class="videoWrap" aria-label="promo video 1:1">
-        <video id="promoVideo" src="assets/promo.mp4" playsinline muted autoplay loop controls preload="metadata"></video>
-      </div>
-    </section>
-
-    <div class="ctaWrap">
-      <a class="cta" id="ctaBtn" href="https://xx168.ofa918.net/login?id=register" target="_blank" rel="noopener noreferrer">
-        <span id="t_cta_main">立即加入</span> <small id="t_cta_sub">領取168體驗金</small>
-      </a>
+    <div class="card">
+      <img src="assets/LOGO.png" class="logo" alt="雄厚 LOGO">
     </div>
 
-    <div class="footer">
-      © <span id="year"></span> 雄厚 All Rights Reserved.
+    <div class="card">
+      <div class="title">最新優惠</div>
+      <div class="videoWrap">
+        <video src="assets/promo.mp4" autoplay muted loop playsinline></video>
+      </div>
     </div>
+
+    <a class="cta" href="https://xx168.ofa918.net/login?id=register">
+      立即加入
+      <small>領取168體驗金</small>
+    </a>
+
+    <footer>© <span id="y"></span> 雄厚</footer>
   </main>
 
   <script>
-    // iOS autoplay fix
-    (function(){
-      const v = document.getElementById("promoVideo");
-      if(!v) return;
-      const tryPlay = () => v.play().catch(()=>{});
-      document.addEventListener("touchstart", tryPlay, { once:true, passive:true });
-      document.addEventListener("click", tryPlay, { once:true });
-    }());
-
-    // Touch feedback (ripple + haptic)
-    (function(){
-      const btn = document.getElementById("ctaBtn");
-      if(!btn) return;
-
-      const haptic = () => {
-        if (navigator.vibrate) navigator.vibrate(12);
-      };
-
-      const ripple = (ev) => {
-        const rect = btn.getBoundingClientRect();
-        const x = (ev.touches && ev.touches[0]) ? ev.touches[0].clientX : ev.clientX;
-        const y = (ev.touches && ev.touches[0]) ? ev.touches[0].clientY : ev.clientY;
-
-        const s = document.createElement("span");
-        s.className = "ripple";
-        s.style.left = (x - rect.left) + "px";
-        s.style.top  = (y - rect.top) + "px";
-        btn.appendChild(s);
-        setTimeout(() => s.remove(), 650);
-      };
-
-      btn.addEventListener("touchstart", (e)=>{ haptic(); ripple(e); }, { passive:true });
-      btn.addEventListener("mousedown", (e)=>{ ripple(e); });
-      btn.addEventListener("click", ()=>{ haptic(); });
-    })();
-
-    // i18n auto-detect
-    const I18N = {
-      "zh-Hant": { promo:"最新優惠", ctaMain:"立即加入", ctaSub:"領取168體驗金" },
-      "zh-Hans": { promo:"最新优惠", ctaMain:"立即加入", ctaSub:"领取168体验金" },
-      "zh-HK":   { promo:"最新優惠", ctaMain:"立即加入", ctaSub:"領取168體驗金" },
-      "yue":     { promo:"最新優惠", ctaMain:"即刻加入", ctaSub:"領取168體驗金" },
-      "en":      { promo:"Latest Offer", ctaMain:"Join Now", ctaSub:"Get 168 Trial Bonus" },
-      "ms":      { promo:"Promosi Terkini", ctaMain:"Sertai Sekarang", ctaSub:"Dapatkan Bonus Cubaan 168" },
-      "km":      { promo:"ប្រូម៉ូសិនថ្មីៗ", ctaMain:"ចូលរួមឥឡូវនេះ", ctaSub:"ទទួលបានប្រាក់សាកល្បង 168" },
-      "vi":      { promo:"Ưu đãi mới nhất", ctaMain:"Tham gia ngay", ctaSub:"Nhận 168 tiền trải nghiệm" },
-      "ja":      { promo:"最新特典", ctaMain:"今すぐ参加", ctaSub:"168 体験ボーナスを受け取る" },
-      "th":      { promo:"โปรล่าสุด", ctaMain:"เข้าร่วมเลย", ctaSub:"รับโบนัสทดลอง 168" },
-      "fil":     { promo:"Pinakabagong Promo", ctaMain:"Sumali Na", ctaSub:"Kunin ang 168 Trial Bonus" }
-    };
-
-    function pickLang(){
-      const langs = (navigator.languages && navigator.languages.length) ? navigator.languages : [navigator.language || "en"];
-      const raw = (langs[0] || "en").toLowerCase();
-
-      if (raw.startsWith("zh-hk") || raw.includes("hant-hk")) return "zh-HK";
-      if (raw.startsWith("yue")) return "yue";
-      if (raw.startsWith("zh")) {
-        if (raw.includes("hans") || raw.includes("cn") || raw.includes("sg")) return "zh-Hans";
-        if (raw.includes("hant") || raw.includes("tw") || raw.includes("hk") || raw.includes("mo")) return "zh-Hant";
-        return "zh-Hant";
-      }
-      if (raw.startsWith("en")) return "en";
-      if (raw.startsWith("ms")) return "ms";
-      if (raw.startsWith("km")) return "km";
-      if (raw.startsWith("vi")) return "vi";
-      if (raw.startsWith("ja")) return "ja";
-      if (raw.startsWith("th")) return "th";
-      if (raw.startsWith("fil") || raw.startsWith("tl")) return "fil";
-      return "en";
-    }
-
-    function applyLang(key){
-      const t = I18N[key] || I18N.en;
-      document.getElementById("t_promo").textContent = t.promo;
-      document.getElementById("t_cta_main").textContent = t.ctaMain;
-      document.getElementById("t_cta_sub").textContent = t.ctaSub;
-      document.documentElement.setAttribute("lang", key);
-    }
-
-    applyLang(pickLang());
-    document.getElementById("year").textContent = new Date().getFullYear();
+    document.getElementById("y").textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
