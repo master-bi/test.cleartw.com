@@ -138,7 +138,7 @@
       background: linear-gradient(135deg, rgba(242,210,122,0.98), rgba(214,178,90,0.92), rgba(154,123,47,0.92));
       color: rgba(0,0,0,0.92);
       font-weight: 900;
-      font-size: 18px;
+      font-size: 22px;
       letter-spacing: 0.4px;
       cursor:pointer;
       text-decoration:none;
@@ -146,7 +146,7 @@
       -webkit-tap-highlight-color: transparent;
       user-select:none;
     }
-    .cta small{ font-weight: 800; font-size: 12px; opacity: 0.85; }
+    .cta small{ font-weight: 900; font-size: 14px; opacity: 0.88; }
 
     @media (max-height: 680px){
       .cta{
@@ -154,6 +154,43 @@
  padding: 13px 14px; font-size: 15px; }
       .promoTitle{ font-size: 14.5px; }
     }
+  
+    .cta{
+      position: relative;
+      overflow: hidden;
+      touch-action: manipulation;
+    }
+    .cta::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      border-radius: 16px;
+      pointer-events:none;
+      opacity:0;
+      box-shadow: 0 0 0 0 rgba(242,210,122,0.0);
+      transition: opacity .18s ease;
+    }
+    .cta:active{
+      transform: translateY(1px) scale(0.99);
+      filter: brightness(0.98);
+    }
+    .cta:active::after{
+      opacity:1;
+    }
+    .ripple{
+      position:absolute;
+      border-radius: 999px;
+      transform: translate(-50%, -50%);
+      pointer-events:none;
+      background: rgba(255,255,255,0.35);
+      mix-blend-mode: overlay;
+      animation: ripple .55s ease-out forwards;
+    }
+    @keyframes ripple{
+      from{ width:0; height:0; opacity:0.55; }
+      to{ width:520px; height:520px; opacity:0; }
+    }
+
   </style>
 </head>
 
@@ -244,6 +281,34 @@
 
     applyLang(pickLang());
     document.getElementById("year").textContent = new Date().getFullYear();
+
+  
+    // ===== Touch feedback (ripple + haptic) =====
+    (function(){
+      const btn = document.getElementById("ctaBtn");
+      if(!btn) return;
+
+      const haptic = () => {
+        if (navigator.vibrate) navigator.vibrate(12);
+      };
+
+      const ripple = (ev) => {
+        const rect = btn.getBoundingClientRect();
+        const x = (ev.touches && ev.touches[0]) ? ev.touches[0].clientX : ev.clientX;
+        const y = (ev.touches && ev.touches[0]) ? ev.touches[0].clientY : ev.clientY;
+
+        const s = document.createElement("span");
+        s.className = "ripple";
+        s.style.left = (x - rect.left) + "px";
+        s.style.top  = (y - rect.top) + "px";
+        btn.appendChild(s);
+        setTimeout(() => s.remove(), 650);
+      };
+
+      btn.addEventListener("touchstart", (e)=>{ haptic(); ripple(e); }, { passive:true });
+      btn.addEventListener("mousedown", (e)=>{ ripple(e); });
+      btn.addEventListener("click", ()=>{ haptic(); });
+    })();
 
   </script>
 </body>
