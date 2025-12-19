@@ -3,17 +3,22 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+
+  <!-- 連結預覽顯示用（不顯示在頁面上） -->
   <title>大老爺 - 值得信賴的遊戲平台</title>
   <meta name="description" content="這裡有超多有趣玩法，輕鬆體驗、樂趣不斷。多種模式自由選擇，享受獨一無二的互動體驗。驚喜內容不時出現，等你一起來探索！" />
   <meta name="theme-color" content="#000000" />
 
+  <!--（可選）社群預覽（FB/LINE/Telegram 等）-->
+  <meta property="og:title" content="大老爺 - 值得信賴的遊戲平台" />
+  <meta property="og:description" content="這裡有超多有趣玩法，輕鬆體驗、樂趣不斷。多種模式自由選擇，享受獨一無二的互動體驗。驚喜內容不時出現，等你一起來探索！" />
+  <meta property="og:image" content="assets/LOGO.png" />
+  <meta property="og:type" content="website" />
+
   <style>
     :root{
-      --bg:#000;
       --gold:#d6b25a;
       --gold2:#f2d27a;
-      --gold3:#9a7b2f;
-      --card: rgba(10,10,10,0.72);
       --shadow: 0 18px 60px rgba(214,178,90,0.16);
       --glow: 0 0 28px rgba(214,178,90,0.28), 0 0 70px rgba(214,178,90,0.10);
       --radius: 22px;
@@ -69,10 +74,10 @@
       display:flex;
       align-items:center;
       justify-content:center;
-      padding: 14px 14px 8px;
+      padding: 18px 14px;
     }
     .logo{
-      width: min(220px, 70%);
+      width: min(240px, 74%);
       height:auto;
       display:block;
       filter: drop-shadow(0 10px 24px rgba(214,178,90,0.22));
@@ -80,58 +85,48 @@
       -webkit-user-drag:none;
     }
 
-    .hero{
-      padding: 14px 16px 16px;
-      text-align:center;
-    }
-    .title{
-      font-size: 18px;
-      font-weight: 800;
-      letter-spacing: 0.5px;
-      margin: 2px 0 8px;
-    }
-    .desc{
-      font-size: 13px;
-      line-height: 1.55;
-      color: rgba(255,255,255,0.86);
-      margin: 0;
-    }
-
+    /* Promo card */
     .promo{
       padding: 14px;
       display:flex;
       flex-direction:column;
-      gap: 10px;
+      gap: 12px;
     }
-    .promoHead{
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      gap:10px;
-      margin-top: 2px;
-    }
-    .badge{
-      font-size: 12px;
-      font-weight: 800;
-      color: rgba(0,0,0,0.92);
-      background: linear-gradient(135deg, var(--gold2), var(--gold));
-      padding: 8px 12px;
-      border-radius: 999px;
-      box-shadow: 0 10px 30px rgba(214,178,90,0.24);
+    .promoTitle{
+      text-align:center;
+      font-weight: 900;
       letter-spacing: 1px;
+      color: var(--gold2);
+      margin: 2px 0 0;
+      font-size: 15px;
+    }
+    .promoRule{
+      width: 86px;
+      height: 2px;
+      margin: 8px auto 0;
+      background: linear-gradient(90deg, transparent, rgba(242,210,122,0.95), transparent);
+      border-radius: 999px;
+      opacity: 0.9;
     }
 
+    /* Square video frame (1:1) without cropping */
     .videoWrap{
+      width:100%;
+      aspect-ratio: 1 / 1;
       border-radius: 16px;
       overflow:hidden;
       border: 1px solid rgba(214,178,90,0.35);
       background: rgba(0,0,0,0.65);
+      display:flex;
+      align-items:center;
+      justify-content:center;
     }
     video{
       width:100%;
-      height:auto;
+      height:100%;
       display:block;
       background:#000;
+      object-fit: contain; /* 不裁切 */
     }
 
     .ctaWrap{
@@ -172,11 +167,9 @@
       letter-spacing: 0.2px;
     }
 
-    /* Compact devices */
     @media (max-height: 680px){
-      .desc{ font-size: 12.5px; }
-      .title{ font-size: 17px; }
       .cta{ padding: 13px 14px; }
+      .promoTitle{ font-size: 14.5px; }
     }
   </style>
 </head>
@@ -189,19 +182,16 @@
         <!-- 將 LOGO 放在 ./assets/LOGO.png -->
         <img class="logo" src="assets/LOGO.png" alt="大老爺 LOGO" />
       </div>
-      <div class="hero">
-        <div class="title">大老爺 - 值得信賴的遊戲平台</div>
-        <p class="desc">這裡有超多有趣玩法，輕鬆體驗、樂趣不斷。多種模式自由選擇，享受獨一無二的互動體驗。驚喜內容不時出現，等你一起來探索！</p>
-      </div>
     </section>
 
     <!-- 最新優惠 + 影片 -->
     <section class="card promo">
-      <div class="promoHead">
-        <span class="badge">最新優惠</span>
+      <div>
+        <div class="promoTitle">最新優惠</div>
+        <div class="promoRule" aria-hidden="true"></div>
       </div>
 
-      <div class="videoWrap" aria-label="優惠影片">
+      <div class="videoWrap" aria-label="優惠影片（1:1）">
         <!-- 將影片放在 ./assets/promo.mp4 -->
         <video
           src="assets/promo.mp4"
