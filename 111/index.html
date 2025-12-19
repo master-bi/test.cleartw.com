@@ -4,12 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 
-  <!-- 連結預覽顯示用（不顯示在頁面上） -->
   <title>大老爺 - 值得信賴的遊戲平台</title>
   <meta name="description" content="這裡有超多有趣玩法，輕鬆體驗、樂趣不斷。多種模式自由選擇，享受獨一無二的互動體驗。驚喜內容不時出現，等你一起來探索！" />
   <meta name="theme-color" content="#000000" />
 
-  <!--（可選）社群預覽（FB/LINE/Telegram 等）-->
   <meta property="og:title" content="大老爺 - 值得信賴的遊戲平台" />
   <meta property="og:description" content="這裡有超多有趣玩法，輕鬆體驗、樂趣不斷。多種模式自由選擇，享受獨一無二的互動體驗。驚喜內容不時出現，等你一起來探索！" />
   <meta property="og:image" content="assets/LOGO.png" />
@@ -29,19 +27,14 @@
     body{
       margin:0;
       font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", Arial, sans-serif;
-      background: radial-gradient(1200px 900px at 50% -10%, rgba(214,178,90,0.16), transparent 60%),
-                  radial-gradient(900px 700px at 20% 110%, rgba(214,178,90,0.10), transparent 55%),
-                  #000;
+      background: #000;
       color:#fff;
       display:flex;
       align-items:center;
       justify-content:center;
       padding: 18px 14px;
-      padding-bottom: calc(18px + env(safe-area-inset-bottom));
-      padding-top: calc(18px + env(safe-area-inset-top));
     }
 
-    /* 9:16 stage */
     .stage{
       width:min(440px, 100%);
       aspect-ratio: 9 / 16;
@@ -49,7 +42,6 @@
       display:flex;
       flex-direction:column;
       gap: 14px;
-      align-items:stretch;
     }
 
     .card{
@@ -57,171 +49,112 @@
       border: 1px solid rgba(214,178,90,0.55);
       border-radius: var(--radius);
       box-shadow: var(--shadow), var(--glow);
-      position: relative;
       overflow:hidden;
     }
-    .card::before{
-      content:"";
-      position:absolute; inset:-2px;
-      background: linear-gradient(135deg, rgba(242,210,122,0.40), rgba(154,123,47,0.08), rgba(242,210,122,0.22));
-      filter: blur(18px);
-      opacity: 0.35;
-      pointer-events:none;
-    }
-    .card > *{ position:relative; }
 
     .logoWrap{
       display:flex;
-      align-items:center;
       justify-content:center;
       padding: 18px 14px;
     }
+
+    /* CLS 修正重點 */
     .logo{
-      width: min(240px, 74%);
-      height:auto;
+      width: 240px;
+      height: auto;
+      max-width: 74%;
+      aspect-ratio: 4 / 1; /* 假設 LOGO 約 4:1，可微調 */
       display:block;
-      filter: drop-shadow(0 10px 24px rgba(214,178,90,0.22));
-      user-select:none;
-      -webkit-user-drag:none;
     }
 
-    /* Promo card */
     .promo{
       padding: 14px;
       display:flex;
       flex-direction:column;
       gap: 12px;
     }
+
     .promoTitle{
       text-align:center;
       font-weight: 900;
       letter-spacing: 1px;
       color: var(--gold2);
-      margin: 2px 0 0;
       font-size: 15px;
     }
+
     .promoRule{
       width: 86px;
       height: 2px;
       margin: 8px auto 0;
       background: linear-gradient(90deg, transparent, rgba(242,210,122,0.95), transparent);
-      border-radius: 999px;
-      opacity: 0.9;
     }
 
-    /* Square video frame (1:1) without cropping */
     .videoWrap{
       width:100%;
       aspect-ratio: 1 / 1;
       border-radius: 16px;
       overflow:hidden;
       border: 1px solid rgba(214,178,90,0.35);
-      background: rgba(0,0,0,0.65);
-      display:flex;
-      align-items:center;
-      justify-content:center;
+      background:#000;
     }
+
     video{
       width:100%;
       height:100%;
+      object-fit: contain;
       display:block;
-      background:#000;
-      object-fit: contain; /* 不裁切 */
     }
 
     .ctaWrap{
       margin-top:auto;
       padding: 0 14px 14px;
     }
+
     .cta{
       width:100%;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      gap:10px;
-      padding: 14px 16px;
+      padding: 14px;
+      text-align:center;
       border-radius: 16px;
-      border: 1px solid rgba(242,210,122,0.75);
-      background: linear-gradient(135deg, rgba(242,210,122,0.98), rgba(214,178,90,0.92), rgba(154,123,47,0.92));
-      color: rgba(0,0,0,0.92);
-      font-weight: 900;
-      font-size: 16px;
-      letter-spacing: 0.4px;
-      cursor:pointer;
+      background: linear-gradient(135deg, #f2d27a, #d6b25a);
+      color:#000;
+      font-weight:900;
       text-decoration:none;
-      box-shadow: 0 18px 50px rgba(214,178,90,0.22), 0 0 34px rgba(214,178,90,0.16);
-      transform: translateY(0);
-      transition: transform .12s ease, box-shadow .12s ease, filter .12s ease;
-      user-select:none;
-      -webkit-tap-highlight-color: transparent;
-    }
-    .cta:active{
-      transform: translateY(1px);
-      filter: brightness(0.98);
-      box-shadow: 0 14px 40px rgba(214,178,90,0.18), 0 0 26px rgba(214,178,90,0.12);
-    }
-    .cta small{
-      font-weight: 800;
-      font-size: 12px;
-      opacity: 0.85;
-      letter-spacing: 0.2px;
-    }
-
-    @media (max-height: 680px){
-      .cta{ padding: 13px 14px; }
-      .promoTitle{ font-size: 14.5px; }
+      display:block;
     }
   </style>
 </head>
 
 <body>
-  <main class="stage" aria-label="大老爺落地頁">
-    <!-- LOGO 卡片 -->
+  <main class="stage">
     <section class="card">
       <div class="logoWrap">
-        <!-- 將 LOGO 放在 ./assets/LOGO.png -->
-        <img class="logo" src="assets/LOGO.png" alt="大老爺 LOGO" />
+        <!-- 明確指定 width / height，避免 CLS -->
+        <img
+          class="logo"
+          src="assets/LOGO.png"
+          alt="大老爺 LOGO"
+          width="240"
+          height="60"
+          loading="eager"
+          decoding="async"
+        />
       </div>
     </section>
 
-    <!-- 最新優惠 + 影片 -->
     <section class="card promo">
-      <div>
-        <div class="promoTitle">最新優惠</div>
-        <div class="promoRule" aria-hidden="true"></div>
-      </div>
+      <div class="promoTitle">最新優惠</div>
+      <div class="promoRule"></div>
 
-      <div class="videoWrap" aria-label="優惠影片（1:1）">
-        <!-- 將影片放在 ./assets/promo.mp4 -->
-        <video
-          src="assets/promo.mp4"
-          playsinline
-          muted
-          autoplay
-          loop
-          controls
-          preload="metadata"
-        ></video>
+      <div class="videoWrap">
+        <video src="assets/promo.mp4" autoplay muted loop playsinline controls></video>
       </div>
     </section>
 
-    <!-- CTA -->
     <div class="ctaWrap">
-      <a class="cta" href="https://ag223.gm1788.net/login?id=register" target="_blank" rel="noopener noreferrer">
-        立即加入 <small>領取168體驗金</small>
+      <a class="cta" href="https://ag223.gm1788.net/login?id=register" target="_blank">
+        立即加入｜領取168體驗金
       </a>
     </div>
   </main>
-
-  <script>
-    // iOS 可能會阻擋自動播放：嘗試在首次互動時再次 play()
-    (function(){
-      const v = document.querySelector("video");
-      if(!v) return;
-      const tryPlay = () => { v.play().catch(()=>{}); };
-      document.addEventListener("touchstart", tryPlay, { once:true, passive:true });
-      document.addEventListener("click", tryPlay, { once:true });
-    })();
-  </script>
 </body>
 </html>
