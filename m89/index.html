@@ -52,9 +52,26 @@
     .rebate tbody tr:hover td{background:var(--soft)}
     .rebate td:first-child{font-weight:600;width:32%;min-width:260px}
     .noteBox{border-left:4px solid var(--accent);background:rgba(37,99,235,.05);padding:10px 12px;border-radius:12px;color:var(--muted);font-size:13px}
+  
+    /* top language switch (non-intrusive) */
+    .lang-bar{position:sticky;top:0;background:#fff;z-index:10}
+    .lang-wrap{max-width:1100px;margin:0 auto;padding:10px 16px;display:flex;gap:8px}
+    .lang-btn{border:1px solid #e5e7eb;background:#fff;padding:6px 12px;border-radius:8px;font-size:13px;color:#4b5563;cursor:pointer}
+    .lang-btn.active{border-color:#2563eb;color:#111827;background:rgba(37,99,235,.06)}
+    .color-divider{height:3px;background:linear-gradient(90deg,#2563eb,#16a34a,#f59e0b)}
+
   </style>
 </head>
 <body>
+
+  <div class="lang-bar">
+    <div class="lang-wrap">
+      <button class="lang-btn active" data-tab="cn">中文</button>
+      <button class="lang-btn" data-tab="en">EN</button>
+    </div>
+    <div class="color-divider"></div>
+  </div>
+
   <div class="wrap">
     <div class="topbar">
       <div>
@@ -174,6 +191,16 @@
       document.documentElement.lang = name === 'cn' ? 'zh-Hant' : 'en';
     }
     btns.forEach(b => b.addEventListener('click', () => setTab(b.dataset.tab)));
+  
+    // top language buttons hook
+    document.querySelectorAll('.lang-btn').forEach(btn=>{
+      btn.addEventListener('click',()=>{
+        document.querySelectorAll('.lang-btn').forEach(b=>b.classList.remove('active'));
+        btn.classList.add('active');
+        setTab(btn.dataset.tab);
+      });
+    });
+
   </script>
 </body>
 </html>
