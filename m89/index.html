@@ -1,87 +1,88 @@
-
 <!doctype html>
 <html lang="zh-Hant">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>返水1.20%無上限 | M89</title>
-  <meta name="description" content="返水活動說明與VIP返水比例表（中英雙語）。" />
+  <title>返水1.20%無上限</title>
   <style>
     :root {
-      --bg:#0b1020;--text:rgba(255,255,255,.92);--muted:rgba(255,255,255,.66);
-      --line:rgba(255,255,255,.12);--radius:18px;--shadow:0 12px 40px rgba(0,0,0,.45);
-      --accent:#7c4dff;--accent2:#00d4ff;--good:#22c55e;
-      --mono:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+      --bg:#ffffff;
+      --text:#111827;
+      --muted:#4b5563;
+      --line:#e5e7eb;
+      --soft:#f9fafb;
+      --accent:#2563eb;
+      --accent2:#16a34a;
+      --warn:#f59e0b;
+      --radius:14px;
     }
     *{box-sizing:border-box}
-    body{margin:0;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
-      color:var(--text);
-      background:radial-gradient(1200px 600px at 15% 10%, rgba(124,77,255,.35), transparent 55%),
-               radial-gradient(1000px 520px at 90% 10%, rgba(0,212,255,.22), transparent 55%),
-               radial-gradient(900px 520px at 50% 95%, rgba(34,197,94,.18), transparent 55%),
-               var(--bg);
-      min-height:100vh;}
-    .wrap{max-width:1100px;margin:0 auto;padding:28px 18px 60px}
-    .hero{border:1px solid var(--line);background:linear-gradient(135deg, rgba(255,255,255,.10), rgba(255,255,255,.04));
-      box-shadow:var(--shadow);border-radius:calc(var(--radius) + 6px);padding:22px 22px 18px;position:relative;overflow:hidden}
-    .hero::before{content:"";position:absolute;inset:-2px;background:linear-gradient(90deg, rgba(124,77,255,.35), rgba(0,212,255,.22), rgba(34,197,94,.18));
-      filter:blur(28px);opacity:.55;z-index:0}
-    .hero>*{position:relative;z-index:1}
-    h1{margin:0 0 10px;font-size:clamp(22px,2.6vw,34px);letter-spacing:.2px}
+    body{margin:0;background:var(--bg);color:var(--text);
+      font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji";}
+    .wrap{max-width:1100px;margin:0 auto;padding:22px 16px 48px}
+    .topbar{display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:16px}
+    h1{margin:0;font-size:24px;letter-spacing:.2px}
     .sub{color:var(--muted);font-size:14px;line-height:1.5}
-    .pill{display:inline-flex;align-items:center;padding:6px 10px;border-radius:999px;border:1px solid rgba(255,255,255,.14);
-      background:rgba(255,255,255,.04);color:rgba(255,255,255,.78);font-size:12px}
-    .badges{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
-    .badge{display:inline-flex;align-items:center;gap:8px;padding:8px 10px;border-radius:999px;border:1px solid var(--line);
-      background:rgba(0,0,0,.18);font-size:13px;color:rgba(255,255,255,.86)}
-    .dot{width:8px;height:8px;border-radius:50%;background:var(--accent2);box-shadow:0 0 0 4px rgba(0,212,255,.12)}
-    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px;margin-top:16px}
-    .card{border:1px solid var(--line);border-radius:var(--radius);background:rgba(255,255,255,.05);
-      box-shadow:0 10px 30px rgba(0,0,0,.30);padding:16px 16px 14px}
-    .card h3{margin:0 0 8px;font-size:14px;color:rgba(255,255,255,.86)}
-    .card p{margin:0;color:var(--muted);font-size:13px;line-height:1.55}
-    .kpi{font-family:var(--mono);font-size:14px;color:rgba(255,255,255,.9)}
-    .span-4{grid-column:span 4} .span-12{grid-column:span 12}
-    @media (max-width:820px){.span-4{grid-column:span 12}}
+    .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+    .chip{display:inline-flex;align-items:center;gap:6px;
+      padding:7px 10px;border-radius:999px;border:1px solid var(--line);background:var(--soft);
+      font-size:12px;color:var(--muted)}
+    .dot{width:8px;height:8px;border-radius:50%;background:var(--accent)}
     .tabs{display:flex;gap:10px;margin:18px 0 12px}
-    .tabbtn{cursor:pointer;border:1px solid var(--line);background:rgba(255,255,255,.04);color:rgba(255,255,255,.82);
-      padding:10px 12px;border-radius:12px;font-size:13px;transition:transform .08s ease, background .2s ease, border-color .2s ease;user-select:none}
-    .tabbtn:hover{transform:translateY(-1px);border-color:rgba(255,255,255,.2)}
-    .tabbtn.active{background:linear-gradient(135deg, rgba(124,77,255,.22), rgba(0,212,255,.12));
-      border-color:rgba(124,77,255,.35);color:rgba(255,255,255,.95)}
-    .section-title{display:flex;align-items:center;justify-content:space-between;margin:8px 0 10px;gap:10px}
-    .section-title h2{margin:0;font-size:16px;color:rgba(255,255,255,.90)}
+    .tabbtn{cursor:pointer;border:1px solid var(--line);background:#fff;color:var(--muted);
+      padding:10px 12px;border-radius:12px;font-size:13px;user-select:none}
+    .tabbtn.active{border-color:rgba(37,99,235,.35);background:rgba(37,99,235,.06);color:var(--text)}
+    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:12px;margin-top:12px}
+    .card{grid-column:span 12;border:1px solid var(--line);border-radius:var(--radius);background:#fff;padding:14px 14px 12px}
+    .kpiRow{display:grid;grid-template-columns:repeat(12,1fr);gap:12px}
+    .kpi{grid-column:span 4;border:1px solid var(--line);border-radius:var(--radius);background:var(--soft);padding:12px}
+    .kpi h3{margin:0 0 6px;font-size:13px;color:var(--muted)}
+    .kpi .v{margin:0;font-size:14px;line-height:1.5;color:var(--text)}
+    @media (max-width:820px){.kpi{grid-column:span 12}}
+    .sectionTitle{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}
+    .sectionTitle h2{margin:0;font-size:16px}
     .hint{color:var(--muted);font-size:12px}
-    .table-wrap{overflow:auto;border-radius:var(--radius);border:1px solid var(--line);background:rgba(0,0,0,.18)}
-    table.rebate{width:100%;border-collapse:separate;border-spacing:0;min-width:780px}
-    .rebate thead th{position:sticky;top:0;background:rgba(15,20,40,.92);border-bottom:1px solid var(--line);
-      font-size:12px;text-align:left;padding:12px 12px;color:rgba(255,255,255,.85);white-space:nowrap;z-index:2}
-    .rebate td{padding:12px 12px;border-bottom:1px solid rgba(255,255,255,.08);font-size:13px;color:rgba(255,255,255,.86);vertical-align:top}
-    .rebate tbody tr:hover td{background:rgba(255,255,255,.035)}
-    .rebate td:first-child{font-weight:600;color:rgba(255,255,255,.92);width:32%;min-width:260px}
-    .bullets{margin:0;padding-left:18px;line-height:1.65;font-size:13px}
+    .bullets{margin:0;padding-left:18px;line-height:1.65;font-size:14px}
     .bullets li{margin:6px 0;color:var(--muted)}
-    .footer{margin-top:16px;color:rgba(255,255,255,.52);font-size:12px;text-align:center}
+    .table-wrap{overflow:auto;border-radius:var(--radius);border:1px solid var(--line);background:#fff}
+    table.rebate{width:100%;border-collapse:separate;border-spacing:0;min-width:760px}
+    .rebate thead th{position:sticky;top:0;background:var(--soft);border-bottom:1px solid var(--line);
+      font-size:12px;text-align:left;padding:10px 12px;color:var(--muted);white-space:nowrap}
+    .rebate td{padding:10px 12px;border-bottom:1px solid var(--line);font-size:14px;color:var(--text);vertical-align:top}
+    .rebate tbody tr:hover td{background:var(--soft)}
+    .rebate td:first-child{font-weight:600;width:32%;min-width:260px}
+    .noteBox{border-left:4px solid var(--accent);background:rgba(37,99,235,.05);padding:10px 12px;border-radius:12px;color:var(--muted);font-size:13px}
   </style>
 </head>
 <body>
   <div class="wrap">
-    <div class="hero">
-      <h1>返水1.20%無上限 <span class="pill">M89</span></h1>
-      <div class="sub">2026年01月01號00:00:00 (GMT+8) 至 2030年12月31日 23:59:59</div>
-
-      <div class="badges">
-        <div class="badge"><span class="dot"></span> SGD 帳戶限定</div>
-        <div class="badge">返水比例依 VIP 等級</div>
-        <div class="badge">返水點數無上限</div>
-        <div class="badge">紅利：隔日下午審核後發放</div>
-        <div class="badge">提現：流水 1 倍</div>
+    <div class="topbar">
+      <div>
+        <h1>返水1.20%無上限</h1>
+        <div class="sub">2026年01月01號00:00:00 (GMT+8) 至 2030年12月31日 23:59:59</div>
+        <div class="chips">
+          <div class="chip"><span class="dot"></span>SGD 帳戶限定</div>
+          <div class="chip">返水比例依 VIP 等級</div>
+          <div class="chip">返水點數無上限</div>
+          <div class="chip">每日計算 00:00–23:59 (GMT+8)</div>
+          <div class="chip">隔日下午審核後發放</div>
+          <div class="chip">流水 1 倍可提現</div>
+        </div>
       </div>
+    </div>
 
-      <div class="grid">
-        <div class="card span-4"><h3>活動重點</h3><p>電子遊戲、真人視訊與體育賽事可享返水 <span class="kpi">0.40% ~ 1.20%</span>（依 VIP 等級）。</p></div>
-        <div class="card span-4"><h3>計算區間</h3><p>每日有效押注計算：<span class="kpi">00:00:00 ~ 23:59:59</span>（GMT+8）。</p></div>
-        <div class="card span-4"><h3>發放時間</h3><p>紅利按日發放，隔日 <span class="kpi">15:00</span> 後審核完成注入帳戶。</p></div>
+    <div class="kpiRow">
+      <div class="kpi">
+        <h3>返水範圍</h3>
+        <p class="v">0.40% ~ 1.20%（依 VIP 等級）</p>
+      </div>
+      <div class="kpi">
+        <h3>適用遊戲</h3>
+        <p class="v">體育、真人視訊、電子遊戲（依規則計算）</p>
+      </div>
+      <div class="kpi">
+        <h3>發放時間</h3>
+        <p class="v">隔日下午 15:00 後完成審核注入</p>
       </div>
     </div>
 
@@ -91,13 +92,19 @@
     </div>
 
     <section id="tab-cn">
-      <div class="card span-12">
-        <div class="section-title"><h2>活動說明</h2><div class="hint">表格可左右滑動（手機也 OK）</div></div>
+      <div class="card">
+        <div class="sectionTitle">
+          <h2>活動內容</h2>
+          <div class="hint">表格可左右滑動</div>
+        </div>
         <ul class='bullets'><li>此活動僅適用於SGD帳戶會員。</li><li>會員進行電子遊戲、真人百家、體育賽事遊戲，將獲得返水 0.40%~1.20%，返水%數按照當前 VIP 等級而定，返水點數無上限玩得越多送得越多。</li><li>每日返水計算時間將由  00:00:00 (GMT+8）開始至23:59:59 (GMT+8）結束。</li><li>紅利將按日發放，會在隔日下午15:00後完成審核後，注入會員的賬戶中。</li><li>紅利將根據在符合條件的體育、真人視訊和電子遊戲的總有效押注額來計算。</li><li>領取此優惠活動，須達成流水1倍後即可提交托售申請。</li></ul>
       </div>
 
-      <div class="card span-12" style="margin-top:14px;">
-        <div class="section-title"><h2>VIP 返水比例表（SGD）</h2><div class="hint">黏住表頭，方便對照</div></div>
+      <div class="card" style="margin-top:12px;">
+        <div class="sectionTitle">
+          <h2>VIP 尊享權益（SGD）</h2>
+          <div class="hint">可黏住表頭對照</div>
+        </div>
         
     <div class="table-wrap" role="region" aria-label="VIP 返水比例表（SGD）">
       <table class="rebate">
@@ -108,22 +115,33 @@
     
       </div>
 
-      <div class="card span-12" style="margin-top:14px;">
-        <div class="section-title"><h2>條款與規則</h2><div class="hint">請完整閱讀以免影響領取/提現</div></div>
+      <div class="card" style="margin-top:12px;">
+        <div class="sectionTitle">
+          <h2>條款與規則</h2>
+          <div class="hint">請詳讀</div>
+        </div>
         <ul class='bullets'><li>此活動不可與其他活動同時使用/進行。</li><li>會員需將上筆儲值和紅利都遊戲完畢或將餘額托售後 (餘額低於1元) 方可申請下一筆紅利。</li><li>所有送出的活動僅限一人一份。此處所指的一人一份指的是一個家庭、住家地址、IP地址（網際協議地址）、電子郵件地址、電話號碼、信用卡或儲蓄卡和/或電子支付、或公共電腦（例子：學校、公共圖書館或工作地點等等地點的電腦）。M89遊戲城將保留向任何客戶或客戶集團取消活動的權利，如果在任何時候發現違反此條款，所有紅利/贏利將被沒收。</li><li>活動期間將嚴格遵守多帳戶條款, 如會員在活動中被發現使用多個遊戲帳戶,M89遊戲城將有權取消玩家參加活動和收回贏利的權利。 M89遊戲城將保有對多個帳號的最終裁定和解釋權。</li><li>所有產生輸贏的押注將被計算在有效押注額內，任何平局或取消的賭注皆不計算。</li><li>紅利一旦發放入會員的帳戶內, 將無法取消。</li><li>有效押注額僅計算在M89遊戲城押注產生輸贏結果的注單。注單取消或本金退還，任何低於歐洲盤1.75或亞洲盤0.75水位的押注及在同一局遊戲中同時押注對等盤口等，將不計算為有效押注額內。</li><li>押注任何輪盤遊戲, 選號不得超過26碼，如在任何時候發現違規則所有紅利/贏利將被取消。</li><li>押注任何彩票遊戲, 同一期中禁止對打對衝，幸運飛艇冠、亞和不管是大小、單雙只能購買一個，兩面盤大小，單雙龍虎只能購買一個，禁止刷超7碼，冠亞和值最多不可以超過11個。如發現有進行對打對衝無論輸贏不予計算。</li><li>M89遊戲城保留可單方面執行的決定權, 可以在任何時候無事先通知的情況下修改、改變規則與條款/停止、終止或取消。</li><li>會員必須接受並遵守上述規則與條款以及M89遊戲城的所有相關條款與規定。</li><li>M89遊戲城對本規則與條款保有最終解釋權。</li></ul>
       </div>
     </section>
 
     <section id="tab-en" style="display:none;">
-      <div class="card span-12">
-        <div class="section-title"><h2>Promo Summary</h2><div class="hint">Swipe table horizontally on mobile</div></div>
-        <div class="sub" style="margin-bottom:8px;"><b>Promo Name:</b> 1.2% Unlimited</div>
-        <div class="sub" style="margin-bottom:10px;"><b>Promo Period:</b> 1st January 2026 00:00:00 (GMT+8) to 31st December 2030 23:59:59 (GMT+8)</div>
+      <div class="card">
+        <div class="sectionTitle">
+          <h2>Promo Conditions</h2>
+          <div class="hint">Swipe table horizontally</div>
+        </div>
+        <div class="noteBox" style="margin-bottom:10px;">
+          <div><b>Promo Name:</b> 1.2% Unlimited</div>
+          <div><b>Promo Period:</b> 1st January 2026 00:00:00 (GMT+8) to 31st December 2030 23:59:59 (GMT+8)</div>
+        </div>
         <ul class='bullets'><li>Only available for SGD account members.</li><li>Members will get 0.4%~1.2% rebate for live casino, and sports. The rebate reward % is determined to the current VIP level. The rebate reward bonus is unlimited to claim, the more you play the more reward you can get.</li><li>The calculation time of the daily bet amount is from 00:00:00 to 23:59:59 every day.</li><li>The Bonus will be credited to customer M89 account after the review is completed after 14:00 the next day.</li><li>Only Sports, Live Casino, MT Live Casino Baccarat and Slot valid bets.</li><li>The Bonus is subject to 1 time turnover before you can submit a withdrawal request.</li></ul>
       </div>
 
-      <div class="card span-12" style="margin-top:14px;">
-        <div class="section-title"><h2>VIP Rebate Table (SGD)</h2><div class="hint">Sticky header for easy comparison</div></div>
+      <div class="card" style="margin-top:12px;">
+        <div class="sectionTitle">
+          <h2>VIP Privileges (SGD)</h2>
+          <div class="hint">Sticky header</div>
+        </div>
         
     <div class="table-wrap" role="region" aria-label="VIP Rebate Table (SGD)">
       <table class="rebate">
@@ -134,13 +152,15 @@
     
       </div>
 
-      <div class="card span-12" style="margin-top:14px;">
-        <div class="section-title"><h2>Terms & Conditions</h2><div class="hint">Please read carefully</div></div>
+      <div class="card" style="margin-top:12px;">
+        <div class="sectionTitle">
+          <h2>Terms and Conditions</h2>
+          <div class="hint">Please read carefully</div>
+        </div>
         <ul class='bullets'><li>This promotion cannot be used in conjunction with other M89 promotions.</li><li>The previous deposit and bonus must be fully wagered or withdrawn (remain balance less than 1) before applying for the new bonus.</li><li>All the activities they send are limited to one per person. A person contains family, home address, IP address (Internet Protocol address), email address, phone number, credit card or debit card and/or electronic payment, or public computer (ex: schools, public libraries, or work locations etc.) M89 will reserve the right to cancel the event from any customer and customer group, if you are caught in violation at any time, all bonuses and profit will be forfeited.</li><li>During the Promotion, strict rules regarding multiple account abuse will be enforced. M89 reserves the right to disqualify players from the Promotion and/or the Site should any player be suspected of entering more than one account in the Promotion. The decision on what activity constitutes multiple account abuse lies with M89’s management in its sole discretion.</li><li>The effective bet amount only counts the bet slips that result in winning or losing results in the M89, and any draw or canceled bets will not be counted.</li><li>It cannot be canceled when the bonus is placed in the member&#x27;s account.</li><li>Only wagers in M89 that generate a win/loss return will contribute to the rollover requirement. Canceled or void wagers, wager on odds less than Euro 1.75 or Asia 0.75, or wagers on both even-chances during a single game will not count towards this requirement.</li><li>Play any roulette numbers for betting cannot exceed 26 numbers. Any violation of this rule is found at any time, all bonuses/winning profits will be canceled.</li><li>No lottery game betting is not allowed to place bets on both sides. For the game &#x27;Lucky airship,&#x27; you can only purchase one side for the champion, runner-up, regardless of two-sided bets, such as big/small or odd/even, you can only purchase one side. It&#x27;s not allowed to select more than 7 numbers, and the total of the champion and runner-up numbers cannot exceed 11. Any violation of this rule is found at any time, all bonuses/winning profits will be canceled.</li><li>M89 reserves the right to modify, cancel, suspend, or terminate the rule and/or change the terms at any time without prior notice.</li><li>Members who participate in M89 must accept and comply with the above rules and terms as well as all relevant terms and conditions of the website implemented by M89.</li><li>M89 is the sole arbiter of terms and conditions, and its decision is final.</li></ul>
       </div>
     </section>
 
-    <div class="footer">© M89 • Single-page promo layout • index.html</div>
   </div>
 
   <script>
